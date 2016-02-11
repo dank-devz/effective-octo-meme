@@ -12,9 +12,9 @@ TARGET = fast-food-gui
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+SOURCES += src/main.cpp\
+           src/mainwindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += include/mainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += form/mainwindow.ui
