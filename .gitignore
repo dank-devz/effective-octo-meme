@@ -1,0 +1,6 @@
+build*
+debug*
+*.o
+*.moc
+bin/
+*.user
