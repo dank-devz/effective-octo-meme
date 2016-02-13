@@ -13,6 +13,7 @@ public:
     /// Fields in menu_view
     enum Fields
     {
+        ID,
         ITEM,
         PRICE
     };
