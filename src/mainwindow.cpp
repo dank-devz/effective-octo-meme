@@ -12,8 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // instantiate the database and the model
     db = new Database();
-    RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
-    ui->viewAllRestaurants_tableView->setModel(resTableModel);
 }
 
 MainWindow::~MainWindow()
@@ -74,4 +72,11 @@ void MainWindow::on_viewDetails_pushButton_back_clicked()
 {
     // takes the user back to the viewAllRestaurants page (index - 1)
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::initViewAllRestaurantsTable(Database *db)
+{
+    RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
+    ui->viewAllRestaurants_tableView->setModel(resTableModel);
+    ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }

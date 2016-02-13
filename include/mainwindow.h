@@ -51,6 +51,11 @@ private slots:
      */
     void on_viewDetails_pushButton_back_clicked();
 
+    /*
+     * O T H E R  F U N C T I O N S
+     */
+    void initViewAllRestaurantsTable(Database *);
+
 private:
     Ui::MainWindow *ui;
 
