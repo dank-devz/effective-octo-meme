@@ -4,3 +4,8 @@ bin/
 *.moc
 debug*
 *.user
+/debug/
+/release/
+Makefile
+Makefile.*
+ui_mainwindow.h
