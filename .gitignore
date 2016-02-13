@@ -4,3 +4,5 @@ bin/
 *.moc
 debug*
 *.user
+moc*
+Makefile
