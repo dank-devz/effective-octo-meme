@@ -54,11 +54,16 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(4);
 
-    /* add code to set table view to appropriate restaurant details*/
-    int id = ui->viewAllRestaurants_tableView->selectionModel()->currentIndex().row()+1;
-    qDebug() << "Restraunt ID: " << id;
-    initViewDetailsTable(db, id);
-    ui->viewRestaurantDetails_tableView->hideColumn(0);
+    // Get the restraunt ID to display a menu for
+    QModelIndex index = ui->viewAllRestaurants_tableView->currentIndex();
+
+    // Get the restraunt name
+    QString Title = ui->viewAllRestaurants_tableView->model()->data(index).toString() + "'s Menu";
+
+    // Fill the view with the infos
+    ui->label->setText(Title);
+    initViewDetailsTable(db, index.row()+1);
+    ui->tableView->hideColumn(0);
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -89,6 +94,6 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
 void MainWindow::initViewDetailsTable(Database *db, int id)
 {
     MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
-    ui->viewRestaurantDetails_tableView->setModel(resMenuModel);
-    ui->viewRestaurantDetails_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableView->setModel(resMenuModel);
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
