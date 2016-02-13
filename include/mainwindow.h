@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "database.h"
 #include "restauranttablemodel.h"
+#include "menutablemodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -54,7 +55,8 @@ private slots:
     /*
      * O T H E R  F U N C T I O N S
      */
-    void initViewAllRestaurantsTable(Database *);
+    void initViewAllRestaurantsTable(Database *db);
+    void initViewDetailsTable(Database *db, int id);
 
 private:
     Ui::MainWindow *ui;

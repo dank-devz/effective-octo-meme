@@ -12,7 +12,7 @@ MenuTableModel::MenuTableModel(QObject *parent, Database *db, int id) : QSqlTabl
 void MenuTableModel::Initialize(int id)
 {
     QString filter = QString("id='%1'").arg(id);
-    this->setTable("menu_view");
+    this->setTable("items");
     this->setHeaderData(ITEM, Qt::Horizontal, tr("Item Name"),QSqlTableModel::OnManualSubmit);
     this->setHeaderData(PRICE, Qt::Horizontal, tr("Price"),QSqlTableModel::OnManualSubmit);
     this->setFilter(filter);

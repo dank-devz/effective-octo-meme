@@ -55,6 +55,10 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->stackedWidget->setCurrentIndex(4);
 
     /* add code to set table view to appropriate restaurant details*/
+    int id = ui->viewAllRestaurants_tableView->selectionModel()->currentIndex().row()+1;
+    qDebug() << "Restraunt ID: " << id;
+    initViewDetailsTable(db, id);
+    ui->viewRestaurantDetails_tableView->hideColumn(0);
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -80,4 +84,11 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
     RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(resTableModel);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+}
+
+void MainWindow::initViewDetailsTable(Database *db, int id)
+{
+    MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
+    ui->viewRestaurantDetails_tableView->setModel(resMenuModel);
+    ui->viewRestaurantDetails_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
