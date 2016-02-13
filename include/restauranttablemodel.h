@@ -12,6 +12,7 @@ public:
     ///Fields in restaurants_view
     enum Fields
     {
+        ID,
         NAME,
         DISTANCE
     };

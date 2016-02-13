@@ -1,4 +1,4 @@
-#include "include\menutablemodel.h"
+#include "include/menutablemodel.h"
 
 MenuTableModel::MenuTableModel(QObject *parent, Database *db, int id) : QSqlTableModel(parent, *db)
 {
