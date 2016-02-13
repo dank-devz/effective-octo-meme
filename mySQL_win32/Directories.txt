@@ -1,0 +1,8 @@
+Now the following libraries are ready in C:\Qt\4.6.2\plugins\sqldrivers.
+	libqsqlmysql4.a
+	libqsqlmysqld4.a
+	qsqlmysql4.dll
+	qsqlmysqld4.dll
+
+To use the SDK and QtCreator directly, copy these libraries to your C:\Qt\...\qt\plugins\sqldrivers\ or C:\Qt\$Version$\src\qtbase\plugins\sqldrivers\
+and copy C:\MySQL\MySQL51\lib\opt\libmysql.dll to your C:\Qt\...\qt\bin\ and/or C:\Qt\5.5\mingw\bin

@@ -4,9 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+INCLUDEPATH += $$PWD/mySQL_win32/
 
 TARGET = fast-food-gui
 TEMPLATE = app
@@ -18,3 +20,5 @@ SOURCES += src/main.cpp\
 HEADERS  += include/mainwindow.h
 
 FORMS    += form/mainwindow.ui
+
+QTPLUGIN += qsqlmysql
