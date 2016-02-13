@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // instantiate the database and the model
     db = new Database();
+    initViewAllRestaurantsTable(db);
 }
 
 MainWindow::~MainWindow()
