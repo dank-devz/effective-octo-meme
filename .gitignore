@@ -6,3 +6,4 @@ debug*
 *.user
 moc*
 Makefile
+ui*

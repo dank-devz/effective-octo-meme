@@ -18,17 +18,21 @@ public:
 private slots:
     void on_actionQuit_triggered();
 
-    void on_pushButton_viewAllRestaurants_clicked();
+    void on_home_pushButton_viewAllRestaurants_clicked();
 
-    void on_pushButton_planRegularFoodRun_clicked();
+    void on_home_pushButton_planRegularFoodRun_clicked();
 
-    void on_pushButton_planCustomFoodRun_clicked();
+    void on_home_pushButton_planCustomFoodRun_clicked();
 
-    void on_pushButton_back1_clicked();
+    void on_viewAllRestaurants_pushButton_back_clicked();
 
-    void on_pushButton_back2_clicked();
+    void on_viewAllRestaurants_pushButton_viewDetails_clicked();//inc
 
-    void on_pushButton_back3_clicked();
+    void on_planRegularTrip_pushButton_back_clicked();
+
+    void on_planCustomFoodRun_pushButton_back_clicked();
+
+    void on_viewDetails_pushButton_back_clicked();
 
 private:
     Ui::MainWindow *ui;
