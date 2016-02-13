@@ -9,6 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // sets the default page to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(0);
+
+    // instantiate the database and the model
+    db = new Database();
+    RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
+    ui->viewAllRestaurants_tableView->setModel(resTableModel);
 }
 
 MainWindow::~MainWindow()

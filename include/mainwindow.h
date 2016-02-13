@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "database.h"
+#include "restauranttablemodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -51,6 +53,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    /*
+     * D A T A B A S E  V A R I A B L E S
+     */
+    Database *db;
 };
 
 #endif // MAINWINDOW_H
