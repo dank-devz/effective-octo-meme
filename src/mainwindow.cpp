@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // sets the default page to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(0);
+
+    // instantiate the database and the model
+    db = new Database();
+    initViewAllRestaurantsTable(db);
 }
 
 MainWindow::~MainWindow()
@@ -21,39 +25,59 @@ void MainWindow::on_actionQuit_triggered()
     QApplication::quit();
 }
 
-
-void MainWindow::on_pushButton_viewAllRestaurants_clicked()
+void MainWindow::on_home_pushButton_viewAllRestaurants_clicked()
 {
     // takes the user to the viewAllRestaurants page (index - 1)
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_pushButton_planRegularFoodRun_clicked()
+void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 {
     // takes the user to the planRegularFoodRun page (index - 2)
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-void MainWindow::on_pushButton_planCustomFoodRun_clicked()
+void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 {
     // takes the user to the planCustomFoodRun page (index - 3)
     ui->stackedWidget->setCurrentIndex(3);
 }
 
-void MainWindow::on_pushButton_back1_clicked()
+void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_pushButton_back2_clicked()
+void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
+{
+    // takes the user to the view details page
+    ui->stackedWidget->setCurrentIndex(4);
+
+    /* add code to set table view to appropriate restaurant details*/
+}
+
+void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_pushButton_back3_clicked()
+void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_viewDetails_pushButton_back_clicked()
+{
+    // takes the user back to the viewAllRestaurants page (index - 1)
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::initViewAllRestaurantsTable(Database *db)
+{
+    RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
+    ui->viewAllRestaurants_tableView->setModel(resTableModel);
+    ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
