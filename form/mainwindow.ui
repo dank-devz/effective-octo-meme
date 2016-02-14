@@ -60,7 +60,7 @@
         <height>161</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_homepageButtons">
+      <layout class="QVBoxLayout" name="home_verticalLayout">
        <property name="spacing">
         <number>15</number>
        </property>
@@ -131,7 +131,7 @@
        <string>View Details</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -140,7 +140,7 @@
         <height>421</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="viewAllRestaurants_verticalLayout">
        <item>
         <widget class="QLabel" name="viewAllRestaurants_label_title">
          <property name="text">
@@ -257,7 +257,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -266,9 +266,9 @@
         <height>311</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="viewDetails_verticalLayout">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="viewDetails_label_pageTitle">
          <property name="text">
           <string>&lt;insert restauraunt name&gt;'s Details</string>
          </property>
@@ -278,7 +278,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableView" name="tableView"/>
+        <widget class="QTableView" name="viewDetails_tableView"/>
        </item>
       </layout>
      </widget>
