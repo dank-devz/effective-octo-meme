@@ -94,6 +94,7 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
     RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(resTableModel);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
 void MainWindow::initViewDetailsTable(Database *db, int id)
@@ -101,4 +102,5 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
     MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(resMenuModel);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
