@@ -69,6 +69,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->label->setText(Title);
     initViewDetailsTable(db, currentRow+1);
     ui->tableView->hideColumn(0);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
