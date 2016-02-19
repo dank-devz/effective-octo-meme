@@ -19,6 +19,7 @@ Database::Database() : QSqlDatabase(addDatabase("QMYSQL"))
   {
       qDebug() << "CONNECTED! Huzzah.";
   }
+
 //  query = QSqlQuery(*this);
 //  query.exec("PRAGMA foreign_keys = ON;");
 }
@@ -38,7 +39,6 @@ Database::~Database()
 
 /*
  * M U T A T O R S
- * (╯°□°）╯︵ ┻━┻)
  */
 
 /**
@@ -50,17 +50,17 @@ Database::~Database()
  */
 bool Database::AddMenuItem(int restaurantId, QString itemName, double price)
 {
-   //create query object and associate it with this database.
-   QSqlQuery *query = new QSqlQuery(this);
+   QSqlQuery query;
 
-   //prepare a SQL query with named binding
-   query->prepare("INSERT INTO items (id, name, price) "
-                  "VALUES (:id. :name, :price);");
+   //prepare a SQL query with positional binding
+   //note: I tried this with named binding and it did not work. (╯°□°）╯︵ ┻━┻)
+   query.prepare("INSERT INTO items (id, name, price) "
+                  "VALUES (?, ?, ?)");
 
-   //bind values
-   query->bindValue("id", restaurantId);
-   query->bindValue(":name", itemName);
-   query->bindValue(":price", price);
+   //bind values respectively
+   query.addBindValue(restaurantId);
+   query.addBindValue(itemName);
+   query.addBindValue(price);
 
-   return query->exec();
+   return query.exec();
 }
