@@ -18,6 +18,9 @@ public:
     ///Destructor
     ~Database();
 
+    //Mutators
+    bool AddMenuItem(int restaurantId, QString itemName, double price);
+
 private:
 };
 

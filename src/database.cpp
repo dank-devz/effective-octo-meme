@@ -19,6 +19,7 @@ Database::Database() : QSqlDatabase(addDatabase("QMYSQL"))
   {
       qDebug() << "CONNECTED! Huzzah.";
   }
+
 //  query = QSqlQuery(*this);
 //  query.exec("PRAGMA foreign_keys = ON;");
 }
@@ -33,5 +34,32 @@ Database::~Database()
 //    query.finish();
 //    query.clear();
 //  }
-//  close();
+    //  close();
+}
+
+/*
+ * M U T A T O R S
+ */
+
+/**
+ * @brief Database::AddMenuItem Add a menu item to the items table.
+ * @param restaurantId Id of the restaurant this menu item belongs to.
+ * @param itemName the name of the food item.
+ * @param price the price of the food item.
+ * @return true if record successfully added to items table
+ */
+bool Database::AddMenuItem(int restaurantId, QString itemName, double price)
+{
+   QSqlQuery query;
+
+   //prepare a SQL query with named binding
+   query.prepare("INSERT INTO items (id, name, price) "
+                  "VALUES (:id, :name, :price)");
+
+   //bind values
+   query.bindValue(":id", restaurantId);
+   query.bindValue(":name", itemName);
+   query.bindValue(":price", price);
+
+   return query.exec();
 }
