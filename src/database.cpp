@@ -52,15 +52,14 @@ bool Database::AddMenuItem(int restaurantId, QString itemName, double price)
 {
    QSqlQuery query;
 
-   //prepare a SQL query with positional binding
-   //note: I tried this with named binding and it did not work. (╯°□°）╯︵ ┻━┻)
+   //prepare a SQL query with named binding
    query.prepare("INSERT INTO items (id, name, price) "
-                  "VALUES (?, ?, ?)");
+                  "VALUES (:id, :name, :price)");
 
-   //bind values respectively
-   query.addBindValue(restaurantId);
-   query.addBindValue(itemName);
-   query.addBindValue(price);
+   //bind values
+   query.bindValue(":id", restaurantId);
+   query.bindValue(":name", itemName);
+   query.bindValue(":price", price);
 
    return query.exec();
 }
