@@ -63,3 +63,24 @@ bool Database::AddMenuItem(int restaurantId, QString itemName, double price)
 
    return query.exec();
 }
+
+/**
+ * @brief Database::RemoveMenuItem Remove an item from a restaurant's menu.
+ * @param restaurantId the id of the restaurant to remove from.
+ * @param itemName the name of the item to remove.
+ * @return true if item is successfully removed from table.
+ */
+bool Database::RemoveMenuItem(int restaurantId, QString itemName)
+{
+    QSqlQuery query;
+
+    //prepare a SQL query with named binding
+    query.prepare("DELETE FROM items WHERE id = :id "
+                  "and name = :name");
+
+    //bind values
+    query.bindValue(":id", restaurantId);
+    query.bindValue(":name", itemName);
+
+    return query.exec();
+}
