@@ -24,10 +24,10 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_home">
-     <widget class="QLabel" name="label_homepageTitle">
+     <widget class="QLabel" name="home_label_homepageTitle">
       <property name="geometry">
        <rect>
         <x>140</x>
@@ -51,7 +51,7 @@
        <string>Dank Title</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -65,21 +65,27 @@
         <number>15</number>
        </property>
        <item>
-        <widget class="QPushButton" name="pushButton_viewAllRestaurants">
+        <widget class="QPushButton" name="home_pushButton_viewAllRestaurants">
          <property name="text">
           <string>View Nearby Restaurants</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_planRegularFoodRun">
+        <widget class="QPushButton" name="home_pushButton_planRegularFoodRun">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Plan a food run</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_planCustomFoodRun">
+        <widget class="QPushButton" name="home_pushButton_planCustomFoodRun">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="font">
           <font>
            <weight>50</weight>
@@ -95,24 +101,11 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_viewAllRestaurants">
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>150</y>
-        <width>271</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>view all restaurants (temp label)</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_back1">
+     <widget class="QPushButton" name="viewAllRestaurants_pushButton_back">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>440</y>
         <width>61</width>
         <height>30</height>
        </rect>
@@ -131,6 +124,44 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
+      <property name="geometry">
+       <rect>
+        <x>315</x>
+        <y>440</y>
+        <width>101</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>View Details</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>411</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="viewAllRestaurants_label_title">
+         <property name="text">
+          <string>View all Restaurants</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="viewAllRestaurants_tableView"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_planRegularTrip">
      <widget class="QLabel" name="label_2">
@@ -146,11 +177,11 @@
        <string>plan reg run (temp label)</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_back2">
+     <widget class="QPushButton" name="planRegularTrip_pushButton_back">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>440</y>
         <width>61</width>
         <height>30</height>
        </rect>
@@ -184,11 +215,11 @@
        <string>plan custom food run (temp label)</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_back3">
+     <widget class="QPushButton" name="planCustomFoodRun_pushButton_back">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>440</y>
         <width>61</width>
         <height>30</height>
        </rect>
@@ -208,6 +239,56 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_viewDetails">
+     <widget class="QPushButton" name="viewDetails_pushButton_back">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>440</y>
+        <width>61</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>411</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>&lt;insert restauraunt name&gt;'s Details</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="tableView"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -216,7 +297,7 @@
      <x>0</x>
      <y>0</y>
      <width>429</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
