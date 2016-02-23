@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "QMainWindow"
 #include "database.h"
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
