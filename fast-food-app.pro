@@ -4,26 +4,35 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
-
+QT       += core gui sql testlib
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+#TEMPLATE = app
+TEMPLATE = subdirs
+CONFIG += ordered
+SUBDIRS = \
+        src \
+        app \
+        test
 
-TARGET = ../build-fast-food-app
-TEMPLATE = app
+app.depends = src
+test.depends = src
 
 
-SOURCES += src/main.cpp\
-           src/mainwindow.cpp \
-    src/database.cpp \
-    src/restauranttablemodel.cpp \
-    src/menutablemodel.cpp
+#SOURCES += app/main.cpp\
+#           src/mainwindow.cpp \
+#    src/database.cpp \
+#    src/restauranttablemodel.cpp \
+#    src/menutablemodel.cpp \
+##    test/test_database.cpp
 
-HEADERS  += include/mainwindow.h \
-    include/database.h \
-    include/restauranttablemodel.h \
-    include/menutablemodel.h
+#HEADERS  += src/include/mainwindow.h \
+#    src/include/database.h \
+#    src/include/restauranttablemodel.h \
+#    src/include/menutablemodel.h \
+##    test/test_database.h
 
-FORMS    += form/mainwindow.ui
 
-QTPLUGIN += qsqlmysql
+
+#DISTFILES += \
+#    defaults.pri
