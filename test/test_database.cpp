@@ -1,6 +1,4 @@
-//#ifndef TEST_DATABASE_H
-//#define TEST_DATABASE_H
-
+#include <QtTest/QtTest>
 
 class Test_Database: public QObject
 {
