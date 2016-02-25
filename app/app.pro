@@ -1,6 +1,7 @@
 include(../defaults.pri)
 
-QT       += core gui sql testlib
+QT       += core gui sql
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app

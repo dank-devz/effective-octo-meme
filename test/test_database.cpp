@@ -3,6 +3,9 @@
 class Test_Database: public QObject
 {
     Q_OBJECT
+//public:
+//    Test_Database();
+//    ~Test_Database();
 private slots:
     void initTest();
 };

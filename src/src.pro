@@ -1,22 +1,20 @@
 include(../defaults.pri)
-QT       += core gui sql testlib
+QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = fast-food-app
-#CONFIG -= qt
+CONFIG -= testlib
 TEMPLATE = lib
 
 SOURCES += mainwindow.cpp \
     database.cpp \
     restauranttablemodel.cpp \
-    menutablemodel.cpp \
-#    test/test_database.cpp
+    menutablemodel.cpp
 
 HEADERS  += include/mainwindow.h \
     include/database.h \
     include/restauranttablemodel.h \
-    include/menutablemodel.h \
-#    test/test_database.h
+    include/menutablemodel.h
 
 FORMS    += form/mainwindow.ui
 
