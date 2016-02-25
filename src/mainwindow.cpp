@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
 
     // instantiate the database and the model
-    db = new Database();
+    db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
+                      "dankdevz", "cs1d-fast-food-fantasy");
     initViewAllRestaurantsTable(db);
 }
 
