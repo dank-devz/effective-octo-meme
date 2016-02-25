@@ -24,7 +24,6 @@ void Test_Database::testOpen()
     QVERIFY(testDB->isOpen());
 }
 
-//#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)
 #include "test_database.moc"
