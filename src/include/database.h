@@ -19,7 +19,10 @@ public:
     ~Database();
 
     //Mutators
+    ///Add an item to a specified restaurant's menu.
     bool AddMenuItem(int restaurantId, QString itemName, double price);
+    ///Remove an item from a specified restaurant's menu.
+    bool RemoveMenuItem(int restaurantId, QString itemName);
 
 private:
 };
