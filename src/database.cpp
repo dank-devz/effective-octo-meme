@@ -4,12 +4,12 @@
  * \brief Database::Database
  * \param path path to sql database file
  */
-Database::Database() : QSqlDatabase(addDatabase("QMYSQL"))
+Database::Database(QString databaseName, QString hostName, QString userName, QString password) : QSqlDatabase(addDatabase("QMYSQL"))
 {
-  setDatabaseName("fast_food_restaurants");
-  setHostName("cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com");
-  setUserName("dankdevz");
-  setPassword("cs1d-fast-food-fantasy");
+  setDatabaseName(databaseName);
+  setHostName(hostName);
+  setUserName(userName);
+  setPassword(password);
   if(!open())
   {
       qDebug() << "Database error occurred";
