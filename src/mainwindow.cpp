@@ -68,19 +68,19 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->stackedWidget->setCurrentIndex(4);
 
     // get the information for the currently selected item
-    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    int currentRow         = ui->viewDetails_tableView->currentIndex().row();
+    QModelIndex nameIndex  = ui->viewDetails_tableView->model()->index(currentRow, 1);
+    QModelIndex idIndex    = ui->viewDetails_tableView->model()->index(currentRow, 0);
 
     // get the restaurant name and location ID
-    int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-    QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+    int locationID = ui->viewDetails_tableView->model()->data(idIndex).toInt();
+    QString Title  = ui->viewDetails_tableView->model()->data(nameIndex).toString() + "'s Menu";
     qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
     // Fill the view with the infos
-    ui->viewAllRestaurants_label_title->setText(Title);
+    ui->viewDetails_label_title->setText(Title);
     initViewDetailsTable(db, currentRow+1);
-    ui->viewAllRestaurants_tableView->hideColumn(0);
+    ui->viewDetails_tableView->hideColumn(0);
 }
 
 
