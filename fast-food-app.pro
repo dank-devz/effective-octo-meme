@@ -4,26 +4,19 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+TEMPLATE = subdirs
+CONFIG += ordered
+SUBDIRS = \
+        src \
+#        src/include \
+        app \
+        test
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+app.depends = src
+test.depends = src
 
 
-TARGET = ../build-fast-food-app
-TEMPLATE = app
 
 
-SOURCES += src/main.cpp\
-           src/mainwindow.cpp \
-    src/database.cpp \
-    src/restauranttablemodel.cpp \
-    src/menutablemodel.cpp
-
-HEADERS  += include/mainwindow.h \
-    include/database.h \
-    include/restauranttablemodel.h \
-    include/menutablemodel.h
-
-FORMS    += form/mainwindow.ui
-
-QTPLUGIN += qsqlmysql
+#DISTFILES += \
+#    defaults.pri
