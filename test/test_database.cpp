@@ -1,4 +1,5 @@
 #include <QtTest/QtTest>
+#include "../src/include/database.h"
 
 class Test_Database: public QObject
 {
@@ -8,10 +9,12 @@ class Test_Database: public QObject
 //    ~Test_Database();
 private slots:
     void initTest();
+    Database *testDB;
 };
 
 void Test_Database::initTest(){
     QVERIFY("Testing" == "Testing");
+    testDB = new Database();
 }
 
 //#endif //TEST_DATABASE_H
