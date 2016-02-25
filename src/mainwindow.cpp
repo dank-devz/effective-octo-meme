@@ -81,6 +81,8 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->viewDetails_label_title->setText(Title);
     initViewDetailsTable(db, currentRow+1);
     ui->viewDetails_tableView->hideColumn(0);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+    ui->viewAllRestaurants_tableView->hideColumn(0);
 }
 
 
@@ -122,11 +124,13 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
     RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(resTableModel);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
 void MainWindow::initViewDetailsTable(Database *db, int id)
 {
     MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
     ui->viewAllRestaurants_tableView->setModel(resMenuModel);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
