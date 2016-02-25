@@ -9,6 +9,7 @@ class Test_Database: public QObject
 //    ~Test_Database();
 private slots:
     void initTest();
+private:
     Database *testDB;
 };
 
