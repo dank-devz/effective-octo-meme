@@ -78,7 +78,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
     // Fill the view with the infos
-    ui->viewDetails_label_title->setText(Title);
+    ui->viewDetails_label_pageTitle->setText(Title);
     initViewDetailsTable(db, currentRow+1);
     ui->viewDetails_tableView->hideColumn(0);
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
