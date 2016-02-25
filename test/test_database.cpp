@@ -10,6 +10,10 @@ class Test_Database: public QObject
 private slots:
     void initTest();
     void testOpen();
+    void testValidAddMenuItem();
+    void testInvalidAddMenuItem();
+//    void testValidRemoveMenuItem();
+//    void testInvalidRemoveMenuItem();
 private:
     Database *testDB;
 };
@@ -25,6 +29,21 @@ void Test_Database::testOpen()
 {
     QVERIFY(testDB->isOpen());
 }
+
+void Test_Database::testValidAddMenuItem()
+{
+    QVERIFY(testDB->AddMenuItem(0, "Spicy Tuna Roll", 4.50));
+}
+
+void Test_Database::testInvalidAddMenuItem()
+{
+    QVERIFY(!testDB->AddMenuItem(420, "Special Brownie", 4.20));
+}
+
+//void Test_Database::testValidRemoveMenuItem()
+//{
+//    QVERIFY(testDB->)
+//}
 
 //#endif //TEST_DATABASE_H
 
