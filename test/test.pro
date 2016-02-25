@@ -4,7 +4,7 @@
 include(../defaults.pri)
 
 TEMPLATE = app
-QT += testlib
+QT += testlib sql
 TARGET = test
 CONFIG +=console
 CONFIG += app_bundle

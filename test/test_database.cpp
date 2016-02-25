@@ -9,12 +9,14 @@ class Test_Database: public QObject
 //    ~Test_Database();
 private slots:
     void initTest();
+private:
     Database *testDB;
 };
 
 void Test_Database::initTest(){
     QVERIFY("Testing" == "Testing");
     testDB = new Database();
+    QVERIFY(testDB->isOpen());
 }
 
 //#endif //TEST_DATABASE_H
