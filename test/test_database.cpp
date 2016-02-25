@@ -12,8 +12,7 @@ private slots:
     void testOpen();
     void testValidAddMenuItem();
     void testInvalidAddMenuItem();
-//    void testValidRemoveMenuItem();
-//    void testInvalidRemoveMenuItem();
+    void testRemoveMenuItem();
 private:
     Database *testDB;
 };
@@ -40,10 +39,10 @@ void Test_Database::testInvalidAddMenuItem()
     QVERIFY(!testDB->AddMenuItem(420, "Special Brownie", 4.20));
 }
 
-//void Test_Database::testValidRemoveMenuItem()
-//{
-//    QVERIFY(testDB->)
-//}
+void Test_Database::testRemoveMenuItem()
+{
+    QVERIFY(testDB->RemoveMenuItem(0, "Spicy Tuna Roll"));
+}
 
 //#endif //TEST_DATABASE_H
 
