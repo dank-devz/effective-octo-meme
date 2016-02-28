@@ -175,7 +175,7 @@ bool Database::PurchaseItem(int itemId, int quantity)
     query.prepare("INSERT INTO cart (id, quantity) "
                   "VALUES (:id, :quantity)");
 
-    query.bindValue(":id", id);
+    query.bindValue(":id", itemId);
     query.bindValue(":quantity", quantity);
 
     return query.exec();
