@@ -11,3 +11,5 @@ ui*
 .qmake.stash
 app/app
 test/test.app/
+*.so*
+test/test

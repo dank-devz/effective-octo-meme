@@ -74,7 +74,7 @@
        <item>
         <widget class="QPushButton" name="home_pushButton_planRegularFoodRun">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Plan a food run</string>
@@ -164,17 +164,17 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_planRegularTrip">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="planRegularTrip_label_title">
       <property name="geometry">
        <rect>
-        <x>130</x>
-        <y>150</y>
-        <width>241</width>
+        <x>140</x>
+        <y>20</y>
+        <width>121</width>
         <height>22</height>
        </rect>
       </property>
       <property name="text">
-       <string>plan reg run (temp label)</string>
+       <string>Plan your trip!</string>
       </property>
      </widget>
      <widget class="QPushButton" name="planRegularTrip_pushButton_back">
@@ -198,6 +198,77 @@
       </property>
       <property name="flat">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="planRegularTrip_comboBox_startingLocation">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>190</y>
+        <width>200</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="planRegularTrip_comboBox_numberOfStops">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>80</y>
+        <width>75</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="planRegularTrip_label_promptLocations">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>120</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>How man locations would you like to visit?</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="planRegularTrip_label_promptStart">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>120</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Where would you like to start?</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="planRegularTrip_pushButton_go">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>320</y>
+        <width>87</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>GO!</string>
       </property>
      </widget>
     </widget>
@@ -297,7 +368,7 @@
      <x>0</x>
      <y>0</y>
      <width>429</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
