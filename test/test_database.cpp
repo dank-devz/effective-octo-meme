@@ -15,7 +15,9 @@ private:
 };
 
 void Test_Database::initTest(){
-    testDB = new Database();
+    //replace this with connection to test Database once we have it up and running.
+    testDB = new Database("fast_food_restaurants_testing", "cs1d-fast-food-fantasy-testing.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
+                          "dankdevz", "dankdevz");
     QVERIFY(testDB != NULL);
 }
 

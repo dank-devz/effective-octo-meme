@@ -13,7 +13,7 @@ class Database : public QSqlDatabase
 public:
 
     ///Create database from specified db file and driver
-    Database();
+    Database(QString databaseName, QString hostname, QString username, QString password);
 
     ///Destructor
     ~Database();
