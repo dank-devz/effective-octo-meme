@@ -11,3 +11,5 @@ test/test.app
 *.dylib
 app/app
 .qmake.stash
+*.so*
+test/test

@@ -74,7 +74,7 @@
        <item>
         <widget class="QPushButton" name="home_pushButton_planRegularFoodRun">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Plan a food run</string>
@@ -368,7 +368,7 @@
      <x>0</x>
      <y>0</y>
      <width>429</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

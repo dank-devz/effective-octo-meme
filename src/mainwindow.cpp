@@ -37,6 +37,13 @@ void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 {
     // takes the user to the planRegularFoodRun page (index - 2)
     ui->stackedWidget->setCurrentIndex(2);
+
+    QList<QString> restaurants = db->GetRestaurants();
+    for(int i = 0; i < restaurants.size(); i ++)
+    {
+        ui->planRegularTrip_comboBox_numberOfStops->addItem(QString::number(i+1));
+        ui->planRegularTrip_comboBox_startingLocation->addItem(restaurants.at(i));
+    }
 }
 
 void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
