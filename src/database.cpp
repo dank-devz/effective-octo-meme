@@ -6,22 +6,22 @@
  */
 Database::Database(QString databaseName, QString hostName, QString userName, QString password) : QSqlDatabase(addDatabase("QMYSQL"))
 {
-  setDatabaseName(databaseName);
-  setHostName(hostName);
-  setUserName(userName);
-  setPassword(password);
-  if(!open())
-  {
-      qDebug() << "Database error occurred";
-      qDebug() << lastError();
-  }
-  else
-  {
-      qDebug() << "CONNECTED! Huzzah.";
-  }
+    setDatabaseName(databaseName);
+    setHostName(hostName);
+    setUserName(userName);
+    setPassword(password);
+    if(!open())
+    {
+        qDebug() << "Database error occurred";
+        qDebug() << lastError();
+    }
+    else
+    {
+        qDebug() << "CONNECTED! Huzzah.";
+    }
 
-//  query = QSqlQuery(*this);
-//  query.exec("PRAGMA foreign_keys = ON;");
+    //  query = QSqlQuery(*this);
+    //  query.exec("PRAGMA foreign_keys = ON;");
 }
 
 /*!
@@ -29,11 +29,11 @@ Database::Database(QString databaseName, QString hostName, QString userName, QSt
  */
 Database::~Database()
 {
-//  if(query.isActive())
-//  {
-//    query.finish();
-//    query.clear();
-//  }
+    //  if(query.isActive())
+    //  {
+    //    query.finish();
+    //    query.clear();
+    //  }
     //  close();
 }
 
@@ -50,18 +50,18 @@ Database::~Database()
  */
 bool Database::AddMenuItem(int restaurantId, QString itemName, double price)
 {
-   QSqlQuery query;
+    QSqlQuery query;
 
-   //prepare a SQL query with named binding
-   query.prepare("INSERT INTO items (id, name, price) "
+    //prepare a SQL query with named binding
+    query.prepare("INSERT INTO items (id, name, price) "
                   "VALUES (:id, :name, :price)");
 
-   //bind values
-   query.bindValue(":id", restaurantId);
-   query.bindValue(":name", itemName);
-   query.bindValue(":price", price);
+    //bind values
+    query.bindValue(":id", restaurantId);
+    query.bindValue(":name", itemName);
+    query.bindValue(":price", price);
 
-   return query.exec();
+    return query.exec();
 }
 
 /**
@@ -83,4 +83,26 @@ bool Database::RemoveMenuItem(int restaurantId, QString itemName)
     query.bindValue(":name", itemName);
 
     return query.exec();
+}
+
+/**
+ * @brief Database::GetRestaurants Return a list of restaurants
+ * @return QList of QStrings of restaurant names
+ */
+QList<QString> Database::GetRestaurants()
+{
+    QList<QString> restaurantList;
+    QSqlQuery query;
+    if(query.exec("SELECT name from restaurants WHERE restaurants.id != 0"))
+    {
+        while(query.next())
+        {
+            restaurantList.append(query.value("name").toString());
+        }
+    }
+    else
+    {
+        qDebug() << this->lastError().text();
+    }
+    return restaurantList;
 }

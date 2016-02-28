@@ -8,6 +8,7 @@
 #include <QString>
 #include <QDebug>
 
+
 class Database : public QSqlDatabase
 {
 public:
@@ -23,6 +24,8 @@ public:
     bool AddMenuItem(int restaurantId, QString itemName, double price);
     ///Remove an item from a specified restaurant's menu.
     bool RemoveMenuItem(int restaurantId, QString itemName);
+    ///Return a list of restaurants
+    QList<QString> GetRestaurants();
 
 private:
 };
