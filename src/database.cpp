@@ -163,6 +163,22 @@ int Database::GetItemId(int restaurantId, QString itemName)
 }
 
 /**
+ * @brief Database::GetCartTotal Retrieve the total cost of the items in the cart.
+ * @return Sum of the prices of items in the cart.
+ */
+double Database::GetCartTotal()
+{
+    QSqlQuery query;
+    double totalCost = 0;
+    query.exec("SELECT items.price, cart.quantity from cart, items where cart.id = items.itemId");
+    while(query.next())
+    {
+        totalCost += (query.value("price").toDouble() * query.value("quantity").toInt());
+    }
+    return totalCost;
+}
+
+/**
  * @brief Database::PurchaseItem Add an item to the cart.
  * @param itemId The ID of the item to add.
  * @param quantity The quantity of items to purchase.

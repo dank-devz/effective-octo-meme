@@ -34,6 +34,8 @@ public:
     int GetRestaurantId(QString restaurantName);
     ///Retrieve a menu item's unique ID
     int GetItemId(int restaurantId, QString itemName);
+    ///Retrieve the total cost of the items in the cart.
+    double GetCartTotal();
 
 private:
 };
