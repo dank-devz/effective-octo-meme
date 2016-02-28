@@ -9,7 +9,7 @@ private:
     MainWindow *testWindow;
 };
 
-void Test_MainWindow::initTest(){
+
 
 }
 
