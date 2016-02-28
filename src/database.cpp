@@ -106,3 +106,22 @@ QList<QString> Database::GetRestaurants()
     }
     return restaurantList;
 }
+
+/**
+ * @brief Database::PurchaseItem Add an item to the cart.
+ * @param itemId The ID of the item to add.
+ * @param quantity The quantity of items to purchase.
+ * @return true if successfully added.
+ */
+bool Database::PurchaseItem(int itemId, int quantity)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO cart (id, quantity) "
+                  "VALUES (:id, :quantity)");
+
+    query.bindValue(":id", id);
+    query.bindValue(":quantity", quantity);
+
+    return query.exec();
+}

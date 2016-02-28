@@ -26,6 +26,8 @@ public:
     bool RemoveMenuItem(int restaurantId, QString itemName);
     ///Return a list of restaurants
     QList<QString> GetRestaurants();
+    ///Add an item to purchases
+    bool PurchaseItem(int itemId, int quantity);
 
 private:
 };
