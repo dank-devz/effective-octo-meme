@@ -108,6 +108,33 @@ QList<QString> Database::GetRestaurants()
 }
 
 /**
+ * @brief Database::GetRestaurantId Retrieve a restaurant's unique ID given its name
+ * @param restaurantName
+ * @return restaurant ID
+ */
+int Database::GetRestaurantId(QString restaurantName)
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT id from restaurants where name = :restaurantName");
+    query.bindValue(":restaurantName", restaurantName);
+    if(query.exec()){
+        if(query.next()){
+            return query.value("id").toInt();
+        }
+        else
+        {
+            qDebug() << "No restaurant with that name exists.";
+        }
+    }
+    else
+    {
+        qDebug() << lastError().text();
+        return -1;
+    }
+}
+
+/**
  * @brief Database::PurchaseItem Add an item to the cart.
  * @param itemId The ID of the item to add.
  * @param quantity The quantity of items to purchase.

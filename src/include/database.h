@@ -24,10 +24,16 @@ public:
     bool AddMenuItem(int restaurantId, QString itemName, double price);
     ///Remove an item from a specified restaurant's menu.
     bool RemoveMenuItem(int restaurantId, QString itemName);
-    ///Return a list of restaurants
-    QList<QString> GetRestaurants();
     ///Add an item to purchases
     bool PurchaseItem(int itemId, int quantity);
+
+    //Accessors
+    ///Return a list of restaurants
+    QList<QString> GetRestaurants();
+    ///Retrieve a restaurant's unique ID
+    int GetRestaurantId(QString restaurantName);
+    ///Retrieve a menu item's unique ID
+    int GetItemId(int restaurantId, QString itemName);
 
 private:
 };
