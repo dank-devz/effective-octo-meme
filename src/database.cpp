@@ -110,7 +110,7 @@ QList<QString> Database::GetRestaurants()
 /**
  * @brief Database::GetRestaurantId Retrieve a restaurant's unique ID given its name
  * @param restaurantName
- * @return restaurant ID
+ * @return -1 if failed, otherwise return restaurant ID
  */
 int Database::GetRestaurantId(QString restaurantName)
 {
@@ -125,6 +125,34 @@ int Database::GetRestaurantId(QString restaurantName)
         else
         {
             qDebug() << "No restaurant with that name exists.";
+        }
+    }
+    else
+    {
+        qDebug() << lastError().text();
+        return -1;
+    }
+}
+
+/**
+ * @brief Database::GetItemId Retrieve a menu item's id given the restaurantID and item name
+ * @param restaurantId
+ * @param itemName
+ * @return -1 if failed, otherwise return item ID.
+ */
+int Database::GetItemId(int restaurantId, QString itemName)
+{
+    QSqlQuery query;
+    query.prepare("SELECT itemId from items where id = :restaurantId and name = :itemName");
+    query.bindValue(":restaurantId", restaurantId);
+    query.bindValue(":itemName", itemName);
+    if(query.exec()){
+        if(query.next()){
+            return query.value("itemId").toInt();
+        }
+        else
+        {
+            qDebug() << "No menu item like that exists.";
         }
     }
     else
