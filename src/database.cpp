@@ -106,3 +106,77 @@ QList<QString> Database::GetRestaurants()
     }
     return restaurantList;
 }
+
+/**
+ * @brief Database::GetRestaurantId Retrieve a restaurant's unique ID given its name
+ * @param restaurantName
+ * @return -1 if failed, otherwise return restaurant ID
+ */
+int Database::GetRestaurantId(QString restaurantName)
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT id from restaurants where name = :restaurantName");
+    query.bindValue(":restaurantName", restaurantName);
+    if(query.exec()){
+        if(query.next()){
+            return query.value("id").toInt();
+        }
+        else
+        {
+            qDebug() << "No restaurant with that name exists.";
+        }
+    }
+    else
+    {
+        qDebug() << lastError().text();
+        return -1;
+    }
+}
+
+/**
+ * @brief Database::GetItemId Retrieve a menu item's id given the restaurantID and item name
+ * @param restaurantId
+ * @param itemName
+ * @return -1 if failed, otherwise return item ID.
+ */
+int Database::GetItemId(int restaurantId, QString itemName)
+{
+    QSqlQuery query;
+    query.prepare("SELECT itemId from items where id = :restaurantId and name = :itemName");
+    query.bindValue(":restaurantId", restaurantId);
+    query.bindValue(":itemName", itemName);
+    if(query.exec()){
+        if(query.next()){
+            return query.value("itemId").toInt();
+        }
+        else
+        {
+            qDebug() << "No menu item like that exists.";
+        }
+    }
+    else
+    {
+        qDebug() << lastError().text();
+        return -1;
+    }
+}
+
+/**
+ * @brief Database::PurchaseItem Add an item to the cart.
+ * @param itemId The ID of the item to add.
+ * @param quantity The quantity of items to purchase.
+ * @return true if successfully added.
+ */
+bool Database::PurchaseItem(int itemId, int quantity)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO cart (id, quantity) "
+                  "VALUES (:id, :quantity)");
+
+    query.bindValue(":id", itemId);
+    query.bindValue(":quantity", quantity);
+
+    return query.exec();
+}
