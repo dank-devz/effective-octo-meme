@@ -16,6 +16,9 @@ void MenuTableModel::Initialize(int id)
     this->setHeaderData(ID, Qt::Horizontal, tr("Restaurant ID"),QSqlTableModel::OnManualSubmit);
     this->setHeaderData(ITEM, Qt::Horizontal, tr("Item Name"),QSqlTableModel::OnManualSubmit);
     this->setHeaderData(PRICE, Qt::Horizontal, tr("Price"),QSqlTableModel::OnManualSubmit);
+
+    this->insertColumn(3);
+    this->setHeaderData(3,Qt::Horizontal, tr("Purchase Quantity"),QSqlTableModel::OnManualSubmit);
     this->setFilter(filter);
     this->select();
 }

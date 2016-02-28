@@ -1,4 +1,4 @@
-#include "../include/mainwindow.h"
+#include "include/mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
 
     // instantiate the database and the model
-    db = new Database();
+    db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
+                      "dankdevz", "cs1d-fast-food-fantasy");
     initViewAllRestaurantsTable(db);
 }
 
@@ -69,6 +70,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->label->setText(Title);
     initViewDetailsTable(db, currentRow+1);
     ui->tableView->hideColumn(0);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -94,6 +96,7 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
     RestaurantTableModel *resTableModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(resTableModel);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
 void MainWindow::initViewDetailsTable(Database *db, int id)
@@ -101,4 +104,5 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
     MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(resMenuModel);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }

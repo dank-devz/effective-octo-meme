@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -73,6 +73,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="home_pushButton_planRegularFoodRun">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Plan a food run</string>
          </property>
@@ -80,6 +83,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="home_pushButton_planCustomFoodRun">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="font">
           <font>
            <weight>50</weight>
@@ -362,7 +368,7 @@
      <x>0</x>
      <y>0</y>
      <width>429</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
