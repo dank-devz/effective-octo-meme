@@ -16,6 +16,7 @@ private slots:
     void testGetRestaurantId();
     void testGetItemId();
     void testGetRestaurants();
+    void testGetCartTotal();
 private:
     Database *testDB;
 };
@@ -60,6 +61,11 @@ void Test_Database::testGetRestaurants()
 {
     QList<QString> testList = testDB->GetRestaurants();
     QVERIFY(testList.size() > 0);
+}
+
+void Test_Database::testGetCartTotal()
+{
+    QVERIFY(testDB->GetCartTotal() > 0);
 }
 
 
