@@ -7,3 +7,7 @@ debug*
 moc*
 Makefile
 ui*
+*.dylib
+.qmake.stash
+app/app
+test/test.app/
