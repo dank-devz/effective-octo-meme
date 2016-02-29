@@ -180,3 +180,8 @@ bool Database::PurchaseItem(int itemId, int quantity)
 
     return query.exec();
 }
+
+/**
+ * @brief Database::GetRestaurantDistances Retrieve the restaurant distances
+ * @return int list
+ */
