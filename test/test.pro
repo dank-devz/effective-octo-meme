@@ -12,7 +12,6 @@ INCLUDEPATH += .
 
 # Input
 HEADERS += test_database.h
-SOURCES += test_database.cpp \
-    test_mainwindow.cpp
+SOURCES += test_database.cpp
 
 LIBS += -L../src -lfast-food-app
