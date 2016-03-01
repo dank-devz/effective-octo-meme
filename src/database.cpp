@@ -183,5 +183,34 @@ bool Database::PurchaseItem(int itemId, int quantity)
 
 /**
  * @brief Database::GetRestaurantDistances Retrieve the restaurant distances
+ * @param restaurantName
  * @return int list
  */
+
+QList<double> Database::GetRestaurantDistances(QString name)
+{
+    QList <double> 	distanceList;
+    QSqlQuery 		query;
+    int 			restaurantId;
+    double 			distance;
+
+    restaurantId = GetRestaurantId(name);
+
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        if(query.next())
+        {
+            distance = query.value(0).toDouble();
+            distanceList.append(distance);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return distanceList;
+}
