@@ -240,3 +240,26 @@ QList<double> Database::GetRestaurantDistances(int restaurantId)
     }
     return distanceList;
 }
+
+QList<int> Database::GetAllRestaurantIds() const
+{
+    QList <int> 	restaurantIds;
+    QSqlQuery 		query;
+    int 			id;
+
+    query.prepare("SELECT `id` FROM restaurants");
+
+    if(query.exec()){
+        while(query.next())
+        {
+            id = query.value("id").toInt();
+            restaurantIds.append(id);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return restaurantIds;
+}

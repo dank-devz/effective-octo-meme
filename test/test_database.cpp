@@ -15,6 +15,7 @@ private slots:
     void testRemoveMenuItem();
     void testGetDistanceFromRestaurantByID();
     void testGetDistanceFromRestaurantByName();
+    void testGetAllRestaurantIds();
 private:
     Database *testDB;
 };
@@ -67,6 +68,17 @@ void Test_Database::testGetDistanceFromRestaurantByName()
     QVERIFY(testMap.contains(158));
     QVERIFY(testMap.contains(1234));
 
+}
+
+void Test_Database::testGetAllRestaurantIds()
+{
+    QList<int> testIds;
+    testIds = testDB->GetAllRestaurantIds();
+    QVERIFY(testIds.contains(0));
+    QVERIFY(testIds.contains(1));
+    QVERIFY(testIds.contains(2));
+    QVERIFY(testIds.contains(3));
+    QVERIFY(testIds.contains(4));
 }
 
 //#endif //TEST_DATABASE_H
