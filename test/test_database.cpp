@@ -13,10 +13,16 @@ private slots:
     void testValidAddMenuItem();
     void testInvalidAddMenuItem();
     void testRemoveMenuItem();
+
     void testGetRestaurantId();
     void testGetItemId();
     void testGetRestaurants();
     void testGetCartTotal();
+
+    void testGetDistanceFromRestaurantByID();
+    void testGetDistanceFromRestaurantByName();
+    void testGetAllRestaurantIds();
+
 private:
     Database *testDB;
 };
@@ -47,6 +53,7 @@ void Test_Database::testRemoveMenuItem()
     QVERIFY(testDB->RemoveMenuItem(0, "Spicy Tuna Roll"));
 }
 
+<<<<<<< HEAD
 void Test_Database::testGetRestaurantId()
 {
     QVERIFY(testDB->GetRestaurantId("Testaurant") == 0);
@@ -70,6 +77,42 @@ void Test_Database::testGetCartTotal()
 
 
 
+=======
+void Test_Database::testGetDistanceFromRestaurantByID()
+{
+    QList<double> testMap;
+    testMap = testDB->GetRestaurantDistances(0);
+
+    QVERIFY(testMap.contains(43824));
+    QVERIFY(testMap.contains(18588));
+    QVERIFY(testMap.contains(158));
+    QVERIFY(testMap.contains(1234));
+
+}
+void Test_Database::testGetDistanceFromRestaurantByName()
+{
+    QList<double> testMap;
+    testMap = testDB->GetRestaurantDistances("Testaurant");
+
+    QVERIFY(testMap.contains(43824));
+    QVERIFY(testMap.contains(18588));
+    QVERIFY(testMap.contains(158));
+    QVERIFY(testMap.contains(1234));
+
+}
+
+void Test_Database::testGetAllRestaurantIds()
+{
+    QList<int> testIds;
+    testIds = testDB->GetAllRestaurantIds();
+    QVERIFY(testIds.contains(0));
+    QVERIFY(testIds.contains(1));
+    QVERIFY(testIds.contains(2));
+    QVERIFY(testIds.contains(3));
+    QVERIFY(testIds.contains(4));
+}
+
+>>>>>>> 191e987ed1f58815b2803bec908b2070a404efe2
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)
