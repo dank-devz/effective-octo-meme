@@ -106,3 +106,137 @@ QList<QString> Database::GetRestaurants()
     }
     return restaurantList;
 }
+
+/**
+ * @brief Database::GetRestaurantId Retrieve a restaurant's unique ID given its name
+ * @param restaurantName
+ * @return -1 if failed, otherwise return restaurant ID
+ */
+int Database::GetRestaurantId(QString restaurantName)
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT id from restaurants where name = :restaurantName");
+    query.bindValue(":restaurantName", restaurantName);
+    if(query.exec()){
+        if(query.next()){
+            return query.value("id").toInt();
+        }
+        else
+        {
+            qDebug() << "No restaurant with that name exists.";
+        }
+    }
+    else
+    {
+        qDebug() << lastError().text();
+        return -1;
+    }
+}
+
+/**
+ * @brief Database::GetItemId Retrieve a menu item's id given the restaurantID and item name
+ * @param restaurantId
+ * @param itemName
+ * @return -1 if failed, otherwise return item ID.
+ */
+int Database::GetItemId(int restaurantId, QString itemName)
+{
+    QSqlQuery query;
+    query.prepare("SELECT itemId from items where id = :restaurantId and name = :itemName");
+    query.bindValue(":restaurantId", restaurantId);
+    query.bindValue(":itemName", itemName);
+    if(query.exec()){
+        if(query.next()){
+            return query.value("itemId").toInt();
+        }
+        else
+        {
+            qDebug() << "No menu item like that exists.";
+        }
+    }
+    else
+    {
+        qDebug() << lastError().text();
+        return -1;
+    }
+}
+
+/**
+ * @brief Database::PurchaseItem Add an item to the cart.
+ * @param itemId The ID of the item to add.
+ * @param quantity The quantity of items to purchase.
+ * @return true if successfully added.
+ */
+bool Database::PurchaseItem(int itemId, int quantity)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO cart (id, quantity) "
+                  "VALUES (:id, :quantity)");
+
+    query.bindValue(":id", itemId);
+    query.bindValue(":quantity", quantity);
+
+    return query.exec();
+}
+
+/**
+ * @brief Database::GetRestaurantDistances Retrieve the restaurant distances
+ * @param restaurantName
+ * @return int list
+ */
+
+QList<double> Database::GetRestaurantDistances(QString name)
+{
+    QList <double> 	distanceList;
+    QSqlQuery 		query;
+    int 			restaurantId;
+    double 			distance;
+
+    restaurantId = GetRestaurantId(name);
+
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            distance = query.value("distance").toDouble();
+            distanceList.append(distance);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return distanceList;
+}
+
+
+QList<double> Database::GetRestaurantDistances(int restaurantId)
+{
+    QList <double> 	distanceList;
+    QSqlQuery 		query;
+    double 			distance;
+
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            distance = query.value("distance").toDouble();
+            distanceList.append(distance);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return distanceList;
+}
