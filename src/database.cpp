@@ -201,9 +201,35 @@ QList<double> Database::GetRestaurantDistances(QString name)
     query.bindValue(":id", restaurantId);
 
     if(query.exec()){
-        if(query.next())
+        while(query.next())
         {
-            distance = query.value(0).toDouble();
+            distance = query.value("distance").toDouble();
+            distanceList.append(distance);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return distanceList;
+}
+
+
+QList<double> Database::GetRestaurantDistances(int restaurantId)
+{
+    QList <double> 	distanceList;
+    QSqlQuery 		query;
+    double 			distance;
+
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            distance = query.value("distance").toDouble();
             distanceList.append(distance);
         }
     }

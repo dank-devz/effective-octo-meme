@@ -13,7 +13,8 @@ private slots:
     void testValidAddMenuItem();
     void testInvalidAddMenuItem();
     void testRemoveMenuItem();
-    void testGetDistanceFromRestaurant();
+    void testGetDistanceFromRestaurantByID();
+    void testGetDistanceFromRestaurantByName();
 private:
     Database *testDB;
 };
@@ -45,19 +46,25 @@ void Test_Database::testRemoveMenuItem()
     QVERIFY(testDB->RemoveMenuItem(0, "Spicy Tuna Roll"));
 }
 
-void Test_Database::testGetDistanceFromRestaurant()
+void Test_Database::testGetDistanceFromRestaurantByID()
+{
+    QList<double> testMap;
+    testMap = testDB->GetRestaurantDistances(0);
+
+    QVERIFY(testMap.contains(43824));
+    QVERIFY(testMap.contains(18588));
+    QVERIFY(testMap.contains(158));
+    QVERIFY(testMap.contains(1234));
+
+}
+void Test_Database::testGetDistanceFromRestaurantByName()
 {
     QList<double> testMap;
     testMap = testDB->GetRestaurantDistances("Testaurant");
 
     QVERIFY(testMap.contains(43824));
-    QVERIFY(testMap.contains(8080));
-    QVERIFY(testMap.contains(199));
-    QVERIFY(testMap.contains(518));
-    QVERIFY(testMap.contains(4888));
     QVERIFY(testMap.contains(18588));
-    QVERIFY(testMap.contains(9000));
-    QVERIFY(testMap.contains(4567));
+    QVERIFY(testMap.contains(158));
     QVERIFY(testMap.contains(1234));
 
 }
