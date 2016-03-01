@@ -81,8 +81,8 @@ void Test_Database::testGetAllRestaurantIds()
     QVERIFY(testIds.contains(4));
 }
 
+
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)
 #include "test_database.moc"
-
