@@ -37,6 +37,14 @@ void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 {
     // takes the user to the planRegularFoodRun page (index - 2)
     ui->stackedWidget->setCurrentIndex(2);
+
+    // fills the combo boxes with the most recent values from the db
+    QList<QString> restaurants = db->GetRestaurants();
+    for(int i = 0; i < restaurants.size(); i ++)
+    {
+        ui->planRegularTrip_comboBox_numberOfStops->addItem(QString::number(i+1));
+        ui->planRegularTrip_comboBox_startingLocation->addItem(restaurants.at(i));
+    }
 }
 
 void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
@@ -77,6 +85,10 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(0);
+
+    // cleares the combo boxes
+    ui->planRegularTrip_comboBox_numberOfStops->clear();
+    ui->planRegularTrip_comboBox_startingLocation->clear();
 }
 
 void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()

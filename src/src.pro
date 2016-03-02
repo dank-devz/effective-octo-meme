@@ -14,7 +14,8 @@ SOURCES += mainwindow.cpp \
 HEADERS  += include/mainwindow.h \
     include/database.h \
     include/restauranttablemodel.h \
-    include/menutablemodel.h
+    include/menutablemodel.h \
+    include/trip.h
 
 FORMS    += form/mainwindow.ui
 

@@ -4,14 +4,16 @@
 include(../defaults.pri)
 
 TEMPLATE = app
-QT += testlib sql
+QT += core testlib sql gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = test
 CONFIG +=console
 CONFIG += app_bundle
 INCLUDEPATH += .
 
 # Input
-HEADERS += test_database.h
+HEADERS += test_database.h \
+    test_gui.h
 SOURCES += test_database.cpp
 
 LIBS += -L../src -lfast-food-app

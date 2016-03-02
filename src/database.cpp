@@ -196,3 +196,86 @@ bool Database::PurchaseItem(int itemId, int quantity)
 
     return query.exec();
 }
+
+/**
+ * @brief Database::GetRestaurantDistances Retrieve the restaurant distances
+ * @param restaurantName
+ * @return int list
+ */
+
+QList<double> Database::GetRestaurantDistances(QString name)
+{
+    QList <double> 	distanceList;
+    QSqlQuery 		query;
+    int 			restaurantId;
+    double 			distance;
+
+    restaurantId = GetRestaurantId(name);
+
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            distance = query.value("distance").toDouble();
+            distanceList.append(distance);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return distanceList;
+}
+
+
+QList<double> Database::GetRestaurantDistances(int restaurantId)
+{
+    QList <double> 	distanceList;
+    QSqlQuery 		query;
+    double 			distance;
+
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            distance = query.value("distance").toDouble();
+            distanceList.append(distance);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return distanceList;
+}
+
+QList<int> Database::GetAllRestaurantIds() const
+{
+    QList <int> 	restaurantIds;
+    QSqlQuery 		query;
+    int 			id;
+
+    query.prepare("SELECT `id` FROM restaurants");
+
+    if(query.exec()){
+        while(query.next())
+        {
+            id = query.value("id").toInt();
+            restaurantIds.append(id);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return restaurantIds;
+}
