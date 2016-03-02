@@ -9,13 +9,15 @@ TEMPLATE = lib
 SOURCES += mainwindow.cpp \
     database.cpp \
     restauranttablemodel.cpp \
-    menutablemodel.cpp
+    menutablemodel.cpp \
+    trip.cpp
 
 HEADERS  += include/mainwindow.h \
     include/database.h \
     include/restauranttablemodel.h \
     include/menutablemodel.h \
-    include/trip.h
+    include/trip.h \
+    include/location.h
 
 FORMS    += form/mainwindow.ui
 

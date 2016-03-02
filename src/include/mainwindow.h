@@ -5,6 +5,7 @@
 #include "database.h"
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
+#include "trip.h"
 
 namespace Ui {
 class MainWindow;
@@ -57,9 +58,12 @@ private slots:
      */
     void initViewAllRestaurantsTable(Database *db);
     void initViewDetailsTable(Database *db, int id);
+    Trip* getTrip(QVector<int> ids);
+    Trip* TripToAll();
 
 private:
     Ui::MainWindow *ui;
+    Trip *the_trip_;
 
     /*
      * D A T A B A S E  V A R I A B L E S

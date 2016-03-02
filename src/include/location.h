@@ -19,7 +19,7 @@ public:
   // Default Constructor
   Location() : id_(-1) {}
   // Constructor - Sets The Data
-  Location(int id, QVector<float> distances) : distances_(distances), id_(id) {}
+  Location(int id, QVector<double> distances) : distances_(distances), id_(id) {}
 
   /*** UTILITY METHODS ***/
   // Returns the ID (db key) of THIS location
@@ -28,8 +28,8 @@ public:
   float DistanceTo(int id) const { return distances_[id]; }
 
 private:
-  int id_;                    //< ID (key) for THIS location
-  QVector<float> distances_;  //< Vector of distances from THIS location to all others, vector index = location ID
+  int id_;                     //< ID (key) for THIS location
+  QVector<double> distances_;  //< Vector of distances from THIS location to all others, vector index = location ID
 //  QVector<int> menu_;         //< Vector of menu items for later use. Would store the # of items purchased of each index, not what those items are
 };
 

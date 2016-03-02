@@ -35,9 +35,9 @@ public:
     ///Retrieve a menu item's unique ID
     int GetItemId(int restaurantId, QString itemName);
     /// Retrieve Restaurant Distances
-    QList<double> GetRestaurantDistances(QString name);
-    QList<double> GetRestaurantDistances(int restaurantId);
-    QList<int> GetAllRestaurantIds() const;
+    QVector<double> GetRestaurantDistances(QString name);
+    QVector<double> GetRestaurantDistances(int restaurantId);
+    QVector<int> GetAllRestaurantIds() const;
 
 private:
 };

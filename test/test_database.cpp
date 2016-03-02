@@ -49,7 +49,7 @@ void Test_Database::testRemoveMenuItem()
 
 void Test_Database::testGetDistanceFromRestaurantByID()
 {
-    QList<double> testMap;
+    QVector<double> testMap;
     testMap = testDB->GetRestaurantDistances(0);
 
     QVERIFY(testMap.contains(43824));
@@ -60,7 +60,7 @@ void Test_Database::testGetDistanceFromRestaurantByID()
 }
 void Test_Database::testGetDistanceFromRestaurantByName()
 {
-    QList<double> testMap;
+    QVector<double> testMap;
     testMap = testDB->GetRestaurantDistances("Testaurant");
 
     QVERIFY(testMap.contains(43824));
@@ -72,7 +72,7 @@ void Test_Database::testGetDistanceFromRestaurantByName()
 
 void Test_Database::testGetAllRestaurantIds()
 {
-    QList<int> testIds;
+    QVector<int> testIds;
     testIds = testDB->GetAllRestaurantIds();
     QVERIFY(testIds.contains(0));
     QVERIFY(testIds.contains(1));
