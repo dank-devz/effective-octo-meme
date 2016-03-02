@@ -1,5 +1,8 @@
 #include <QtTest/QtTest>
+#include <iostream>
 #include "../src/include/database.h"
+#include "trip.h"
+#include "mainwindow.h"
 
 class Test_Database: public QObject
 {
@@ -16,6 +19,7 @@ private slots:
     void testGetDistanceFromRestaurantByID();
     void testGetDistanceFromRestaurantByName();
     void testGetAllRestaurantIds();
+    void testRouteDistance1();
 private:
     Database *testDB;
 };
@@ -81,6 +85,30 @@ void Test_Database::testGetAllRestaurantIds()
     QVERIFY(testIds.contains(4));
 }
 
+void Test_Database::testRouteDistance1()
+{
+    MainWindow w;
+
+    QVector<int> locations;
+    locations.push_back(1);
+    locations.push_back(2);
+    locations.push_back(3);
+
+    QVector<int> valid1;
+    valid1.push_back(2);
+    valid1.push_back(3);
+    valid1.push_back(1);
+
+    QVector<int> valid2 = valid1;
+    valid2.push_back(1);
+    valid2.push_back(3);
+    valid2.push_back(2);
+
+    qDebug() << "About to get the trip";
+    Trip *the_trip = w.getTrip(locations);
+    QVERIFY(the_trip->getDistance() == 42.79);
+    QVERIFY(the_trip->getRoute() == valid1);
+}
 
 //#endif //TEST_DATABASE_H
 

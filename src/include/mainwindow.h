@@ -18,6 +18,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    Trip* getTrip(QVector<int> ids);
+    Trip* TripToAll();
 
 private slots:
     /*
@@ -58,8 +60,6 @@ private slots:
      */
     void initViewAllRestaurantsTable(Database *db);
     void initViewDetailsTable(Database *db, int id);
-    Trip* getTrip(QVector<int> ids);
-    Trip* TripToAll();
 
 private:
     Ui::MainWindow *ui;

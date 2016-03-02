@@ -127,9 +127,11 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
 Trip* MainWindow::getTrip(QVector<int> idsToVisit)
 {
   // Get the ids of all the locations in the db
+  qDebug() << "Getting all the IDs";
   QVector<int> all_ids(db->GetAllRestaurantIds());
 
   // Create and load the location vector
+  qDebug() << "Create the vector of locations";
   QVector<Location> all_locations;
   for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
     all_locations.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
@@ -151,7 +153,7 @@ Trip* MainWindow::getTrip(QVector<int> idsToVisit)
  * @brief Gets the shortest trip to all locations
  * @return a pointer to a trip object containing the route and distance
  */
-Trip *MainWindow::TripToAll()
+Trip* MainWindow::TripToAll()
 {
   return getTrip(db->GetAllRestaurantIds());
 }

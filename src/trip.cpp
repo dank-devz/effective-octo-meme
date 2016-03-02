@@ -41,7 +41,8 @@ QVector<int> Trip::findRoute(QVector<int> idList)
     tempDist += locations_[0].DistanceTo(idList.first());
 
     // Sum the rest of the distances
-    for(int i = 0; i < idList.size()-1; i++){
+    for(int i = 0; i < idList.size()-2; i++){
+      qDebug() << "TEST!";
       tempDist += locations_[idList[i]].DistanceTo(idList[i+1]);
     }
 

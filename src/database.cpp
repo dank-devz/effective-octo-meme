@@ -160,6 +160,7 @@ int Database::GetItemId(int restaurantId, QString itemName)
         qDebug() << lastError().text();
         return -1;
     }
+    return -1;
 }
 
 /**
