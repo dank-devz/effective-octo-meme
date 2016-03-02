@@ -51,7 +51,6 @@ void Test_Database::testRemoveMenuItem()
     QVERIFY(testDB->RemoveMenuItem(0, "Spicy Tuna Roll"));
 }
 
-<<<<<<< HEAD
 void Test_Database::testGetRestaurantId()
 {
     QVERIFY(testDB->GetRestaurantId("Testaurant") == 0);
@@ -75,7 +74,7 @@ void Test_Database::testGetCartTotal()
 
 
 
-=======
+
 void Test_Database::testGetDistanceFromRestaurantByID()
 {
     QList<double> testMap;
@@ -111,7 +110,6 @@ void Test_Database::testGetAllRestaurantIds()
 }
 
 
->>>>>>> b3394006834cdc7b4167399a9759cf6a4e8b7cd8
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)
