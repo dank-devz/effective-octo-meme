@@ -15,3 +15,9 @@ test/test.app/
 Makefile*
 test/test
 *.debug
+*.Debug
+*.Release
+*.a
+*.dll
+*.exe
+*.autosave
