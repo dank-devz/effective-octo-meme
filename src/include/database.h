@@ -36,10 +36,22 @@ public:
     int GetItemId(int restaurantId, QString itemName);
     ///Retrieve the total cost of the items in the cart.
     double GetCartTotal();
+
     /// Retrieve Restaurant Distances
     QList<double> GetRestaurantDistances(QString name);
+
+    /// Retrieve Restaurant Distances
     QList<double> GetRestaurantDistances(int restaurantId);
+
+    /// Retrieve Restaurant IDS
     QList<int> GetAllRestaurantIds() const;
+
+    /// Shopping Cart Methods
+    QList<QString> 	GetRestaurantMenuItemNames(int restaurantId);
+
+    /// Gets the price of an item given the itemId
+    double 			GetItemPrice(int itemId);
+    double 			GetItemPrice(QString itemName);
 
 private:
 };

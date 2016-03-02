@@ -279,3 +279,72 @@ QList<int> Database::GetAllRestaurantIds() const
     }
     return restaurantIds;
 }
+
+QList<QString> Database::GetRestaurantMenuItemNames(int restaurantId)
+{
+    QList <QString> restaurantItemNames;
+    QSqlQuery 		query;
+    QString			itemName;
+
+    query.prepare("SELECT `name` FROM `items` WHERE `items`.`id` = :id");
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            itemName = query.value("name").toString();
+            restaurantItemNames.append(itemName);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return restaurantItemNames;
+}
+
+double Database::GetItemPrice(int itemId)
+{
+    QSqlQuery 		query;
+    double	itemPrice = 0;
+
+    query.prepare("SELECT `price` FROM `items` WHERE `items`.`itemid` = :id");
+    query.bindValue(":id", itemId);
+
+    if(query.exec()){
+        if(query.next())
+        {
+            itemPrice = query.value("price").toDouble();
+        }
+    }
+    else
+    {
+        qDebug() << "failed!";
+        qDebug() << lastError().text();
+    }
+    return itemPrice;
+}
+
+
+double Database::GetItemPrice(QString itemName)
+{
+    QSqlQuery 		query;
+    double	itemPrice = 0;
+
+    query.prepare("select `price` from `items` where `items`.`name` = :name");
+    query.bindValue(":name", itemName);
+
+    if(query.exec()){
+        if(query.next())
+        {
+            itemPrice = query.value("price").toDouble();
+        }
+    }
+    else
+    {
+        qDebug() << "failed!";
+        qDebug() << lastError().text();
+    }
+    return itemPrice;
+}

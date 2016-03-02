@@ -72,9 +72,6 @@ void Test_Database::testGetCartTotal()
     QVERIFY(testDB->GetCartTotal() > 0);
 }
 
-
-
-
 void Test_Database::testGetDistanceFromRestaurantByID()
 {
     QList<double> testMap;
