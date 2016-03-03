@@ -4,27 +4,40 @@
  * @brief Constructor for the trip class
  * @param [in] Vector of all locations
  */
-Trip::Trip(QVector<Location> locations)
+Trip::Trip(Database *db)
 {
-  locations_ = locations;
+  distance_  = -1;
   trip_ = NULL;
-  distance_ = -1;
+  refreshLocations(db);
 }
 
 /**
  * @brief Re-initialzies the vector of all locations
  * @param [IN] vector of all the locations
  */
-void Trip::setLocations(QVector<Location> locations)
+void Trip::refreshLocations(Database *db)
 {
-  // exchange the contents of the vectors
-  // and then let the other one die
-  locations_.swap(locations);
-  distance_ = -1;
+  // Get the ids of all the locations in the
+  QVector<int> all_ids(db->GetAllRestaurantIds());
+
+  // load the location vector
+  for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
+    locations_.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
+  }
 }
 
 /**
- * @brief Finds the shortest route to visit all the location IDs
+ * @brief Resets the calculated distance and route
+ */
+void Trip::resetTripCalc()
+{
+  distance_ = -1;
+  delete trip_;
+  trip_ = NULL;
+}
+
+/**
+ * @brief Finds the shortest route to visit all the location IDs provided
  * @param [IN] A Vector of location IDs to visit (must be sorted!)
  * @return A vector of location IDs in the order that creates the shortest trip
  */
@@ -64,7 +77,30 @@ QVector<int> Trip::findRoute(QVector<int> idList)
 }
 
 /**
+ * @brief Gets the shortest trip to ALL locations in the current list
+ * @return A vector of integers representing the route locations
+ */
+QVector<int> Trip::RoundTheWorld()
+{
+  QVector<int> locIds;  //< Vector for holding location IDs
+
+  // create iterator and skip past the first index (index 0)
+  QVector<Location>::const_iterator itr = locations_.cbegin();
+  itr++;
+
+  //Load up the vector!
+  while(itr != locations_.cend()) {
+    locIds.push_back(itr->id());
+    itr++;
+  }
+  // Find the route and return it!!
+  return findRoute(locIds);
+}
+
+/**
  * @brief Prints the trip to a string for debugging
+ * Probably uneccessary... QVector has an overloaded <<
+ *    ....But it isn't as pretty
  * @return A Qstring of the trip for display
  */
 QString Trip::printTrip() const
