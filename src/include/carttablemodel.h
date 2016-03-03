@@ -1,0 +1,4 @@
+#ifndef CARTTABLEMODEL_H
+#define CARTTABLEMODEL_H
+
+#endif // CARTTABLEMODEL_H

@@ -152,17 +152,16 @@ void MainWindow::initCartItemsTable(Database *db, int id)
 
 void MainWindow::on_cartItems_addSelected_clicked()
 {
-//    QSqlTableModel *tableModel = new QSqlTableModel(this);
-//    // Get the information for the currently selected item
-//    int currentRow         = ui->cartItems_tableView_items->currentIndex().row();
-//    QModelIndex nameIndex  = ui->cartItems_tableView_items->model()->index(currentRow, 1);
-//    QModelIndex idIndex    = ui->cartItems_tableView_items->model()->index(currentRow, 0);
+    QSqlTableModel *tableModel = new QSqlTableModel(this);
+    // Get the information for the currently selected item
+    int currentRow         = ui->cartItems_tableView_items->currentIndex().row();
+    QModelIndex nameIndex  = ui->cartItems_tableView_items->model()->index(currentRow, 1);
+    QModelIndex idIndex    = ui->cartItems_tableView_items->model()->index(currentRow, 0);
 
-//    // Get the Restaurant name and location ID
-//    int locationID = ui->cartItems_tableView_items->model()->data(idIndex).toInt();
-//    QString Title  = ui->cartItems_tableView_items->model()->data(nameIndex).toString();
+    // Get the Restaurant name and location ID
+    int locationID = ui->cartItems_tableView_items->model()->data(idIndex).toInt();
+    QString Title  = ui->cartItems_tableView_items->model()->data(nameIndex).toString();
 
-
-//    ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
-//    ui->cartItems_tableView_reciept->resizeColumnsToContents();
+    ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->cartItems_tableView_reciept->resizeColumnsToContents();
 }
