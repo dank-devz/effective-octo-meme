@@ -163,6 +163,22 @@ int Database::GetItemId(int restaurantId, QString itemName)
 }
 
 /**
+ * @brief Database::GetCartTotal Retrieve the total cost of the items in the cart.
+ * @return Sum of the prices of items in the cart.
+ */
+double Database::GetCartTotal()
+{
+    QSqlQuery query;
+    double totalCost = 0;
+    query.exec("SELECT items.price, cart.quantity from cart, items where cart.id = items.itemId");
+    while(query.next())
+    {
+        totalCost += (query.value("price").toDouble() * query.value("quantity").toInt());
+    }
+    return totalCost;
+}
+
+/**
  * @brief Database::PurchaseItem Add an item to the cart.
  * @param itemId The ID of the item to add.
  * @param quantity The quantity of items to purchase.
@@ -179,6 +195,12 @@ bool Database::PurchaseItem(int itemId, int quantity)
     query.bindValue(":quantity", quantity);
 
     return query.exec();
+}
+
+bool Database::ClearCart()
+{
+    QSqlQuery query;
+    return query.exec("delete from cart");
 }
 
 /**
@@ -262,4 +284,73 @@ QList<int> Database::GetAllRestaurantIds() const
         qDebug() << lastError().text();
     }
     return restaurantIds;
+}
+
+QList<QString> Database::GetRestaurantMenuItemNames(int restaurantId)
+{
+    QList <QString> restaurantItemNames;
+    QSqlQuery 		query;
+    QString			itemName;
+
+    query.prepare("SELECT `name` FROM `items` WHERE `items`.`id` = :id");
+    query.bindValue(":id", restaurantId);
+
+    if(query.exec()){
+        while(query.next())
+        {
+            itemName = query.value("name").toString();
+            restaurantItemNames.append(itemName);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed!";
+        qDebug() << lastError().text();
+    }
+    return restaurantItemNames;
+}
+
+double Database::GetItemPrice(int itemId)
+{
+    QSqlQuery 		query;
+    double	itemPrice = 0;
+
+    query.prepare("SELECT `price` FROM `items` WHERE `items`.`itemid` = :id");
+    query.bindValue(":id", itemId);
+
+    if(query.exec()){
+        if(query.next())
+        {
+            itemPrice = query.value("price").toDouble();
+        }
+    }
+    else
+    {
+        qDebug() << "failed!";
+        qDebug() << lastError().text();
+    }
+    return itemPrice;
+}
+
+
+double Database::GetItemPrice(QString itemName)
+{
+    QSqlQuery 		query;
+    double	itemPrice = 0;
+
+    query.prepare("select `price` from `items` where `items`.`name` = :name");
+    query.bindValue(":name", itemName);
+
+    if(query.exec()){
+        if(query.next())
+        {
+            itemPrice = query.value("price").toDouble();
+        }
+    }
+    else
+    {
+        qDebug() << "failed!";
+        qDebug() << lastError().text();
+    }
+    return itemPrice;
 }

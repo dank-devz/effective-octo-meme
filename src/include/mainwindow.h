@@ -1,10 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "QMainWindow"
+#include <QMainWindow>
 #include "database.h"
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
+#include "carttablemodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +42,7 @@ private slots:
      * P L A N  R E G U L A R  T R I P  F U N C T I O N S
      */
     void on_planRegularTrip_pushButton_back_clicked();
+    void on_planRegularTrip_pushButton_go_clicked();
 
     /*
      * P L A N  C U S T O M  T R I P  F U N C T I O N S
@@ -57,6 +59,11 @@ private slots:
      */
     void initViewAllRestaurantsTable(Database *db);
     void initViewDetailsTable(Database *db, int id);
+    void initCartItemsTable(Database *db, int id);
+
+    void on_cartItems_addSelected_clicked();
+
+    void on_cartItems_pushButton_Back_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -64,6 +71,10 @@ private:
     /*
      * D A T A B A S E  V A R I A B L E S
      */
+
+    MenuTableModel *menuModel;
+    RestaurantTableModel *restaurantModel;
+    CartTableModel *cartModel;
     Database *db;
 };
 

@@ -26,6 +26,8 @@ public:
     bool RemoveMenuItem(int restaurantId, QString itemName);
     ///Add an item to purchases
     bool PurchaseItem(int itemId, int quantity);
+    ///Clear cart
+    bool ClearCart();
 
     //Accessors
     ///Return a list of restaurants
@@ -34,12 +36,27 @@ public:
     int GetRestaurantId(QString restaurantName);
     ///Retrieve a menu item's unique ID
     int GetItemId(int restaurantId, QString itemName);
+    ///Retrieve the total cost of the items in the cart.
+    double GetCartTotal();
+
     /// Retrieve Restaurant Distances
     QList<double> GetRestaurantDistances(QString name);
+
+    /// Retrieve Restaurant Distances
     QList<double> GetRestaurantDistances(int restaurantId);
+
+    /// Retrieve Restaurant IDS
     QList<int> GetAllRestaurantIds() const;
 
+    /// Shopping Cart Methods
+    QList<QString> 	GetRestaurantMenuItemNames(int restaurantId);
+
+    /// Gets the price of an item given the itemId
+    double 			GetItemPrice(int itemId);
+    double 			GetItemPrice(QString itemName);
+
 private:
+
 };
 
 #endif // DATABASE_H
