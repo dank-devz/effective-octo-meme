@@ -125,7 +125,8 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
  * @param idsToVisit [IN] Vector of location IDs to visit
  * @return a pointer to a trip object containing the route and distance
  */
-Trip* MainWindow::getTrip(QVector<int> idsToVisit)
+Trip* MainWindow::
+getTrip(QVector<int> idsToVisit)
 {
   // Get the ids of all the locations in the
   qDebug() << "Getting all the IDs";
@@ -145,6 +146,7 @@ Trip* MainWindow::getTrip(QVector<int> idsToVisit)
 
   //output for debugging
   qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
+  qDebug() << "The Chosen Route: " << the_trip->printTrip();
   return the_trip;
 }
 

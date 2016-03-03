@@ -69,10 +69,16 @@ QVector<int> Trip::findRoute(QVector<int> idList)
  */
 QString Trip::printTrip() const
 {
+  qDebug() << "In PrintTrip()";
   QString output;
-  QVector<int>::const_iterator itr = trip_->cbegin();
-  while(itr != trip_->cend()) {
-    output += QString("<%1>").arg(*itr);;
+  if(trip_->size() != 0){
+      QVector<int>::const_iterator itr = trip_->cbegin();
+      while(itr != trip_->cend()) {
+        output += QString("<%1>").arg(*itr);;
+      }
+      return output;
   }
-  return output;
+  else {
+      return "ERROR! VECTOR EMPTY!";
+  }
 }
