@@ -110,8 +110,9 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 
     // Fill the view with the infos
     ui->label->setText(Title);
+    ui->cartItems_label_restaurant_name->setText(ui->planRegularTrip_comboBox_startingLocation->currentText() + " Menu");
     initCartItemsTable(db, locationID);
-    ui->cartItems_tableView_items->hideColumn(0);
+    ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
     ui->cartItems_tableView_items->resizeColumnsToContents();
 }
 
@@ -149,25 +150,37 @@ void MainWindow::initCartItemsTable(Database *db, int id)
     cartModel = new CartTableModel(this, db);
     ui->cartItems_tableView_items->setModel(menuModel);
     ui->cartItems_tableView_items->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->cartItems_tableView_items->hideColumn(MenuTableModel::ITEMID);
     ui->cartItems_tableView_items->resizeColumnsToContents();
     ui->cartItems_tableView_reciept->setModel(cartModel);
+    ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->cartItems_tableView_reciept->horizontalHeader()->stretchLastSection();
 }
 
 void MainWindow::on_cartItems_addSelected_clicked()
 {
 
     // Get the information for the currently selected item
-    int currentRow         = ui->cartItems_tableView_items->currentIndex().row();
-    QModelIndex nameIndex  = ui->cartItems_tableView_items->model()->index(currentRow, 1);
-    QModelIndex itemIdIndex     = ui->cartItems_tableView_items->model()->index(currentRow, 3);
+    int currentRow          = ui->cartItems_tableView_items->currentIndex().row();
+    QModelIndex nameIndex   = ui->cartItems_tableView_items->model()->index(currentRow, 1);
+    QModelIndex itemIdIndex = ui->cartItems_tableView_items->model()->index(currentRow, 3);
 
 //    // Get the Restaurant name and location ID
     int itemID = ui->cartItems_tableView_items->model()->data(itemIdIndex).toInt();
     QString itemName  = ui->cartItems_tableView_items->model()->data(nameIndex).toString();
-    db->PurchaseItem(itemID, 1);
+    int quantity = ui->cartItems_spinBox_quantity->value();
+    db->PurchaseItem(itemID, quantity);
     cartModel->select();
+    ui->cartItems_label_totalValue->setText("$" + QString::number(db->GetCartTotal()));
+    ui->cartItems_spinBox_quantity->setValue(1);
 
-
+    ui->cartItems_tableView_reciept->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_reciept->resizeColumnsToContents();
+}
+
+void MainWindow::on_cartItems_pushButton_Back_clicked()
+{
+    ui->cartItems_spinBox_quantity->setValue(1);
+    ui->stackedWidget->setCurrentIndex(2);
 }
