@@ -69,6 +69,10 @@ private:
     /*
      * D A T A B A S E  V A R I A B L E S
      */
+
+    MenuTableModel *menuModel;
+    RestaurantTableModel *restaurantModel;
+    CartTableModel *cartModel;
     Database *db;
 };
 

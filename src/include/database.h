@@ -54,6 +54,7 @@ public:
     double 			GetItemPrice(QString itemName);
 
 private:
+
 };
 
 #endif // DATABASE_H

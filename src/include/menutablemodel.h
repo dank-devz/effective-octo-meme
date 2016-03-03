@@ -15,7 +15,8 @@ public:
     {
         ID,
         ITEM,
-        PRICE
+        PRICE,
+        ITEMID
     };
 
     /// Constructor
