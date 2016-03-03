@@ -1,6 +1,6 @@
 #include "../include/carttablemodel.h"
 
-CartTableModel::CartTableModel(QObject *parent, Database *db, int id)
+CartTableModel::CartTableModel(QObject *parent, Database *db)
 {
     Initialize();
 }

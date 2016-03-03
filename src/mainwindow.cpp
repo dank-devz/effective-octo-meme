@@ -145,14 +145,16 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
 void MainWindow::initCartItemsTable(Database *db, int id)
 {
     MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
+    CartTableModel *cartModel = new CartTableModel(this, db);
     ui->cartItems_tableView_items->setModel(resMenuModel);
     ui->cartItems_tableView_items->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_items->resizeColumnsToContents();
+    ui->cartItems_tableView_reciept->setModel(cartModel);
 }
 
 void MainWindow::on_cartItems_addSelected_clicked()
 {
-    QSqlTableModel *tableModel = new QSqlTableModel(this);
+
     // Get the information for the currently selected item
     int currentRow         = ui->cartItems_tableView_items->currentIndex().row();
     QModelIndex nameIndex  = ui->cartItems_tableView_items->model()->index(currentRow, 1);

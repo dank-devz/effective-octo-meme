@@ -5,6 +5,7 @@
 #include "database.h"
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
+#include "carttablemodel.h"
 
 namespace Ui {
 class MainWindow;
