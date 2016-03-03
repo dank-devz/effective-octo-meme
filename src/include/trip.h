@@ -3,7 +3,6 @@
 
 #include <QVector>
 #include <QString>
-#include <QTextStream>
 #include <QDebug>
 #include <algorithm>
 #include "location.h"

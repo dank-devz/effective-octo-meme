@@ -1,5 +1,6 @@
 #include "include/mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -126,7 +127,7 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
  */
 Trip* MainWindow::getTrip(QVector<int> idsToVisit)
 {
-  // Get the ids of all the locations in the db
+  // Get the ids of all the locations in the
   qDebug() << "Getting all the IDs";
   QVector<int> all_ids(db->GetAllRestaurantIds());
 
@@ -144,8 +145,6 @@ Trip* MainWindow::getTrip(QVector<int> idsToVisit)
 
   //output for debugging
   qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
-  qDebug() << "The Trip Route is: " << the_trip->printTrip();
-
   return the_trip;
 }
 
@@ -155,6 +154,6 @@ Trip* MainWindow::getTrip(QVector<int> idsToVisit)
  */
 Trip* MainWindow::TripToAll()
 {
-  return getTrip(db->GetAllRestaurantIds());
+    return getTrip(db->GetAllRestaurantIds());
 }
 

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include "QMainWindow"
 #include "database.h"
 #include "restauranttablemodel.h"
@@ -20,6 +21,7 @@ public:
     ~MainWindow();
     Trip* getTrip(QVector<int> ids);
     Trip* TripToAll();
+    bool dbOpen() const { return db->isOpen(); }
 
 private slots:
     /*

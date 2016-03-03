@@ -4,8 +4,10 @@
  * @brief Constructor for the trip class
  * @param [in] Vector of all locations
  */
-Trip::Trip(QVector<Location> locations) : locations_(locations)
+Trip::Trip(QVector<Location> locations)
 {
+  qDebug() << "IN TRIP CONSTRUCTOR!";
+  locations_ = locations;
   trip_ = NULL;
   distance_ = -1;
 }
@@ -42,8 +44,7 @@ QVector<int> Trip::findRoute(QVector<int> idList)
 
     // Sum the rest of the distances
     for(int i = 0; i < idList.size()-2; i++){
-      qDebug() << "TEST!";
-      tempDist += locations_[idList[i]].DistanceTo(idList[i+1]);
+      tempDist += locations_[idList.at(i)].DistanceTo(idList.at(i+1));
     }
 
     // Add distance from last location back to saddleback
@@ -68,10 +69,10 @@ QVector<int> Trip::findRoute(QVector<int> idList)
  */
 QString Trip::printTrip() const
 {
-  QTextStream out;
+  QString output;
   QVector<int>::const_iterator itr = trip_->cbegin();
   while(itr != trip_->cend()) {
-    out << "<" << *itr << ">";
+    output += QString("<%1>").arg(*itr);;
   }
-  return out.readAll();
+  return output;
 }
