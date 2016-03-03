@@ -91,6 +91,29 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
     ui->planRegularTrip_comboBox_startingLocation->clear();
 }
 
+// WILL BE REPLACED
+void MainWindow::on_planRegularTrip_pushButton_go_clicked()
+{
+    // takes the user to the view details page
+    ui->stackedWidget->setCurrentIndex(5);
+
+//    // Get the information for the currently selected item
+//    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
+//    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
+//    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+
+//    // Get the Restaurant name and location ID
+    int locationID = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());//ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
+    QString Title  = ui->planRegularTrip_comboBox_startingLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+    qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
+
+    // Fill the view with the infos
+    ui->label->setText(Title);
+    initCartItemsTable(db, locationID);
+    ui->cartItems_tableView_items->hideColumn(0);
+    ui->cartItems_tableView_items->resizeColumnsToContents();
+}
+
 void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
@@ -117,4 +140,12 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
     ui->tableView->setModel(resMenuModel);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+}
+
+void MainWindow::initCartItemsTable(Database *db, int id)
+{
+    MenuTableModel *resMenuModel = new MenuTableModel(this, db, id);
+    ui->cartItems_tableView_items->setModel(resMenuModel);
+    ui->cartItems_tableView_items->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->cartItems_tableView_items->resizeColumnsToContents();
 }
