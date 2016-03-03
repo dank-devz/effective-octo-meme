@@ -60,6 +60,8 @@ private slots:
     void initViewDetailsTable(Database *db, int id);
     void initCartItemsTable(Database *db, int id);
 
+    void on_cartItems_addSelected_clicked();
+
 private:
     Ui::MainWindow *ui;
 
