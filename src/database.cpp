@@ -197,6 +197,11 @@ bool Database::PurchaseItem(int itemId, int quantity)
     return query.exec();
 }
 
+bool Database::ClearCart()
+{
+    return query.exec("delete from cart");
+}
+
 /**
  * @brief Database::GetRestaurantDistances Retrieve the restaurant distances
  * @param restaurantName
