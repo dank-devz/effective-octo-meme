@@ -134,17 +134,18 @@ Trip* MainWindow::getTrip(QVector<int> idsToVisit)
   qDebug() << "Create the vector of locations";
   QVector<Location> all_locations;
   for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
+      qDebug() << "Iterator value is : " << *itr;
     all_locations.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
   }
 
   // Create the trip object!
   Trip *the_trip = new Trip(all_locations);
   // Calculate the shortest route
-  the_trip->findRoute(idsToVisit);
+//  the_trip->findRoute(idsToVisit);
 
   //output for debugging
-  qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
-  qDebug() << "The Trip Route is: " << the_trip->printTrip();
+//  qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
+//  qDebug() << "The Trip Route is: " << the_trip->printTrip();
 
   return the_trip;
 }

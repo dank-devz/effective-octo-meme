@@ -36,6 +36,7 @@ QVector<int> Trip::findRoute(QVector<int> idList)
   // Remove ID of zero if present
   idList.removeAll(0);
 
+
   do{
     // Add distance from saddleback to the first location
     tempDist += locations_[0].DistanceTo(idList.first());
