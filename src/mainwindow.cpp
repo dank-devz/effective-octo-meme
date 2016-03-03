@@ -129,11 +129,9 @@ Trip* MainWindow::
 getTrip(QVector<int> idsToVisit)
 {
   // Get the ids of all the locations in the
-  qDebug() << "Getting all the IDs";
   QVector<int> all_ids(db->GetAllRestaurantIds());
 
   // Create and load the location vector
-  qDebug() << "Create the vector of locations";
   QVector<Location> all_locations;
   for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
     all_locations.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
@@ -145,8 +143,8 @@ getTrip(QVector<int> idsToVisit)
   the_trip->findRoute(idsToVisit);
 
   //output for debugging
-  qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
-  qDebug() << "The Chosen Route: " << the_trip->printTrip();
+//  qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
+//  qDebug() << "The Chosen Route: " << the_trip->printTrip();
   return the_trip;
 }
 

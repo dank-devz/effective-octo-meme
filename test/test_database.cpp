@@ -85,11 +85,13 @@ void Test_Database::testGetAllRestaurantIds()
     QVERIFY(testIds.contains(4));
 }
 
+
 void Test_Database::testRouteDistance1()
 {
     testDB->close();
     delete testDB;
     MainWindow w;
+    double ValidDist = 42.79;
 
     QVector<int> locations;
     locations.push_back(1);
@@ -106,13 +108,12 @@ void Test_Database::testRouteDistance1()
     valid2.push_back(3);
     valid2.push_back(2);
 
-    qDebug() << "Locations: " << locations[0] << locations[1] << locations[2];
-    qDebug() << "About to get the trip, DB is: " << (w.dbOpen() ? "OPEN" : "NOT OPEN" );
+    qDebug() << "Testing Route Algorith with Locations: " << locations;
     Trip *the_trip = w.getTrip(locations);
-    QVERIFY(the_trip->getDistance() == 42.79);
-    QVERIFY(the_trip->getRoute()    == valid1);
+    qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance() << " (should be " << ValidDist << ") " << the_trip->getRoute();
+    QVERIFY(the_trip->getDistance() == ValidDist);
+    QVERIFY(the_trip->getRoute() == valid1 || the_trip->getRoute() == valid2);
 }
-
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)

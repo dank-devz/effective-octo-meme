@@ -19,7 +19,7 @@ public:
   // Default Constructor
   Location() : id_(-1) {}
   // Constructor - Sets The Data
-  Location(int id, QVector<double> distances) : distances_(distances), id_(id) {}
+  Location(int id, QVector<double> distances) : id_(id), distances_(distances) {}
 
   /*** UTILITY METHODS ***/
   // Returns the ID (db key) of THIS location

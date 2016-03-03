@@ -6,7 +6,6 @@
  */
 Trip::Trip(QVector<Location> locations)
 {
-  qDebug() << "IN TRIP CONSTRUCTOR!";
   locations_ = locations;
   trip_ = NULL;
   distance_ = -1;
@@ -31,7 +30,7 @@ void Trip::setLocations(QVector<Location> locations)
  */
 QVector<int> Trip::findRoute(QVector<int> idList)
 {
-  int tempDist = 0; //< Temporary distance variable
+  double tempDist = 0; //< Temporary distance variable
 
   // Sort the vector to ensure we have lexographically least vector
   std::sort(idList.begin(), idList.end());
@@ -43,14 +42,14 @@ QVector<int> Trip::findRoute(QVector<int> idList)
     tempDist += locations_[0].DistanceTo(idList.first());
 
     // Sum the rest of the distances
-    for(int i = 0; i < idList.size()-2; i++){
+    for(int i = 0; i < idList.size()-1; i++){
       tempDist += locations_[idList.at(i)].DistanceTo(idList.at(i+1));
     }
 
     // Add distance from last location back to saddleback
     tempDist += locations_[0].DistanceTo(idList.last());
 
-    if(tempDist > distance_ || distance_ == -1) {
+    if(tempDist < distance_ || distance_ == -1) {
       distance_ = tempDist;
       delete trip_;
       trip_ = new QVector<int>(idList);
@@ -58,6 +57,7 @@ QVector<int> Trip::findRoute(QVector<int> idList)
     else if(tempDist == distance_) {
       qDebug() << "**** Two Routes have the same length. THE HUMANITY!!!";
     }
+    tempDist = 0;
 
   }while( std::next_permutation(idList.begin(), idList.end()) );
   return *trip_;
@@ -75,6 +75,7 @@ QString Trip::printTrip() const
       QVector<int>::const_iterator itr = trip_->cbegin();
       while(itr != trip_->cend()) {
         output += QString("<%1>").arg(*itr);;
+        itr++;
       }
       return output;
   }

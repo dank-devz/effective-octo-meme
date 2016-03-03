@@ -32,13 +32,13 @@ public:
   // Get the trip stored in the class
   QVector<int> getRoute() const { return *trip_; }
   // Get the distance stored in the class
-  int getDistance() const { return distance_; }
+  double getDistance() const { return distance_; }
   // Print the trip stored in the class
   QString printTrip() const;
 
 private:
-  int distance_;                //< Distance of the shortest trip
-  QVector<int> *trip_;           //< An ordered vector of locations to visit
+  double distance_;             //< Distance of the shortest trip
+  QVector<int> *trip_;          //< An ordered vector of locations to visit
   QVector<Location> locations_; //< A vector of all locations
 };
 

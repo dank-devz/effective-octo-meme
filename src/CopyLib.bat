@@ -1,0 +1,1 @@
+COPY /Y /B .\debug\fast-food-app.dll .\fast-food-app.dll
