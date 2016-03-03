@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    db->ClearCart();
     delete ui;
 }
 

@@ -199,6 +199,7 @@ bool Database::PurchaseItem(int itemId, int quantity)
 
 bool Database::ClearCart()
 {
+    QSqlQuery query;
     return query.exec("delete from cart");
 }
 

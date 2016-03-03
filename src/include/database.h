@@ -26,6 +26,8 @@ public:
     bool RemoveMenuItem(int restaurantId, QString itemName);
     ///Add an item to purchases
     bool PurchaseItem(int itemId, int quantity);
+    ///Clear cart
+    bool ClearCart();
 
     //Accessors
     ///Return a list of restaurants
