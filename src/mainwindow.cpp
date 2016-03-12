@@ -1,4 +1,5 @@
 #include "include/mainwindow.h"
+#include "include/adminlogin.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -13,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                       "dankdevz", "cs1d-fast-food-fantasy");
+    ui->planRegularTrip_comboBox_numberOfStops->hide();
+    ui->planRegularTrip_label_promptLocations->hide();
     initViewAllRestaurantsTable(db);
 }
 
@@ -165,7 +168,7 @@ void MainWindow::on_cartItems_addSelected_clicked()
     QModelIndex nameIndex   = ui->cartItems_tableView_items->model()->index(currentRow, 1);
     QModelIndex itemIdIndex = ui->cartItems_tableView_items->model()->index(currentRow, 3);
 
-//    // Get the Restaurant name and location ID
+    // Get the Restaurant name and location ID
     int itemID = ui->cartItems_tableView_items->model()->data(itemIdIndex).toInt();
     QString itemName  = ui->cartItems_tableView_items->model()->data(nameIndex).toString();
     int quantity = ui->cartItems_spinBox_quantity->value();
@@ -183,4 +186,18 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 {
     ui->cartItems_spinBox_quantity->setValue(1);
     ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_cartItems_removeSelected_clicked()
+{
+
+}
+
+void MainWindow::on_actionLogin_triggered()
+{
+    AdminLogin *adminUi;
+    adminUi = new AdminLogin();
+
+    adminUi->setVisible(true);
+
 }

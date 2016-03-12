@@ -65,6 +65,10 @@ private slots:
 
     void on_cartItems_pushButton_Back_clicked();
 
+    void on_cartItems_removeSelected_clicked();
+
+    void on_actionLogin_triggered();
+
 private:
     Ui::MainWindow *ui;
 
