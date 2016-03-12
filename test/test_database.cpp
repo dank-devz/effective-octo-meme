@@ -118,11 +118,11 @@ void Test_Database::testRouteDistance1()
 
 //    QVERIFY(the_trip->getRoute() == valid1);
 
-    qDebug() << "Testing Route Algorith with Locations: " << locations;
-    Trip *the_trip = w.getTrip(locations);
-    qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance() << " (should be " << ValidDist << ") " << the_trip->getRoute();
-    QVERIFY(the_trip->getDistance() == ValidDist);
-    QVERIFY(the_trip->getRoute() == valid1 || the_trip->getRoute() == valid2);
+//    qDebug() << "Testing Route Algorith with Locations: " << locations;
+//    Trip *the_trip = w.getTrip(locations);
+//    qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance() << " (should be " << ValidDist << ") " << the_trip->getRoute();
+//    QVERIFY(the_trip->getDistance() == ValidDist);
+//    QVERIFY(the_trip->getRoute() == valid1 || the_trip->getRoute() == valid2);
 
 }
 //#endif //TEST_DATABASE_H
