@@ -1,5 +1,6 @@
 #include "include/mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -118,44 +119,3 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
-
-/**
- * @brief Gets the shortest trip to the location IDs provided
- * @param idsToVisit [IN] Vector of location IDs to visit
- * @return a pointer to a trip object containing the route and distance
- */
-Trip* MainWindow::getTrip(QVector<int> idsToVisit)
-{
-  // Get the ids of all the locations in the db
-  qDebug() << "Getting all the IDs";
-  QVector<int> all_ids(db->GetAllRestaurantIds());
-
-  // Create and load the location vector
-  qDebug() << "Create the vector of locations";
-  QVector<Location> all_locations;
-  for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
-      qDebug() << "Iterator value is : " << *itr;
-    all_locations.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
-  }
-
-  // Create the trip object!
-  Trip *the_trip = new Trip(all_locations);
-  // Calculate the shortest route
-//  the_trip->findRoute(idsToVisit);
-
-  //output for debugging
-//  qDebug() << "The Chosen Trip Distance is: " << the_trip->getDistance();
-//  qDebug() << "The Trip Route is: " << the_trip->printTrip();
-
-  return the_trip;
-}
-
-/**
- * @brief Gets the shortest trip to all locations
- * @return a pointer to a trip object containing the route and distance
- */
-Trip* MainWindow::TripToAll()
-{
-  return getTrip(db->GetAllRestaurantIds());
-}
-

@@ -3,9 +3,9 @@
 
 #include <QVector>
 #include <QString>
-#include <QTextStream>
 #include <QDebug>
 #include <algorithm>
+#include "database.h"
 #include "location.h"
 
 /**
@@ -21,25 +21,31 @@ class Trip {
 public:
   /*** CONSTRUCTOR AND DESTRUCTOR ***/
   // Constructor
-  Trip(QVector<Location> locations);
+  Trip(Database *db);
 
   /*** UTILITY METHODS ***/
   // Resets the locations vector in case an update is needed
-  void setLocations(QVector<Location> locations);
+  void refreshLocations(Database *db);
+  // Resets the trip distance and trip
+  void resetTripCalc();
+
+  /*** ALGORITHM METHODS!! ***/
   // Given a list of locations to visit, find the shortest route to all locations
   QVector<int> findRoute(QVector<int> idList);
+  // Find the shortest route to ALL the locations in the current list
+  QVector<int> RoundTheWorld();
 
   /*** GET 'EM METHODS ***/
   // Get the trip stored in the class
   QVector<int> getRoute() const { return *trip_; }
   // Get the distance stored in the class
-  int getDistance() const { return distance_; }
+  double getDistance() const { return distance_; }
   // Print the trip stored in the class
   QString printTrip() const;
 
 private:
-  int distance_;                //< Distance of the shortest trip
-  QVector<int> *trip_;           //< An ordered vector of locations to visit
+  double distance_;             //< Distance of the shortest trip
+  QVector<int> *trip_;          //< An ordered vector of locations to visit
   QVector<Location> locations_; //< A vector of all locations
 };
 

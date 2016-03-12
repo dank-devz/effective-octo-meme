@@ -223,7 +223,7 @@ QVector<double> Database::GetRestaurantDistances(int restaurantId)
     QSqlQuery 		query;
     double  	        distance;
 
-    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id order by distances.to asc");
 
     query.bindValue(":id", restaurantId);
 
@@ -246,7 +246,7 @@ QVector<int> Database::GetAllRestaurantIds() const
 {
     QVector<int> 	restaurantIds;
     QSqlQuery 		query;
-    int 		id;
+    int 		    id;
 
     query.prepare("SELECT `id` FROM restaurants");
 
