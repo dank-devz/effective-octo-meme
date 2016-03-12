@@ -90,8 +90,13 @@ void Test_Database::testRouteDistance1()
 {
     testDB->close();
     delete testDB;
-    MainWindow w;
+    testDB = new Database("fast_food_restaurants",
+                          "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
+                          "dankdevz",
+                          "cs1d-fast-food-fantasy");
+
     double ValidDist = 42.79;
+    Trip *the_trip = new Trip(testDB);
 
     QVector<int> locations;
     locations.push_back(1);
@@ -118,12 +123,13 @@ void Test_Database::testRouteDistance1()
 
 //    QVERIFY(the_trip->getRoute() == valid1);
 
-//    qDebug() << "Testing Route Algorith with Locations: " << locations;
-//    Trip *the_trip = w.getTrip(locations);
-//    qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance() << " (should be " << ValidDist << ") " << the_trip->getRoute();
-//    QVERIFY(the_trip->getDistance() == ValidDist);
-//    QVERIFY(the_trip->getRoute() == valid1 || the_trip->getRoute() == valid2);
 
+    qDebug() << "Testing Route Algorith with Locations: " << locations;
+    the_trip->findRoute(locations);
+    qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance()
+             << " (should be " << ValidDist << ") " << the_trip->getRoute();
+    QVERIFY(the_trip->getDistance() == ValidDist);
+    QVERIFY(the_trip->getRoute() == valid1 || the_trip->getRoute() == valid2);
 }
 //#endif //TEST_DATABASE_H
 
