@@ -13,7 +13,7 @@ class AdminLogin : public QDialog
     Q_OBJECT
 
 public:
-    explicit AdminLogin(QWidget *parent = 0, Database* db = NULL);
+    explicit AdminLogin(QWidget *parent = 0, Database* db = 0);
     ~AdminLogin();
 
 private slots:
@@ -21,6 +21,9 @@ private slots:
     void on_pushButton_ok_clicked();
     // closes the window
     void on_pushButton_cancel_clicked();
+
+signals:
+    void adminStatusChanged(bool status);
 
 private:
     Ui::AdminLogin *ui;

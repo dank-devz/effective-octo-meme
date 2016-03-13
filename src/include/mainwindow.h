@@ -8,6 +8,7 @@
 #include "menutablemodel.h"
 #include "carttablemodel.h"
 #include "trip.h"
+#include "adminlogin.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +34,9 @@ public:
     ~MainWindow();
     Trip* getTrip(QVector<int> ids);
     bool dbOpen() const { return db->isOpen(); }
+
+public slots:
+    void setAdminStatus(bool isAdmin);
 
 private slots:
     /*

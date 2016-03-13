@@ -2,8 +2,6 @@
 #include "ui_adminlogin.h"
 #include "database.h"
 
-extern bool isAdmin = false;
-
 AdminLogin::AdminLogin(QWidget *parent, Database *db) :
     QDialog(parent),
     ui(new Ui::AdminLogin)
@@ -22,7 +20,8 @@ void AdminLogin::on_pushButton_ok_clicked()
     QString username = "dankdevz";
     if(_database->AuthenticateAdmin(username, ui->lineEdit_passwordForm->text()))
     {
-        isAdmin = true;
+        emit adminStatusChanged(true);
+
         QWidget::close();
     }
     else
