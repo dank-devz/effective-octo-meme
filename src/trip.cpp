@@ -52,6 +52,7 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
   // Sort the vector to ensure we have lexographically least vector
   std::sort(idList.begin(), idList.end());
 
+  /*** FIND THE SHORTEST ROUTE THROUGH BRUTE FORCE ***/
   do{    
     // If there is an option starting point then remove it from the list
     // and then add its distances to the trip

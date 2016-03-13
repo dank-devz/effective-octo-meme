@@ -113,6 +113,17 @@ void Test_Database::testRouteDistance1()
     valid2.push_back(3);
     valid2.push_back(2);
 
+//    qDebug() << "About to get the trip";
+//    qDebug() << locations[0];
+//    qDebug() << locations[1];
+//    qDebug() << locations[2];
+//    Trip *the_trip = w.getTrip(locations);
+//    QVERIFY(the_trip != NULL);
+//    QVERIFY(the_trip->getDistance() == 42.79);
+
+//    QVERIFY(the_trip->getRoute() == valid1);
+
+
     qDebug() << "Testing Route Algorith with Locations: " << locations;
     the_trip->findRoute(locations);
     qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance()
