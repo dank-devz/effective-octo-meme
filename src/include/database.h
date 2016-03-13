@@ -38,6 +38,8 @@ public:
     int GetItemId(int restaurantId, QString itemName);
     ///Retrieve the total cost of the items in the cart.
     double GetCartTotal();
+    ///Authenticate an Admin
+    bool AuthenticateAdmin(QString username, QString password);
 
     /// Retrieve Restaurant Distances
     QVector<double> GetRestaurantDistances(QString name);

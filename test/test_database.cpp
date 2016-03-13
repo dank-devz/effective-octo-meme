@@ -19,6 +19,7 @@ private slots:
     void testGetItemId();
     void testGetRestaurants();
     void testGetCartTotal();
+    void testAuthenticateAdmin();
     void testGetDistanceFromRestaurantByID();
     void testGetDistanceFromRestaurantByName();
     void testGetAllRestaurantIds();
@@ -74,6 +75,11 @@ void Test_Database::testGetRestaurants()
 void Test_Database::testGetCartTotal()
 {
 //    QVERIFY(testDB->GetCartTotal() > 0);
+}
+
+void Test_Database::testAuthenticateAdmin()
+{
+    QVERIFY(testDB->AuthenticateAdmin("dankdevz","dankdevz"));
 }
 
 void Test_Database::testGetDistanceFromRestaurantByID()
