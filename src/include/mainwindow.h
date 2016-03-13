@@ -7,6 +7,7 @@
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
 #include "carttablemodel.h"
+#include "trip.h"
 
 namespace Ui {
 class MainWindow;
