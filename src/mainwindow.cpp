@@ -196,8 +196,8 @@ void MainWindow::on_cartItems_removeSelected_clicked()
 void MainWindow::on_actionLogin_triggered()
 {
     AdminLogin *adminUi;
-    adminUi = new AdminLogin();
+    bool authenticated = false;
+    adminUi = new AdminLogin(authenticated);
 
     adminUi->setVisible(true);
-
 }

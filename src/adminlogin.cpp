@@ -1,7 +1,7 @@
 #include "adminlogin.h"
 #include "ui_adminlogin.h"
 
-AdminLogin::AdminLogin(QWidget *parent) :
+AdminLogin::AdminLogin(QWidget *parent, bool& isValidPassword) :
     QDialog(parent),
     ui(new Ui::AdminLogin)
 {
@@ -11,4 +11,14 @@ AdminLogin::AdminLogin(QWidget *parent) :
 AdminLogin::~AdminLogin()
 {
     delete ui;
+}
+
+void AdminLogin::on_pushButton_cancel_clicked()
+{
+    QWidget::close();
+}
+
+void AdminLogin::on_pushButton_ok_clicked()
+{
+
 }
