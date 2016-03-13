@@ -261,11 +261,54 @@ bool Database::ClearCart()
     return query.exec("delete from cart");
 }
 
+/**
+ * @brief Database::AddNewRestaurant
+ * Add a new restaurant and all related info.
+ * @param restaurantName The name of the restaurant
+ * @param menuItemNames THe names of the menu items
+ * @param menuItemPrices The prices of the corresponding menu items
+ * @param otherRestaurantIds The other restaurants ids
+ * @param distances The distances
+ * @return true if successful
+ */
 bool Database::AddNewRestaurant(QString restaurantName, QVector<QString> menuItemNames,
                                 QVector<double> menuItemPrices, QVector<int> otherRestaurantIds,
                                 QVector<double> distances)
 {
+    QSqlQuery query;
+    bool success = false;
 
+    if(AddRestaurant(restaurantName))
+    {
+        int id = GetRestaurantId(restaurantName);
+        QVector<QString>::iterator str_it = menuItemNames.begin();
+        QVector<double>::iterator double_it = menuItemPrices.begin();
+        while(str_it != menuItemNames.end() && double_it != menuItemPrices.end()){
+            success = AddMenuItem(id, *str_it, *double_it);
+            str_it++;
+            double_it++;
+        }
+        QVector<int>::iterator int_it = otherRestaurantIds.begin();
+        double_it = distances.begin();
+        while(int_it != otherRestaurantIds.end() && double_it != distances.end()){
+            success = AddDistance(id, *int_it, *double_it);
+            int_it++;
+            double_it++;
+        }
+    }
+    return success;
+}
+
+bool Database::AddDistance(int from, int to, double distance)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO distances (from, to, distance)"
+                  "VALUES (:from, :to, :distance)");
+    query.bindValue(":from", from);
+    query.bindValue(":to", to);
+    query.bindValue(":distance", distance);
+    return query.exec();
 }
 
 /**
