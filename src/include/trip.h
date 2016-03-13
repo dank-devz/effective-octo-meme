@@ -29,12 +29,6 @@ public:
   // Resets the trip distance and trip
   void resetTripCalc();
 
-  /*** ALGORITHM METHODS!! ***/
-  // Given a list of locations to visit, find the shortest route to all locations
-  QVector<int> findRoute(QVector<int> idList);
-  // Find the shortest route to ALL the locations in the current list
-  QVector<int> RoundTheWorld();
-
   /*** GET 'EM METHODS ***/
   // Get the trip stored in the class
   QVector<int> getRoute() const { return *trip_; }
@@ -43,10 +37,18 @@ public:
   // Print the trip stored in the class
   QString printTrip() const;
 
+  /*** ALGORITHM METHODS!! ***/
+  // Given a list of locations to visit, finds the shortest route to all locations
+  QVector<int> findRouteGreedy(QVector<int> idList, int start = 0);
+  // Given a list of locations to visit, find the shortest route to all locations
+  QVector<int> findRouteBrute(QVector<int> idList, int start = 0);
+  // Find the shortest route to ALL the locations in the current list
+  QVector<int> RoundTheWorld();
+
 private:
   double distance_;             //< Distance of the shortest trip
   QVector<int> *trip_;          //< An ordered vector of locations to visit
-  QVector<Location> locations_; //< A vector of all locations
+  QVector<Location> locations_; //< A vector of all locations available
 };
 
 #endif // TRIP_H
