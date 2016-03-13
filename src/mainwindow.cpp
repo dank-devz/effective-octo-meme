@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->planRegularTrip_label_promptLocations->hide();
     initViewAllRestaurantsTable(db);
     isAdmin = false;
+    QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
+                     this, SLOT(initializeAdminButtons(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -31,6 +33,22 @@ void MainWindow::setAdminStatus(bool isAdmin)
 {
     qDebug() << "SLOT!!";
     this->isAdmin = isAdmin;
+}
+
+void MainWindow::initializeAdminButtons(bool isAdmin)
+{
+    this->isAdmin = isAdmin;
+
+    if(isAdmin)
+    {
+        ui->tableView->setEditTriggers(QTableView::DoubleClicked);
+    }
+    else
+    {
+        ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
+    }
+    ui->admin_submitChanges_pushButton->setEnabled(isAdmin);
+    ui->admin_submitChanges_pushButton->setVisible(isAdmin);
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -152,14 +170,6 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
     menuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(menuModel);
     qDebug() << "isAdmin: " << isAdmin;
-    if(isAdmin)
-    {
-        ui->tableView->setEditTriggers(QTableView::DoubleClicked);
-    }
-    else
-    {
-        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    }
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
@@ -216,7 +226,7 @@ void MainWindow::on_actionLogin_triggered()
     AdminLogin *adminPrompt;
     adminPrompt = new AdminLogin(this, db);
     QObject::connect(adminPrompt, SIGNAL(adminStatusChanged(bool)),
-                     this, SLOT(setAdminStatus(bool)));
+                     this, SLOT(initializeAdminButtons(bool)));
     adminPrompt->setWindowModality(Qt::ApplicationModal);
     adminPrompt->show();
 
@@ -224,7 +234,7 @@ void MainWindow::on_actionLogin_triggered()
 
 void MainWindow::on_actionLogout_triggered()
 {
-//    isAdmin = false;
+     emit adminStatusChanged(false);
 }
 
 void MainWindow::adminButtonsShow()

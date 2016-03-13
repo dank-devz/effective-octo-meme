@@ -35,8 +35,12 @@ public:
     Trip* getTrip(QVector<int> ids);
     bool dbOpen() const { return db->isOpen(); }
 
+signals:
+    void adminStatusChanged(bool isAdmin);
+
 public slots:
     void setAdminStatus(bool isAdmin);
+    void initializeAdminButtons(bool isAdmin);
 
 private slots:
     /*
