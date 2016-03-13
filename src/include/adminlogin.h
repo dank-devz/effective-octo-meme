@@ -13,8 +13,7 @@ class AdminLogin : public QDialog
     Q_OBJECT
 
 public:
-    explicit AdminLogin(QWidget *parent = 0);
-    explicit AdminLogin(QWidget *parent = 0, bool *isValidPassword = false, Database *database = NULL);
+    explicit AdminLogin(QWidget *parent = 0, Database* db = NULL);
     ~AdminLogin();
 
 private slots:
@@ -25,8 +24,7 @@ private slots:
 
 private:
     Ui::AdminLogin *ui;
-    bool isValidPassword_;
-    Database*  database_;
+    Database*  _database;
 };
 
 #endif // ADMINLOGIN_H

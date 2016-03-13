@@ -157,7 +157,7 @@ void MainWindow::initCartItemsTable(Database *db, int id)
     ui->cartItems_tableView_items->resizeColumnsToContents();
     ui->cartItems_tableView_reciept->setModel(cartModel);
     ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->cartItems_tableView_reciept->horizontalHeader()->stretchLastSection();
+    ui->cartItems_tableView_reciept->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::on_cartItems_addSelected_clicked()
@@ -196,12 +196,12 @@ void MainWindow::on_cartItems_removeSelected_clicked()
 void MainWindow::on_actionLogin_triggered()
 {
     AdminLogin *adminPrompt;
-    bool authenticated = false;// TODO- BE REPLACED WITH GLOBAL
-    adminPrompt = new AdminLogin(0, &authenticated);// TODO- BE REPLACED WITH GLOBAL
-    adminPrompt->setVisible(true);
+    adminPrompt = new AdminLogin(0, db);
+    adminPrompt->setWindowModality(Qt::ApplicationModal);
+    adminPrompt->show();
 }
 
 void MainWindow::on_actionLogout_triggered()
 {
-    //TODO - set global to false
+    isAdmin = false;
 }

@@ -15,6 +15,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -83,6 +84,7 @@ private:
     RestaurantTableModel *restaurantModel;
     CartTableModel *cartModel;
     Database *db;
+    bool isAdmin;
 };
 
 #endif // MAINWINDOW_H
