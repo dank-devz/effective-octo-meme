@@ -70,10 +70,6 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
       tempDist += locations_[idList.at(i)].DistanceTo(idList.at(i+1));
     }
 
-    // REMOVED - TRIPS SHOULD NOT RETURN TO SADDLEBACK
-    // Add distance from last location back to saddleback
-    //tempDist += locations_[0].DistanceTo(idList.last());
-
     // If the new route is better save it to the appropriate variables
     if(tempDist < distance_ || distance_ == -1) {
       distance_ = tempDist;
@@ -83,12 +79,13 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
     else if(tempDist == distance_) {
       qDebug() << "**** Routes have the same length. THE HUMANITY!!!";
     }
+    // Reset the temp distance to 0
     tempDist = 0;
 
   }while( std::next_permutation(idList.begin(), idList.end()) );
 
   // Add the optional first stop back onto the front of the list and return
-  trip_->push_front(start);
+  if(start != 0) {trip_->push_front(start); }
   return *trip_;
 }
 

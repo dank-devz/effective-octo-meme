@@ -1,0 +1,120 @@
+graph F {
+  overlap=false;
+//  splines=true;
+  node [shape=box, fontsize=84];
+  {node [label="Saddleback College"] 0;}
+  {node [label="McDonalds"] 1;}
+  {node [label="Chipotle"] 2;}
+  {node [label="Domino's"] 3;}
+  {node [label="KFC"] 4;}
+  {node [label="Subway"] 5;}
+  {node [label="In-N-Out"] 6;}
+  {node [label="Wendy's"] 7;}
+  {node [label="Jack in the Box"] 8;}
+  {node [label="El Pollo Loco"] 9;}
+  {node [label="Papa John's"] 10;}
+  {node [label="Pizza Hut"] 11;}
+  {node [label="Sonic"] 12;}
+  
+  // Distances for McDonalds
+  1 -- 0 [len=8, style=bold];
+  1 -- 2 [len=13.2];
+  1 -- 3 [len=15.4];
+  1 -- 4 [len=11.5];
+  1 -- 5 [len=13.3];
+  1 -- 6 [len=15.2];
+  1 -- 7 [len=5.8];
+  1 -- 8 [len=6.9];
+  1 -- 9 [len=8.56];
+  1 -- 10 [len=3.5];
+  1 -- 11 [len=13.2];
+  1 -- 12 [len=13.2];
+  
+  // Distances for Chipotle
+  2 -- 0 [len=4.29, style=bold];
+  2 -- 3 [len=15.1];
+  2 -- 4 [len=14.8];
+  2 -- 5 [len=0.1];
+  2 -- 6 [len=4.2];
+  2 -- 7 [len=10.3];
+  2 -- 8 [len=9.3];
+  2 -- 9 [len=5.2];
+  2 -- 10 [len=11.0];
+  
+  // Distances for Domino's
+  3 -- 0 [len=12.41, style=bold];
+  3 -- 4 [len=4.3];
+  3 -- 5 [len=16.1];
+  3 -- 6 [len=14.3];
+  3 -- 7 [len=18.4];
+  3 -- 8 [len=18.3];
+  3 -- 9 [len=17.2];
+  3 -- 10 [len=17.2];
+  
+  // Distances for KFC
+  4 -- 0 [len=7.56, style=bold];
+  4 -- 5 [len=8.1];
+  4 -- 6 [len=9.4];
+  4 -- 7 [len=14.4];
+  4 -- 8 [len=14.3];
+  4 -- 9 [len=13.2];
+  4 -- 10 [len=13.2];
+  
+  // Distances for 
+  5 -- 0 [len=2.67, style=bold];
+  5 -- 6 [len=4.5];
+  5 -- 7 [len=8.5];
+  5 -- 8 [len=8.4];
+  5 -- 9 [len=5.1];
+  5 -- 10 [len=12.1];
+  
+  // Distances for In-N-Out Burger
+  6 -- 0 [len=5.94, style=bold];
+  6 -- 7 [len=8.56];
+  6 -- 8 [len=11.1];
+  6 -- 9 [len=5.1];
+  6 -- 10 [len=14.2];
+  
+  // Distances for Wendys
+  7 -- 0 [len=8.44, style=bold];
+  7 -- 8 [len=0.7];
+  7 -- 9 [len=5.8];
+  7 -- 10 [len=4.0];
+  
+  // Distances for Jack in the Box
+  8 -- 0 [len=12.75, style=bold];
+  8 -- 9 [len=5.7];
+  8 -- 10 [len=4.7];
+  
+  // Distances for El Pollo Loco
+  9 -- 0 [len=9.19, style=bold];
+  9 -- 10 [len=9.5];
+  
+  // Distances for Papa John’s Pizza
+  10 -- 0 [len=14.54, style=bold];
+  
+  // Distances for Pizza Hut
+  11 -- 0 [len=6.6, style=bold];
+  11 -- 2 [len=14.2];
+  11 -- 3 [len=13.4];
+  11 -- 4 [len=16.5];
+  11 -- 5 [len=3.3];
+  11 -- 6 [len=12.2];
+  11 -- 7 [len=7.8];
+  11 -- 8 [len=6.9];
+  11 -- 9 [len=8.2];
+  11 -- 10 [len=6.11];
+  11 -- 12 [len=5.8];
+  
+  // Distances for sonic
+  12 -- 0 [len=6.6, style=bold];
+  12 -- 2 [len=4.4];
+  12 -- 3 [len=18.1];
+  12 -- 4 [len=18.8];
+  12 -- 5 [len=0.8];
+  12 -- 6 [len=8.2];
+  12 -- 7 [len=10.8];
+  12 -- 8 [len=9.4];
+  12 -- 9 [len=5.5];
+  12 -- 10 [len=11.8];
+}
