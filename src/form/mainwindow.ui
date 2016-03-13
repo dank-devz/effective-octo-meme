@@ -422,7 +422,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="admin_submitChanges_pushButton">
+     <widget class="QPushButton" name="admin_submitChanges_menu_pushButton">
       <property name="enabled">
        <bool>false</bool>
       </property>

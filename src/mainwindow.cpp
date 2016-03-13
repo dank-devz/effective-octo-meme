@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     isAdmin = false;
     QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
                      this, SLOT(initializeAdminButtons(bool)));
+    ui->admin_submitChanges_menu_pushButton->setVisible(false);
+    ui->tableView->setEditTriggers(0);
 }
 
 MainWindow::~MainWindow()
@@ -47,8 +49,8 @@ void MainWindow::initializeAdminButtons(bool isAdmin)
     {
         ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
     }
-    ui->admin_submitChanges_pushButton->setEnabled(isAdmin);
-    ui->admin_submitChanges_pushButton->setVisible(isAdmin);
+    ui->admin_submitChanges_menu_pushButton->setEnabled(isAdmin);
+    ui->admin_submitChanges_menu_pushButton->setVisible(isAdmin);
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -250,4 +252,10 @@ void MainWindow::adminButtonsHide()
 void MainWindow::on_cartItems_pushButton_next_clicked()
 {
     ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
+}
+
+void MainWindow::on_admin_submitChanges_pushButton_clicked()
+{
+    menuModel->submitAll();
+    qDebug() << "Changes to menu table have been made.";
 }
