@@ -38,7 +38,61 @@ void Trip::resetTripCalc()
 
 /**
  * @brief Finds the shortest route to visit all the location IDs provided
- * @param idList [IN] A Vector of location IDs to visit (must be sorted!)
+ * This route finding algorithm uses a greedy algorithm that chooses the next
+ * location to visit based on distance from the current location. This will not
+ * always return the optiumum route.
+ * @param idList [IN] A Vector of location IDs to visit
+ * @param start [IN] the starting point for the route, any by default
+ * @return A vector of location IDs in the order that creates the shortest trip
+ */
+QVector<int> Trip::findRouteGreedy(QVector<int> idList, int start, int numVisit)
+{
+  double tempDist = 0; // Temporary distance variable
+  QVector<int> route;  // In Order vecotor of locations to return
+  int visited = 0;     // The number of locations visited so far!
+  int nextStop;        // Temporary storage for next stop to increase readability
+
+  // If default value received for number of locations to visit, visit them all!
+  if(numVisit == -1) { numVisit = locations_.size(); }
+
+  // Remove ID of zero if present as well as any optional starting point
+  idList.removeAll(0);
+  idList.removeAll(start);
+
+  /*** FIND THE SHORTEST ROUTE THROUGH GREEDY-NESS ***/
+  // If a first location was given, add its distance and add to route
+  // Otherwise just add the distance from saddleback to the closest
+  if(start != 0 && visited < numVisit) {
+    // Distance from Saddleback to first stop, and add it to the route
+    tempDist += locations_[0].DistanceTo(start);
+    route.push_back(start);
+    visited++;
+  }
+  else if(visited < numVisit){
+    // Finds the first stop and then adds the distance and adds ID to route
+    // Before removing it from the IDlist and continuing with algorithm
+    nextStop = locations_.at(0).closest(idList);
+    tempDist += locations_.at(0).DistanceTo(nextStop);
+    route.push_back(nextStop);
+    visited++;
+    idList.removeAll(nextStop);
+  }
+
+  // Find the next closest location and add to route, then remove from idList
+  while(!idList.empty() && visited < numVisit) {
+    nextStop = locations_.at(route.back()).closest(idList);
+    tempDist += locations_.at(route.back()).DistanceTo(nextStop);
+    route.push_back(nextStop);
+    visited++;
+    idList.removeAll(nextStop);
+  }
+
+  return route;
+}
+
+/**
+ * @brief Finds the shortest route to visit all the location IDs provided
+ * @param idList [IN] A Vector of location IDs to visit
  * @param start [IN] the starting point for the route, any by default
  * @return A vector of location IDs in the order that creates the shortest trip
  */
