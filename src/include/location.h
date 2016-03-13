@@ -26,6 +26,8 @@ public:
   int id() const { return id_; }
   // Returns the distance to the location with the given ID from THIS location
   float DistanceTo(int id) const { return distances_[id]; }
+  // Returns the ID of the closest location to this one
+  int closest(QVector<int> locIDs) const;
 
 private:
   int id_;                     //< ID (key) for THIS location
