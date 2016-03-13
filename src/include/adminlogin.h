@@ -18,10 +18,10 @@ public:
     ~AdminLogin();
 
 private slots:
-    // closes the window
-    void on_pushButton_cancel_clicked();
     // checks to see if the password is correct
     void on_pushButton_ok_clicked();
+    // closes the window
+    void on_pushButton_cancel_clicked();
 
 private:
     Ui::AdminLogin *ui;

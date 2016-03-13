@@ -13,6 +13,8 @@ AdminLogin::AdminLogin(QWidget *parent, bool *isValidPassword, Database *databas
     ui(new Ui::AdminLogin)
 {
     ui->setupUi(this);
+
+    // sets the private variables to the passed in parameters
     isValidPassword_ = isValidPassword;
     database_ = database;
 }
@@ -20,11 +22,6 @@ AdminLogin::AdminLogin(QWidget *parent, bool *isValidPassword, Database *databas
 AdminLogin::~AdminLogin()
 {
     delete ui;
-}
-
-void AdminLogin::on_pushButton_cancel_clicked()
-{
-    QWidget::close();
 }
 
 void AdminLogin::on_pushButton_ok_clicked()
@@ -35,4 +32,13 @@ void AdminLogin::on_pushButton_ok_clicked()
         isValidPassword_ =  true;
         QWidget::close();
     }
+    else
+    {
+        ui->label_errorMessage->setText("Invalid Password");
+    }
+}
+
+void AdminLogin::on_pushButton_cancel_clicked()
+{
+    QWidget::close();
 }

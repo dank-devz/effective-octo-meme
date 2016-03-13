@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // sets the default page to the home page (index - 0)
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
@@ -33,14 +33,14 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_home_pushButton_viewAllRestaurants_clicked()
 {
     // takes the user to the viewAllRestaurants page (index - 1)
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_ALL_RESTAURANTS);
     ui->viewAllRestaurants_tableView->hideColumn(0);
 }
 
 void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 {
     // takes the user to the planRegularFoodRun page (index - 2)
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
 
     // fills the combo boxes with the most recent values from the db
     QList<QString> restaurants = db->GetRestaurants();
@@ -54,19 +54,19 @@ void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 {
     // takes the user to the planCustomFoodRun page (index - 3)
-    ui->stackedWidget->setCurrentIndex(3);
+    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_CUSTOM_TRIP);
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 {
     // takes the user to the view details page
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
 
     // Get the information for the currently selected item
     int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
@@ -88,7 +88,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 
     // cleares the combo boxes
     ui->planRegularTrip_comboBox_numberOfStops->clear();
@@ -99,7 +99,7 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 {
     // takes the user to the view details page
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
 //    // Get the information for the currently selected item
 //    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
@@ -122,13 +122,13 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 }
 
 void MainWindow::on_viewDetails_pushButton_back_clicked()
 {
     // takes the user back to the viewAllRestaurants page (index - 1)
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_ALL_RESTAURANTS);
 }
 
 void MainWindow::initViewAllRestaurantsTable(Database *db)
@@ -184,8 +184,10 @@ void MainWindow::on_cartItems_addSelected_clicked()
 
 void MainWindow::on_cartItems_pushButton_Back_clicked()
 {
+    // re-initializes the spin box quantity
     ui->cartItems_spinBox_quantity->setValue(1);
-    ui->stackedWidget->setCurrentIndex(2);
+    // returns back to the planning page
+    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
 }
 
 void MainWindow::on_cartItems_removeSelected_clicked()
@@ -204,4 +206,14 @@ void MainWindow::on_actionLogin_triggered()
 void MainWindow::on_actionLogout_triggered()
 {
     //TODO - set global to false
+}
+
+void MainWindow::adminButtonsShow()
+{
+
+}
+
+void MainWindow::adminButtonsHide()
+{
+
 }

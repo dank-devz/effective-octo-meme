@@ -15,6 +15,16 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    enum pageNames
+    {
+        PAGE_HOME = 0,
+        PAGE_VIEW_ALL_RESTAURANTS = 1,
+        PAGE_PLAN_REGULAR_TRIP = 2,
+        PAGE_PLAN_CUSTOM_TRIP = 3,
+        PAGE_VIEW_DETAILS = 4,
+        PAGE_CART_ITEMS = 5
+    };
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -69,8 +79,8 @@ private slots:
     void initViewAllRestaurantsTable(Database *db);
     void initViewDetailsTable(Database *db, int id);
     void initCartItemsTable(Database *db, int id);
-//    void adminButtonsShow();
-//    void adminButtonsHide();
+    void adminButtonsShow();
+    void adminButtonsHide();
 
 private:
     Ui::MainWindow *ui;
