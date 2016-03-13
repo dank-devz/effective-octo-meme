@@ -1,7 +1,7 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include <Qvector>
+#include <QVector>
 
 /**
  * @brief The Location class
