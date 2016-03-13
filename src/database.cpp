@@ -181,7 +181,7 @@ double Database::GetCartTotal()
 bool Database::AuthenticateAdmin(QString username, QString password)
 {
     QSqlQuery query;
-    query.prepare("SELECT from users where username = :username and password = :password");
+    query.prepare("SELECT * from users where username=:username and password=:password and admin=1");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
     return query.exec();

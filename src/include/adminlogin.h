@@ -17,7 +17,7 @@ public:
     ~AdminLogin();
 
 private slots:
-    void on_buttonBox_accepted();
+//    void on_buttonBox_accepted();
 
     void on_pushButton_cancel_clicked();
 
