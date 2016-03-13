@@ -12,4 +12,12 @@ ui*
 app/app
 test/test.app/
 *.so*
+Makefile*
 test/test
+*.debug
+*.Debug
+*.Release
+*.a
+*.dll
+*.exe
+*.autosave

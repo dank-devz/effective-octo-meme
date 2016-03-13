@@ -2,34 +2,11 @@
 #define TRIP_H
 
 #include <QVector>
-
-/**
- * @brief The Location class
- * This class represents a location, with the location ID which is the key
- * in the SQL database and the distances from this location to every
- * other location. The index of the vector holding distances matches the ID
- * of the location that distance is to.
- *
- * @author Ethan Slattery
- * @date 1-March-2016
- */
-class Location {
-public:
-  /*** CONSTRUCTOR AND DESTRUCTOR ***/
-  // Constructor
-  Location(int id, QVector<float> distances);
-  // Destructor
-  ~Location();
-
-  /*** UTILITY METHODS ***/
-  // Returns the distance to the location with the given ID from THIS location
-  float DistanceTo(int id) const;
-
-private:
-  int id_;                    //< ID (key) for THIS location
-  QVector<float> distances_;  //< Vector of distances from THIS location to all others, vector index = location ID
-//  QVector<int> menu_;         //< Vector of menu items for later use. Would store the # of items purchased of each index, not what those items are
-};
+#include <QString>
+#include <QDebug>
+#include <algorithm>
+#include "database.h"
+#include "location.h"
 
 /**
  * @brief The Trip class
@@ -44,20 +21,38 @@ class Trip {
 public:
   /*** CONSTRUCTOR AND DESTRUCTOR ***/
   // Constructor
-  Trip(QVector<Location> locations);
-  // Destructor
-  ~Trip();
+  Trip(Database *db);
 
   /*** UTILITY METHODS ***/
   // Resets the locations vector in case an update is needed
-  void setLocations(QVector<Location> locations);
+  void refreshLocations(Database *db);
+  // Resets the trip distance and trip
+  void resetTripCalc();
+
+  /*** GET 'EM METHODS ***/
+  // Get the trip stored in the class
+  QVector<int> getRoute() const { return *trip_; }
+
+  // Get the distance stored in the class
+  double getDistance() const { return distance_; }
+
+  // Print the trip stored in the class
+  QString printTrip() const;
+
+  /*** ALGORITHM METHODS!! ***/
+  // Given a list of locations to visit, finds the shortest route to all locations
+  QVector<int> findRouteGreedy(QVector<int> idList, int start = 0);
+
   // Given a list of locations to visit, find the shortest route to all locations
-  QVector<int> findRoute(QVector<int> locations) const;
+  QVector<int> findRouteBrute(QVector<int> idList, int start = 0);
+
+  // Find the shortest route to ALL the locations in the current list
+  QVector<int> RoundTheWorld();
 
 private:
-  int distance_;                //< Distance of the shortest trip
-  QVector<int> trip_;           //< An ordered vector of locations to visit
-  QVector<Location> locations_; //< A vector of all locations
+  double distance_;             //< Distance of the shortest trip
+  QVector<int> *trip_;          //< An ordered vector of locations to visit
+  QVector<Location> locations_; //< A vector of all locations available
 };
 
 #endif // TRIP_H

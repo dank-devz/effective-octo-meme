@@ -17,11 +17,6 @@ AdminLogin::~AdminLogin()
     delete ui;
 }
 
-void AdminLogin::on_pushButton_cancel_clicked()
-{
-    QWidget::close();
-}
-
 void AdminLogin::on_pushButton_ok_clicked()
 {
     QString username = "dankdevz";
@@ -30,4 +25,13 @@ void AdminLogin::on_pushButton_ok_clicked()
         isAdmin = true;
         QWidget::close();
     }
+    else
+    {
+        ui->label_errorMessage->setText("Invalid Password");
+    }
+}
+
+void AdminLogin::on_pushButton_cancel_clicked()
+{
+    QWidget::close();
 }

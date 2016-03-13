@@ -1,5 +1,7 @@
 #include <QtTest/QtTest>
 #include "../src/include/database.h"
+#include "trip.h"
+#include "mainwindow.h"
 
 class Test_Database: public QObject
 {
@@ -14,6 +16,8 @@ private slots:
     void testInvalidAddMenuItem();
     void testRemoveMenuItem();
     void testGetRestaurantId();
+    void testAddRestaurant();
+    void testRemoveRestaurant();
     void testGetItemId();
     void testGetRestaurants();
     void testGetCartTotal();
@@ -21,9 +25,11 @@ private slots:
     void testGetDistanceFromRestaurantByID();
     void testGetDistanceFromRestaurantByName();
     void testGetAllRestaurantIds();
+    void testRouteDistance1();
 
 private:
     Database *testDB;
+    Trip *the_trip;
 };
 
 void Test_Database::initTest(){
@@ -57,6 +63,16 @@ void Test_Database::testGetRestaurantId()
     QVERIFY(testDB->GetRestaurantId("Testaurant") == 0);
 }
 
+void Test_Database::testAddRestaurant()
+{
+    QVERIFY(testDB->AddRestaurant("Bobby's"));
+}
+
+void Test_Database::testRemoveRestaurant()
+{
+    QVERIFY(testDB->RemoveRestaurant("Bobby's"));
+}
+
 void Test_Database::testGetItemId()
 {
     QVERIFY(testDB->GetItemId(0, "Gizzards") == 1);
@@ -68,9 +84,10 @@ void Test_Database::testGetRestaurants()
     QVERIFY(testList.size() > 0);
 }
 
+
 void Test_Database::testGetCartTotal()
 {
-    QVERIFY(testDB->GetCartTotal() > 0);
+//    QVERIFY(testDB->GetCartTotal() > 0);
 }
 
 void Test_Database::testAuthenticateAdmin()
@@ -80,7 +97,7 @@ void Test_Database::testAuthenticateAdmin()
 
 void Test_Database::testGetDistanceFromRestaurantByID()
 {
-    QList<double> testMap;
+    QVector<double> testMap;
     testMap = testDB->GetRestaurantDistances(0);
 
     QVERIFY(testMap.contains(43824));
@@ -91,7 +108,7 @@ void Test_Database::testGetDistanceFromRestaurantByID()
 }
 void Test_Database::testGetDistanceFromRestaurantByName()
 {
-    QList<double> testMap;
+    QVector<double> testMap;
     testMap = testDB->GetRestaurantDistances("Testaurant");
 
     QVERIFY(testMap.contains(43824));
@@ -103,7 +120,7 @@ void Test_Database::testGetDistanceFromRestaurantByName()
 
 void Test_Database::testGetAllRestaurantIds()
 {
-    QList<int> testIds;
+    QVector<int> testIds;
     testIds = testDB->GetAllRestaurantIds();
     QVERIFY(testIds.contains(0));
     QVERIFY(testIds.contains(1));
@@ -113,6 +130,38 @@ void Test_Database::testGetAllRestaurantIds()
 }
 
 
+void Test_Database::testRouteDistance1()
+{
+    testDB->close();
+    delete testDB;
+    testDB = new Database("fast_food_restaurants",
+                          "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
+                          "dankdevz",
+                          "cs1d-fast-food-fantasy");
+    QVector<int> testVector;
+    double ValidDist = 32.89;
+    Trip *the_trip = new Trip(testDB);
+
+    QVector<int> locations;
+    locations.push_back(1);
+    locations.push_back(2);
+    locations.push_back(3);
+
+    QVector<int> valid1;
+    valid1.push_back(2);
+    valid1.push_back(1);
+    valid1.push_back(3);
+
+    qDebug() << "Testing Route Algorith with Locations: " << locations;
+
+    the_trip->findRouteBrute(locations);
+
+    qDebug() << "TRIP DISTANCE: " << the_trip->getDistance()
+             << " (should be " << ValidDist << ") WITH ROUTE:" << the_trip->getRoute();
+
+    QCOMPARE(the_trip->getRoute(), valid1);
+    QCOMPARE(the_trip->getDistance(), ValidDist);
+}
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)
