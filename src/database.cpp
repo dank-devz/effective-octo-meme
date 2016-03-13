@@ -86,6 +86,54 @@ bool Database::RemoveMenuItem(int restaurantId, QString itemName)
 }
 
 /**
+ * @brief Database::AddRestaurant
+ * Add a restaurant to the Database.
+ * @param restaurantName
+ * @return true if successful
+ */
+bool Database::AddRestaurant(QString restaurantName)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO restaurants (name)"
+                  "VALUES (:name)");
+    query.bindValue(":name", restaurantName);
+
+    return query.exec();
+}
+
+/**
+ * @brief Database::RemoveRestaurant
+ * Remove a restaurant from the Database.
+ * @param restaurantId
+ * @return
+ */
+bool Database::RemoveRestaurant(int restaurantId)
+{
+    QSqlQuery query;
+
+    query.prepare("DELETE FROM restaurants WHERE id = :id");
+    query.bindValue(":id", restaurantId);
+
+    return query.exec();
+}
+
+/**
+ * @brief Database::RemoveRestaurant
+ * @param restaurantName
+ * @return
+ */
+bool Database::RemoveRestaurant(QString restaurantName)
+{
+    QSqlQuery query;
+
+    query.prepare("DELETE FROM restaurants WHERE name = :name");
+    query.bindValue(":name", restaurantName);
+
+    return query.exec();
+}
+
+/**
  * @brief Database::GetRestaurants Return a list of restaurants
  * @return QList of QStrings of restaurant names
  */
