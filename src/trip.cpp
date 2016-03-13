@@ -31,9 +31,9 @@ void Trip::refreshLocations(Database *db)
  */
 void Trip::resetTripCalc()
 {
-  distance_ = -1;
-  delete trip_;
-  trip_ = NULL;
+  this->distance_ = -1.0;
+  delete this->trip_;
+  this->trip_ = NULL;
 }
 
 /**
@@ -72,20 +72,33 @@ QVector<int> Trip::findRouteGreedy(QVector<int> idList, int start, int numVisit)
     // Finds the first stop and then adds the distance and adds ID to route
     // Before removing it from the IDlist and continuing with algorithm
     nextStop = locations_.at(0).closest(idList);
-    tempDist += locations_.at(0).DistanceTo(nextStop);
-    route.push_back(nextStop);
-    visited++;
-    idList.removeAll(nextStop);
+    if(nextStop != -1) {
+      tempDist += locations_.at(0).DistanceTo(nextStop);
+      route.push_back(nextStop);
+      visited++;
+      idList.removeAll(nextStop);
+    }
   }
 
   // Find the next closest location and add to route, then remove from idList
   while(!idList.empty() && visited < numVisit) {
+//qDebug() << "*** ROUTE IS NOW: " << route << " WITH A DISTANCE OF: " << tempDist;
+//qDebug() << "*** IDLIST: " << idList << " NUMVISIT: " << visited;
     nextStop = locations_.at(route.back()).closest(idList);
-    tempDist += locations_.at(route.back()).DistanceTo(nextStop);
-    route.push_back(nextStop);
-    visited++;
-    idList.removeAll(nextStop);
+//qDebug() << "*** NEXT CLOSEST POINT IS: " << nextStop;
+    if(nextStop != -1) {
+      tempDist += locations_.at(route.back()).DistanceTo(nextStop);
+      route.push_back(nextStop);
+      visited++;
+      idList.removeAll(nextStop);
+    }
   }
+
+  qDebug() << "!!! TRIP: " << route << " DISTANCE OF: " << tempDist;
+  // Assign the calculated route into the class data
+  distance_ = tempDist;
+  delete trip_;
+  trip_ = new QVector<int>(route);
 
   return route;
 }

@@ -24,6 +24,7 @@ private slots:
     void testGetDistanceFromRestaurantByName();
     void testGetAllRestaurantIds();
     void testRouteDistance1();
+    void TestGreedy1();
 
 private:
     Database *testDB;
@@ -116,7 +117,6 @@ void Test_Database::testGetAllRestaurantIds()
     QVERIFY(testIds.contains(4));
 }
 
-
 void Test_Database::testRouteDistance1()
 {
     testDB->close();
@@ -125,9 +125,8 @@ void Test_Database::testRouteDistance1()
                           "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                           "dankdevz",
                           "cs1d-fast-food-fantasy");
-    QVector<int> testVector;
     double ValidDist = 32.89;
-    Trip *the_trip = new Trip(testDB);
+    the_trip = new Trip(testDB);
 
     QVector<int> locations;
     locations.push_back(1);
@@ -149,6 +148,50 @@ void Test_Database::testRouteDistance1()
     QCOMPARE(the_trip->getRoute(), valid1);
     QCOMPARE(the_trip->getDistance(), ValidDist);
 }
+
+void Test_Database::TestGreedy1()
+{
+  qDebug() << "TEST1";
+  double ValidDist = 41.77;
+  qDebug() << "TEST2";
+  the_trip->resetTripCalc();
+  qDebug() << "TEST3";
+
+  QVector<int> locations;
+  locations.push_back(1);
+  locations.push_back(2);
+  locations.push_back(3);
+  locations.push_back(4);
+  locations.push_back(5);
+  locations.push_back(6);
+  locations.push_back(7);
+  locations.push_back(8);
+  locations.push_back(9);
+  locations.push_back(10);
+
+  QVector<int> valid1;
+  valid1.push_back(5);
+  valid1.push_back(2);
+  valid1.push_back(6);
+  valid1.push_back(9);
+  valid1.push_back(8);
+  valid1.push_back(7);
+  valid1.push_back(10);
+  valid1.push_back(1);
+  valid1.push_back(4);
+  valid1.push_back(3);
+
+  qDebug() << "Testing Greedy Route Algorith with Locations: " << locations;
+
+  the_trip->findRouteGreedy(locations);
+
+  qDebug() << "TRIP DISTANCE: " << the_trip->getDistance()
+           << " (should be " << ValidDist << ") WITH ROUTE:" << the_trip->getRoute();
+
+  QCOMPARE(the_trip->getRoute(), valid1);
+  QCOMPARE(the_trip->getDistance(), ValidDist);
+}
+
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)

@@ -2,15 +2,18 @@
 
 int Location::closest(QVector<int> locIDs) const
 {
-  double tempDist = distances_.at(locIDs.at(0));  // Stores the distance for working
-  int index = locIDs.at(0);                       // index of the shortest distance
+  if(!locIDs.empty()){
+    double tempDist = distances_.at(locIDs.at(0));  // Stores the distance for working
+    int index = locIDs.at(0);                       // index of the shortest distance
 
-  for(int i = 1; i < locIDs.size(); i++) {
-    if(distances_.at(locIDs.at(i)) < tempDist) {
-      tempDist = distances_.at(locIDs.at(i));
-      index = i;
-    }//END IF
-  }//END FOR LOOP
+    for(int i = 1; i < locIDs.size(); i++) {
+      if(distances_.at(locIDs.at(i)) < tempDist) {
+        tempDist = distances_.at(locIDs.at(i));
+        index = locIDs.at(i);
+      }//END IF
+    }//END FOR LOOP
 
-  return locIDs.at(index);
+    return index;
+  }
+  return -1;
 }// END CLOSEST()
