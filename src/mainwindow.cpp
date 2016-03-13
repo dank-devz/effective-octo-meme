@@ -225,30 +225,29 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
 {
     QVector<int> restId;
     int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
-    int index;
 
     qDebug() << "Number of stops selected" << numToVisit;
-    for(index = 0; index < numToVisit; index++)
+    for(int index = 0; index < numToVisit; index++)
     {
         restId.push_back(index + 1);
         qDebug() << "Getting the distances from restaurant id : " << index + 1;
         qDebug() << db->GetRestaurantDistances(index+1);
     }
 
-    this->the_trip_->findRouteBrute(restId);
-
+    the_trip_->findRouteBrute(restId);
 
     restId.clear();
-    QString distance = QString::number(this->the_trip_->getDistance());
+
+    QString distance = QString::number(the_trip_->getDistance());
     ui->tripSummary_label_totalDistanceTraveledValue->setText(distance);
     numToVisit = 0;
-    index = 0;
     ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
 }
 
 void MainWindow::on_pushButton_clicked()
 {
 
+    the_trip_->resetTripCalc();
    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
    ui->tripSummary_label_totalDistanceTraveledValue->clear();
 }
