@@ -37,6 +37,8 @@ public:
     bool AddNewRestaurant(QString restaurantName, QVector<QString> menuItemNames,
                           QVector<double> menuItemPrices, QVector<int> otherRestaurantIds,
                           QVector<double> distances);
+    ///Add a new distance
+    bool AddDistance(int from, int to, double distance);
 
     //Accessors
     ///Return a list of restaurants
