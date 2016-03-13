@@ -1,20 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-<<<<<<< HEAD
 #include <QDebug>
-#include "QMainWindow"
-#include "database.h"
-#include "restauranttablemodel.h"
-#include "menutablemodel.h"
-#include "trip.h"
-=======
 #include <QMainWindow>
 #include "database.h"
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
 #include "carttablemodel.h"
->>>>>>> 20667d3944366acf7a9887a29559b67d94d00693
 
 namespace Ui {
 class MainWindow;
