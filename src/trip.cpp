@@ -70,8 +70,9 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
       tempDist += locations_[idList.at(i)].DistanceTo(idList.at(i+1));
     }
 
+    // REMOVED - TRIPS SHOULD NOT RETURN TO SADDLEBACK
     // Add distance from last location back to saddleback
-    tempDist += locations_[0].DistanceTo(idList.last());
+    //tempDist += locations_[0].DistanceTo(idList.last());
 
     // If the new route is better save it to the appropriate variables
     if(tempDist < distance_ || distance_ == -1) {
