@@ -197,7 +197,7 @@ void MainWindow::on_actionLogin_triggered()
 {
     AdminLogin *adminUi;
     bool authenticated = false;
-    adminUi = new AdminLogin(authenticated);
+    adminUi = new AdminLogin(0, &authenticated);
 
     adminUi->setVisible(true);
 }
