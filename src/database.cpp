@@ -213,6 +213,13 @@ bool Database::ClearCart()
     return query.exec("delete from cart");
 }
 
+bool Database::AddNewRestaurant(QString restaurantName, QVector<QString> menuItemNames,
+                                QVector<double> menuItemPrices, QVector<int> otherRestaurantIds,
+                                QVector<double> distances)
+{
+
+}
+
 /**
  * @brief Database::GetRestaurantDistances Retrieve the restaurant distances
  * @param restaurantName
@@ -294,6 +301,25 @@ QVector<int> Database::GetAllRestaurantIds() const
         qDebug() << lastError().text();
     }
     return restaurantIds;
+}
+
+QVector<QString> Database::GetAllRestaurantNames() const
+{
+    QVector<QString> restaurantNames;
+    QSqlQuery query;
+
+    query.prepare("SELECT name from restaurants");
+    if(query.exec()){
+        while(query.next()){
+            restaurantNames.append(query.value("name").toString());
+        }
+    }
+    else
+    {
+        qDebug() << "Dun goofed.";
+        qDebug() << lastError().text();
+    }
+    return restaurantNames;
 }
 
 QList<QString> Database::GetRestaurantMenuItemNames(int restaurantId)
