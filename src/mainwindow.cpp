@@ -1,6 +1,7 @@
 #include "include/mainwindow.h"
 #include "include/adminlogin.h"
 #include "ui_mainwindow.h"
+#include "addrestaurant.h"
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->planRegularTrip_comboBox_numberOfStops->hide();
     ui->planRegularTrip_label_promptLocations->hide();
     initViewAllRestaurantsTable(db);
+
+    addRestaurant *a = new addRestaurant(0, db);
+    a->show();
 }
 
 MainWindow::~MainWindow()
