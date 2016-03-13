@@ -14,6 +14,8 @@ private slots:
     void testInvalidAddMenuItem();
     void testRemoveMenuItem();
     void testGetRestaurantId();
+    void testAddRestaurant();
+    void testRemoveRestaurant();
     void testGetItemId();
     void testGetRestaurants();
     void testGetCartTotal();
@@ -56,6 +58,16 @@ void Test_Database::testGetRestaurantId()
     QVERIFY(testDB->GetRestaurantId("Testaurant") == 0);
 }
 
+void Test_Database::testAddRestaurant()
+{
+    QVERIFY(testDB->AddRestaurant("Bobby's"));
+}
+
+void Test_Database::testRemoveRestaurant()
+{
+    QVERIFY(testDB->RemoveRestaurant("Bobby's"));
+}
+
 void Test_Database::testGetItemId()
 {
     QVERIFY(testDB->GetItemId(0, "Gizzards") == 1);
@@ -66,6 +78,7 @@ void Test_Database::testGetRestaurants()
     QList<QString> testList = testDB->GetRestaurants();
     QVERIFY(testList.size() > 0);
 }
+
 
 void Test_Database::testGetCartTotal()
 {
