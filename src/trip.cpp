@@ -38,42 +38,57 @@ void Trip::resetTripCalc()
 
 /**
  * @brief Finds the shortest route to visit all the location IDs provided
- * @param [IN] A Vector of location IDs to visit (must be sorted!)
+ * @param idList [IN] A Vector of location IDs to visit (must be sorted!)
+ * @param start [IN] the starting point for the route, any by default
  * @return A vector of location IDs in the order that creates the shortest trip
  */
-QVector<int> Trip::findRoute(QVector<int> idList)
+QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
 {
-  double tempDist = 0; //< Temporary distance variable
+  double tempDist = 0; // Temporary distance variable
 
+  // Remove ID of zero if present as well as any optional starting point
+  idList.removeAll(0);
+  idList.removeAll(start);
   // Sort the vector to ensure we have lexographically least vector
   std::sort(idList.begin(), idList.end());
-  // Remove ID of zero if present
-  idList.removeAll(0);
 
-
-  do{
-    // Add distance from saddleback to the first location
-    tempDist += locations_[0].DistanceTo(idList.first());
+  /*** FIND THE SHORTEST ROUTE THROUGH BRUTE FORCE ***/
+  do{    
+    // If there is an option starting point then remove it from the list
+    // and then add its distances to the trip
+    if(start != 0) {
+      tempDist += locations_[0].DistanceTo(start);
+      tempDist += locations_[start].DistanceTo(idList.first());
+    }
+    else {
+      // Add distance from saddleback to the first location
+      tempDist += locations_[0].DistanceTo(idList.first());
+    }
 
     // Sum the rest of the distances
     for(int i = 0; i < idList.size()-1; i++){
       tempDist += locations_[idList.at(i)].DistanceTo(idList.at(i+1));
     }
 
+    // REMOVED - TRIPS SHOULD NOT RETURN TO SADDLEBACK
     // Add distance from last location back to saddleback
-    tempDist += locations_[0].DistanceTo(idList.last());
+    //tempDist += locations_[0].DistanceTo(idList.last());
 
+    // If the new route is better save it to the appropriate variables
     if(tempDist < distance_ || distance_ == -1) {
       distance_ = tempDist;
       delete trip_;
       trip_ = new QVector<int>(idList);
     }
     else if(tempDist == distance_) {
-      qDebug() << "**** Two Routes have the same length. THE HUMANITY!!!";
+      qDebug() << "**** Routes have the same length. THE HUMANITY!!!";
     }
     tempDist = 0;
 
   }while( std::next_permutation(idList.begin(), idList.end()) );
+
+  // Add the optional first stop back onto the front of the list and return
+  trip_->push_front(start);
   return *trip_;
 }
 
