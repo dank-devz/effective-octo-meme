@@ -2,22 +2,12 @@
 #include "ui_adminlogin.h"
 #include "database.h"
 
-AdminLogin::AdminLogin(QWidget *parent) :
+AdminLogin::AdminLogin(QWidget *parent, Database *db) :
     QDialog(parent),
     ui(new Ui::AdminLogin)
 {
     ui->setupUi(this);
-}
-
-AdminLogin::AdminLogin(QWidget *parent, bool *isValidPassword, Database *database) :
-    QDialog(parent),
-    ui(new Ui::AdminLogin)
-{
-    ui->setupUi(this);
-
-    // sets the private variables to the passed in parameters
-    isValidPassword_ = isValidPassword;
-    database_ = database;
+    _database = db;
 }
 
 AdminLogin::~AdminLogin()
@@ -28,9 +18,10 @@ AdminLogin::~AdminLogin()
 void AdminLogin::on_pushButton_ok_clicked()
 {
     QString username = "dankdevz";
-    if(database_->AuthenticateAdmin(username, ui->lineEdit_passwordForm->text()))
+    if(_database->AuthenticateAdmin(username, ui->lineEdit_passwordForm->text()))
     {
-        isValidPassword_ =  true;
+        emit adminStatusChanged(true);
+
         QWidget::close();
     }
     else
