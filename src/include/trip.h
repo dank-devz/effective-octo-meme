@@ -34,6 +34,8 @@ public:
   QVector<int> findRoute(QVector<int> idList);
   // Find the shortest route to ALL the locations in the current list
   QVector<int> RoundTheWorld();
+  // Find the shortest path using a recursive-activity-selector algorithm
+//  QVector<int> recru
 
   /*** GET 'EM METHODS ***/
   // Get the trip stored in the class
