@@ -233,7 +233,8 @@ bool Database::AuthenticateAdmin(QString username, QString password)
     query.prepare("SELECT * from users where username=:username and password=:password and admin=1");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
-    return query.exec();
+    query.exec();
+    return query.next();
 }
 
 /**
