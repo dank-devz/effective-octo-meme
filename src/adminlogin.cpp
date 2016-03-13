@@ -8,6 +8,7 @@ AdminLogin::AdminLogin(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+
 AdminLogin::AdminLogin(QWidget *parent, bool *isValidPassword, Database *database) :
     QDialog(parent),
     ui(new Ui::AdminLogin)
