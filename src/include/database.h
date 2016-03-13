@@ -33,6 +33,10 @@ public:
     bool PurchaseItem(int itemId, int quantity);
     ///Clear cart
     bool ClearCart();
+    ///Add new restaurant and all info
+    bool AddNewRestaurant(QString restaurantName, QVector<QString> menuItemNames,
+                          QVector<double> menuItemPrices, QVector<int> otherRestaurantIds,
+                          QVector<double> distances);
 
     //Accessors
     ///Return a list of restaurants
@@ -52,6 +56,8 @@ public:
     QVector<double> GetRestaurantDistances(int restaurantId);
     /// Retrieve Restaurant IDS
     QVector<int> GetAllRestaurantIds() const;
+    /// Retrieve restaurant Names
+    QVector<QString> GetAllRestaurantNames() const;
 
     /// Shopping Cart Methods
     QList<QString> 	GetRestaurantMenuItemNames(int restaurantId);
