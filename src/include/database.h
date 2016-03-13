@@ -24,6 +24,11 @@ public:
     bool AddMenuItem(int restaurantId, QString itemName, double price);
     ///Remove an item from a specified restaurant's menu.
     bool RemoveMenuItem(int restaurantId, QString itemName);
+    ///Add a restaurant
+    bool AddRestaurant(QString restaurantName);
+    ///Remove a restaurant
+    bool RemoveRestaurant(int restaurantId);
+    bool RemoveRestaurant(QString restaurantName);
     ///Add an item to purchases
     bool PurchaseItem(int itemId, int quantity);
     ///Clear cart
