@@ -32,16 +32,22 @@ public:
   /*** GET 'EM METHODS ***/
   // Get the trip stored in the class
   QVector<int> getRoute() const { return *trip_; }
+
   // Get the distance stored in the class
   double getDistance() const { return distance_; }
+
   // Print the trip stored in the class
   QString printTrip() const;
 
   /*** ALGORITHM METHODS!! ***/
   // Given a list of locations to visit, finds the shortest route to all locations
-  QVector<int> findRouteGreedy(QVector<int> idList, int start = 0);
+  QVector<int> findRouteGreedy(QVector<int> idList,
+                               int start = 0);
+
   // Given a list of locations to visit, find the shortest route to all locations
-  QVector<int> findRouteBrute(QVector<int> idList, int start = 0);
+  QVector<int> findRouteBrute(QVector<int> idList,
+                              int start = 0);
+
   // Find the shortest route to ALL the locations in the current list
   QVector<int> RoundTheWorld();
 

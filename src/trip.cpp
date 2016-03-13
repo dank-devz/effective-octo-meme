@@ -110,7 +110,7 @@ QVector<int> Trip::RoundTheWorld()
     itr++;
   }
   // Find the route and return it!!
-  return findRoute(locIds);
+  return findRouteBrute(locIds);
 }
 
 /**
