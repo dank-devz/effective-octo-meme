@@ -178,6 +178,15 @@ double Database::GetCartTotal()
     return totalCost;
 }
 
+bool Database::AuthenticateAdmin(QString username, QString password)
+{
+    QSqlQuery query;
+    query.prepare("SELECT from users where username = :username and password = :password");
+    query.bindValue(":username", username);
+    query.bindValue(":password", password);
+    return query.exec();
+}
+
 /**
  * @brief Database::PurchaseItem Add an item to the cart.
  * @param itemId The ID of the item to add.
