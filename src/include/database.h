@@ -42,13 +42,11 @@ public:
     bool AuthenticateAdmin(QString username, QString password);
 
     /// Retrieve Restaurant Distances
-    QList<double> GetRestaurantDistances(QString name);
-
+    QVector<double> GetRestaurantDistances(QString name);
     /// Retrieve Restaurant Distances
-    QList<double> GetRestaurantDistances(int restaurantId);
-
+    QVector<double> GetRestaurantDistances(int restaurantId);
     /// Retrieve Restaurant IDS
-    QList<int> GetAllRestaurantIds() const;
+    QVector<int> GetAllRestaurantIds() const;
 
     /// Shopping Cart Methods
     QList<QString> 	GetRestaurantMenuItemNames(int restaurantId);

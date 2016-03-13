@@ -160,6 +160,7 @@ int Database::GetItemId(int restaurantId, QString itemName)
         qDebug() << lastError().text();
         return -1;
     }
+    return -1;
 }
 
 /**
@@ -218,12 +219,12 @@ bool Database::ClearCart()
  * @return int list
  */
 
-QList<double> Database::GetRestaurantDistances(QString name)
+QVector<double> Database::GetRestaurantDistances(QString name)
 {
-    QList <double> 	distanceList;
+    QVector<double> 	distanceList;
     QSqlQuery 		query;
-    int 			restaurantId;
-    double 			distance;
+    int 		restaurantId;
+    double 		distance;
 
     restaurantId = GetRestaurantId(name);
 
@@ -247,13 +248,13 @@ QList<double> Database::GetRestaurantDistances(QString name)
 }
 
 
-QList<double> Database::GetRestaurantDistances(int restaurantId)
+QVector<double> Database::GetRestaurantDistances(int restaurantId)
 {
-    QList <double> 	distanceList;
+    QVector<double> 	distanceList;
     QSqlQuery 		query;
-    double 			distance;
+    double  	        distance;
 
-    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id");
+    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id order by distances.to asc");
 
     query.bindValue(":id", restaurantId);
 
@@ -272,11 +273,11 @@ QList<double> Database::GetRestaurantDistances(int restaurantId)
     return distanceList;
 }
 
-QList<int> Database::GetAllRestaurantIds() const
+QVector<int> Database::GetAllRestaurantIds() const
 {
-    QList <int> 	restaurantIds;
+    QVector<int> 	restaurantIds;
     QSqlQuery 		query;
-    int 			id;
+    int 		    id;
 
     query.prepare("SELECT `id` FROM restaurants");
 

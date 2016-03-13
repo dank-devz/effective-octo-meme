@@ -1,5 +1,8 @@
 #include <QtTest/QtTest>
+#include <iostream>
 #include "../src/include/database.h"
+#include "trip.h"
+#include "mainwindow.h"
 
 class Test_Database: public QObject
 {
@@ -21,6 +24,7 @@ private slots:
     void testGetDistanceFromRestaurantByID();
     void testGetDistanceFromRestaurantByName();
     void testGetAllRestaurantIds();
+    void testRouteDistance1();
 
 private:
     Database *testDB;
@@ -80,7 +84,7 @@ void Test_Database::testAuthenticateAdmin()
 
 void Test_Database::testGetDistanceFromRestaurantByID()
 {
-    QList<double> testMap;
+    QVector<double> testMap;
     testMap = testDB->GetRestaurantDistances(0);
 
     QVERIFY(testMap.contains(43824));
@@ -91,7 +95,7 @@ void Test_Database::testGetDistanceFromRestaurantByID()
 }
 void Test_Database::testGetDistanceFromRestaurantByName()
 {
-    QList<double> testMap;
+    QVector<double> testMap;
     testMap = testDB->GetRestaurantDistances("Testaurant");
 
     QVERIFY(testMap.contains(43824));
@@ -103,7 +107,7 @@ void Test_Database::testGetDistanceFromRestaurantByName()
 
 void Test_Database::testGetAllRestaurantIds()
 {
-    QList<int> testIds;
+    QVector<int> testIds;
     testIds = testDB->GetAllRestaurantIds();
     QVERIFY(testIds.contains(0));
     QVERIFY(testIds.contains(1));
@@ -113,6 +117,50 @@ void Test_Database::testGetAllRestaurantIds()
 }
 
 
+void Test_Database::testRouteDistance1()
+{
+    testDB->close();
+    delete testDB;
+    testDB = new Database("fast_food_restaurants",
+                          "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
+                          "dankdevz",
+                          "cs1d-fast-food-fantasy");
+
+    double ValidDist = 42.79;
+    Trip *the_trip = new Trip(testDB);
+
+    QVector<int> locations;
+    locations.push_back(1);
+    locations.push_back(2);
+    locations.push_back(3);
+
+    QVector<int> valid1;
+    valid1.push_back(2);
+    valid1.push_back(3);
+    valid1.push_back(1);
+
+    QVector<int> valid2 = valid1;
+    valid2.push_back(1);
+    valid2.push_back(3);
+    valid2.push_back(2);
+
+    qDebug() << "About to get the trip";
+    qDebug() << locations[0];
+    qDebug() << locations[1];
+    qDebug() << locations[2];
+    QVERIFY(the_trip != NULL);
+    QVERIFY(the_trip->getDistance() == 42.79);
+
+    QVERIFY(the_trip->getRoute() == valid1);
+
+
+    qDebug() << "Testing Route Algorith with Locations: " << locations;
+//    the_trip->findRoute(locations);
+    qDebug() << "TRIP DISTANCE BACK IN TEST: " << the_trip->getDistance()
+             << " (should be " << ValidDist << ") " << the_trip->getRoute();
+    QVERIFY(the_trip->getDistance() == ValidDist);
+    QVERIFY(the_trip->getRoute() == valid1 || the_trip->getRoute() == valid2);
+}
 //#endif //TEST_DATABASE_H
 
 QTEST_MAIN(Test_Database)
