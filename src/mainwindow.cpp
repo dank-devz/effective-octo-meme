@@ -9,15 +9,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     // sets the default page to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                       "dankdevz", "cs1d-fast-food-fantasy");
-    ui->planRegularTrip_comboBox_numberOfStops->hide();
-    ui->planRegularTrip_label_promptLocations->hide();
+//    ui->planRegularTrip_comboBox_numberOfStops->hide();
+//    ui->planRegularTrip_label_promptLocations->hide();
     initViewAllRestaurantsTable(db);
+    this->the_trip_ = new Trip(db);
 }
 
 MainWindow::~MainWindow()
@@ -221,5 +223,16 @@ void MainWindow::adminButtonsHide()
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
 {
+    qDebug() << "Number of stops selected" << ui->planRegularTrip_comboBox_numberOfStops->currentText();
+    int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
+    int index;
+
+    for(index = 0; i < numToVisit;i++)
+    {
+
+    }
+
+//    this->the_trip_->findRouteBrute(testVect);
+//    ui->tripSummary_label_totalDistanceTraveledValue->setText(QString::number(this->the_trip_->getDistance()));
     ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
 }

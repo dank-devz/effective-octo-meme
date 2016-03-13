@@ -106,6 +106,7 @@ QVector<int> Trip::RoundTheWorld()
     locIds.push_back(itr->id());
     itr++;
   }
+  qDebug() << locIds;
   // Find the route and return it!!
   return findRouteBrute(locIds);
 }
