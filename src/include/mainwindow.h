@@ -89,6 +89,8 @@ private slots:
 
     void on_cartItems_pushButton_next_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data
