@@ -16,16 +16,20 @@ private slots:
     void testValidAddMenuItem();
     void testInvalidAddMenuItem();
     void testRemoveMenuItem();
+    void testGetRestaurantId();
+    void testGetItemId();
+    void testGetRestaurants();
+    void testGetCartTotal();
     void testGetDistanceFromRestaurantByID();
     void testGetDistanceFromRestaurantByName();
     void testGetAllRestaurantIds();
     void testRouteDistance1();
+
 private:
     Database *testDB;
 };
 
 void Test_Database::initTest(){
-    //replace this with connection to test Database once we have it up and running.
     testDB = new Database("fast_food_restaurants_testing", "cs1d-fast-food-fantasy-testing.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                           "dankdevz", "dankdevz");
     QVERIFY(testDB != NULL);
@@ -49,6 +53,27 @@ void Test_Database::testInvalidAddMenuItem()
 void Test_Database::testRemoveMenuItem()
 {
     QVERIFY(testDB->RemoveMenuItem(0, "Spicy Tuna Roll"));
+}
+
+void Test_Database::testGetRestaurantId()
+{
+    QVERIFY(testDB->GetRestaurantId("Testaurant") == 0);
+}
+
+void Test_Database::testGetItemId()
+{
+    QVERIFY(testDB->GetItemId(0, "Gizzards") == 1);
+}
+
+void Test_Database::testGetRestaurants()
+{
+    QList<QString> testList = testDB->GetRestaurants();
+    QVERIFY(testList.size() > 0);
+}
+
+void Test_Database::testGetCartTotal()
+{
+    QVERIFY(testDB->GetCartTotal() > 0);
 }
 
 void Test_Database::testGetDistanceFromRestaurantByID()
@@ -113,15 +138,15 @@ void Test_Database::testRouteDistance1()
     valid2.push_back(3);
     valid2.push_back(2);
 
-//    qDebug() << "About to get the trip";
-//    qDebug() << locations[0];
-//    qDebug() << locations[1];
-//    qDebug() << locations[2];
-//    Trip *the_trip = w.getTrip(locations);
-//    QVERIFY(the_trip != NULL);
-//    QVERIFY(the_trip->getDistance() == 42.79);
+    qDebug() << "About to get the trip";
+    qDebug() << locations[0];
+    qDebug() << locations[1];
+    qDebug() << locations[2];
+    Trip *the_trip = w.getTrip(locations);
+    QVERIFY(the_trip != NULL);
+    QVERIFY(the_trip->getDistance() == 42.79);
 
-//    QVERIFY(the_trip->getRoute() == valid1);
+    QVERIFY(the_trip->getRoute() == valid1);
 
 
     qDebug() << "Testing Route Algorith with Locations: " << locations;
