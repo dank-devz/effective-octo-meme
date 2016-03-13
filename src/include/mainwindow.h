@@ -24,7 +24,8 @@ class MainWindow : public QMainWindow
         PAGE_PLAN_REGULAR_TRIP = 2,
         PAGE_PLAN_CUSTOM_TRIP = 3,
         PAGE_VIEW_DETAILS = 4,
-        PAGE_CART_ITEMS = 5
+        PAGE_CART_ITEMS = 5,
+        PAGE_TRIP_SUMMARY = 6
     };
 
 public:
@@ -86,12 +87,14 @@ private slots:
     void adminButtonsShow();
     void adminButtonsHide();
 
+    void on_cartItems_pushButton_next_clicked();
+
 private:
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data
 
     /*
-     * D A T A B A S E  V A R I A B L E S
+     * O T H E R  V A R I A B L E S
      */
 
     MenuTableModel *menuModel;

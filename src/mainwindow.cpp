@@ -218,3 +218,8 @@ void MainWindow::adminButtonsHide()
 {
 
 }
+
+void MainWindow::on_cartItems_pushButton_next_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
+}

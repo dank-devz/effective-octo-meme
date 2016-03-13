@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -516,6 +516,11 @@
         <height>22</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <underline>true</underline>
+       </font>
+      </property>
       <property name="text">
        <string>Back</string>
       </property>
@@ -526,7 +531,7 @@
      <widget class="QLabel" name="cartItems_label_totalValue">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>330</x>
         <y>470</y>
         <width>59</width>
         <height>14</height>
@@ -541,12 +546,12 @@
        <rect>
         <x>260</x>
         <y>470</y>
-        <width>59</width>
-        <height>14</height>
+        <width>71</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Total:</string>
+       <string>Total: $</string>
       </property>
      </widget>
      <widget class="QLabel" name="cartItems_label_restaurant_name">
@@ -564,6 +569,107 @@
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
+     </widget>
+     <widget class="QPushButton" name="cartItems_pushButton_next">
+      <property name="geometry">
+       <rect>
+        <x>125</x>
+        <y>470</y>
+        <width>87</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <underline>true</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Next</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_tripSummary">
+     <widget class="QTableView" name="tripSummary_tableView_reciept">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>280</y>
+        <width>409</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="tripSummary_label_totalSpentPrompt">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>470</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Total: $</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="tripSummary_label_totalSpentValue">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>470</y>
+        <width>59</width>
+        <height>14</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0.00</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>401</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="tripSummary_horizontalLayout_totalDistanceTraveled">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="tripSummary_label_totalDistanceTraveled">
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Total Distance Traveled:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="tripSummary_label_totalDistanceTraveledValue">
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
