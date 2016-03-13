@@ -195,9 +195,13 @@ void MainWindow::on_cartItems_removeSelected_clicked()
 
 void MainWindow::on_actionLogin_triggered()
 {
-    AdminLogin *adminUi;
-    bool authenticated = false;
-    adminUi = new AdminLogin(0, &authenticated);
+    AdminLogin *adminPrompt;
+    bool authenticated = false;// TODO- BE REPLACED WITH GLOBAL
+    adminPrompt = new AdminLogin(0, &authenticated);// TODO- BE REPLACED WITH GLOBAL
+    adminPrompt->setVisible(true);
+}
 
-    adminUi->setVisible(true);
+void MainWindow::on_actionLogout_triggered()
+{
+    //TODO - set global to false
 }

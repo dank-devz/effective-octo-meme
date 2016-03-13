@@ -24,6 +24,8 @@ private slots:
      * T O O L B A R  F U N C T I O N S
      */
     void on_actionQuit_triggered();
+    void on_actionLogin_triggered();
+    void on_actionLogout_triggered();
 
     /*
      * H O M E  P A G E  F U N C T I O N S
@@ -55,19 +57,20 @@ private slots:
     void on_viewDetails_pushButton_back_clicked();
 
     /*
+     * C A R T  F U N C T I O N S
+     */
+    void on_cartItems_addSelected_clicked();
+    void on_cartItems_pushButton_Back_clicked();
+    void on_cartItems_removeSelected_clicked();
+
+    /*
      * O T H E R  F U N C T I O N S
      */
     void initViewAllRestaurantsTable(Database *db);
     void initViewDetailsTable(Database *db, int id);
     void initCartItemsTable(Database *db, int id);
-
-    void on_cartItems_addSelected_clicked();
-
-    void on_cartItems_pushButton_Back_clicked();
-
-    void on_cartItems_removeSelected_clicked();
-
-    void on_actionLogin_triggered();
+//    void adminButtonsShow();
+//    void adminButtonsHide();
 
 private:
     Ui::MainWindow *ui;
