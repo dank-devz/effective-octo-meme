@@ -211,12 +211,12 @@ void MainWindow::on_actionLogout_triggered()
 
 void MainWindow::adminButtonsShow()
 {
-
+    ui->home_pushButton_planRegularFoodRun->setText("Edit Restaurant Menu Items");
 }
 
 void MainWindow::adminButtonsHide()
 {
-
+    ui->home_pushButton_planRegularFoodRun->setText("View Nearby Restaurants");
 }
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
