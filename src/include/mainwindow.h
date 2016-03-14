@@ -96,7 +96,7 @@ private slots:
 
     void on_cartItems_pushButton_next_clicked();
 
-    void on_admin_submitChanges_pushButton_clicked();
+    void on_admin_submitChanges_menu_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

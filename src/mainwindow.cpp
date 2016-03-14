@@ -251,7 +251,7 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
     ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
 }
 
-void MainWindow::on_admin_submitChanges_pushButton_clicked()
+void MainWindow::on_admin_submitChanges_menu_pushButton_clicked()
 {
     menuModel->submitAll();
     qDebug() << "Changes to menu table have been made.";
