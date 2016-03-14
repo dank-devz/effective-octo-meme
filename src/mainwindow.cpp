@@ -180,6 +180,7 @@ void MainWindow::initViewDetailsTable(int id)
     ui->tableView->setModel(menuModel);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->hideColumn(MenuTableModel::ITEMID);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->resizeColumnsToContents();
     ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
