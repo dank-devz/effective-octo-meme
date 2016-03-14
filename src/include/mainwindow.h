@@ -98,6 +98,8 @@ private slots:
 
     void on_admin_submitChanges_menu_pushButton_clicked();
 
+    void on_admin_submitChanges_restaurant_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data

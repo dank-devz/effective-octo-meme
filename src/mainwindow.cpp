@@ -33,6 +33,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/**
+ * @brief MainWindow::toggleAdminFeatures
+ * Make special admin buttons appear, make tables editable.
+ * @param isAdmin
+ */
 void MainWindow::toggleAdminFeatures(bool isAdmin)
 {
     if(isAdmin)
@@ -161,15 +166,23 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
 {
     restaurantModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(restaurantModel);
+    ui->viewAllRestaurants_tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->viewAllRestaurants_tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->viewAllRestaurants_tableView->verticalHeader()->setVisible(false);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+    ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::initViewDetailsTable(Database *db, int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(menuModel);
-    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->verticalHeader()->setVisible(false);
+    ui->tableView->resizeColumnsToContents();
+    ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::initCartItemsTable(Database *db, int id)
@@ -254,5 +267,11 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
 void MainWindow::on_admin_submitChanges_menu_pushButton_clicked()
 {
     menuModel->submitAll();
-    qDebug() << "Changes to menu table have been made.";
+    qDebug() << "Changes submitted to menu table.";
+}
+
+void MainWindow::on_admin_submitChanges_restaurant_pushButton_clicked()
+{
+    restaurantModel->submitAll();
+    qDebug() << "Changes submitted to restaurant table.";
 }
