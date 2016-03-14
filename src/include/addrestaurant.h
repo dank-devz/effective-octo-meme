@@ -10,6 +10,13 @@ namespace Ui {
 class addRestaurant;
 }
 
+enum pageNames
+{
+    PAGE_PRIMARY = 0,
+    PAGE_ADD_ITEMS = 1,
+    PAGE_ADD_DISTANCES = 2
+};
+
 class addRestaurant : public QDialog
 {
     Q_OBJECT
@@ -29,6 +36,12 @@ private slots:
     void on_primary_pushButton_next_clicked();
 
     void on_primary_lineEdit_name_returnPressed();
+
+    void on_addItems_pushButton_cancel_clicked();
+
+    void on_addItems_pushButton_next_clicked();
+
+    void on_addItems_pushButton_add_clicked();
 
 private:
     Ui::addRestaurant *ui;

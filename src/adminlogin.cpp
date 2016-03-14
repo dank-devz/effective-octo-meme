@@ -13,6 +13,7 @@ AdminLogin::AdminLogin(QWidget *parent, bool *isValidPassword, Database *databas
     ui(new Ui::AdminLogin)
 {
     ui->setupUi(this);
+    QWidget::setWindowTitle("Admin Login");
 
     // sets the private variables to the passed in parameters
     isValidPassword_ = isValidPassword;

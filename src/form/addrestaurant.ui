@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_primary">
     <widget class="QLabel" name="primary_label_title">
@@ -58,6 +58,9 @@
        <height>24</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Cancel</string>
      </property>
@@ -73,6 +76,9 @@
        <width>87</width>
        <height>24</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Next</string>
@@ -101,14 +107,18 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="primary_label_error">
+       <widget class="QLabel" name="primary_label_errorMessage">
         <property name="text">
          <string>Please Enter a name!</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="primary_lineEdit_name"/>
+       <widget class="QLineEdit" name="primary_lineEdit_name">
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -122,6 +132,9 @@
        <width>87</width>
        <height>24</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Cancel</string>
@@ -574,6 +587,9 @@
        <height>24</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Next</string>
      </property>
@@ -665,12 +681,12 @@
       <rect>
        <x>220</x>
        <y>104</y>
-       <width>51</width>
+       <width>141</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Added!</string>
+      <string>Added </string>
      </property>
     </widget>
    </widget>
@@ -738,6 +754,9 @@
        <height>24</height>
       </rect>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Cancel</string>
      </property>
@@ -750,6 +769,9 @@
        <width>87</width>
        <height>24</height>
       </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string>Next</string>
