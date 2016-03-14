@@ -39,7 +39,6 @@ signals:
     void adminStatusChanged(bool isAdmin);
 
 public slots:
-    void setAdminStatus(bool isAdmin);
     void toggleAdminFeatures(bool isAdmin);
 
 private slots:
@@ -111,7 +110,6 @@ private:
     RestaurantTableModel *restaurantModel;
     CartTableModel *cartModel;
     Database *db;
-    bool isAdmin;
 };
 
 #endif // MAINWINDOW_H

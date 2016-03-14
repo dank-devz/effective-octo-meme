@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->planRegularTrip_comboBox_numberOfStops->hide();
     ui->planRegularTrip_label_promptLocations->hide();
     initViewAllRestaurantsTable(db);
-    isAdmin = false;
     QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
                      this, SLOT(toggleAdminFeatures(bool)));
     ui->admin_submitChanges_menu_pushButton->setVisible(false);
@@ -34,16 +33,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setAdminStatus(bool isAdmin)
-{
-    qDebug() << "SLOT!!";
-    this->isAdmin = isAdmin;
-}
-
 void MainWindow::toggleAdminFeatures(bool isAdmin)
 {
-    this->isAdmin = isAdmin;
-
     if(isAdmin)
     {
         ui->tableView->setEditTriggers(QTableView::DoubleClicked);
@@ -178,7 +169,6 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(menuModel);
-    qDebug() << "isAdmin: " << isAdmin;
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
