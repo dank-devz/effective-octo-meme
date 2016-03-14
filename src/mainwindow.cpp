@@ -20,8 +20,11 @@ MainWindow::MainWindow(QWidget *parent) :
     initViewAllRestaurantsTable(db);
     isAdmin = false;
     QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
-                     this, SLOT(initializeAdminButtons(bool)));
+                     this, SLOT(toggleAdminFeatures(bool)));
     ui->admin_submitChanges_menu_pushButton->setVisible(false);
+    ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
+//    ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
+    ui->viewAllRestaurants_tableView->setEditTriggers(0);
     ui->tableView->setEditTriggers(0);
 }
 
@@ -37,20 +40,24 @@ void MainWindow::setAdminStatus(bool isAdmin)
     this->isAdmin = isAdmin;
 }
 
-void MainWindow::initializeAdminButtons(bool isAdmin)
+void MainWindow::toggleAdminFeatures(bool isAdmin)
 {
     this->isAdmin = isAdmin;
 
     if(isAdmin)
     {
         ui->tableView->setEditTriggers(QTableView::DoubleClicked);
+        ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::DoubleClicked);
     }
     else
     {
         ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
+        ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::NoEditTriggers);
     }
     ui->admin_submitChanges_menu_pushButton->setEnabled(isAdmin);
     ui->admin_submitChanges_menu_pushButton->setVisible(isAdmin);
+    ui->admin_submitChanges_restaurant_pushButton->setEnabled(isAdmin);
+    ui->admin_submitChanges_restaurant_pushButton->setVisible(isAdmin);
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -228,7 +235,7 @@ void MainWindow::on_actionLogin_triggered()
     AdminLogin *adminPrompt;
     adminPrompt = new AdminLogin(this, db);
     QObject::connect(adminPrompt, SIGNAL(adminStatusChanged(bool)),
-                     this, SLOT(initializeAdminButtons(bool)));
+                     this, SLOT(toggleAdminFeatures(bool)));
     adminPrompt->setWindowModality(Qt::ApplicationModal);
     adminPrompt->show();
 

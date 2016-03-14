@@ -40,7 +40,7 @@ signals:
 
 public slots:
     void setAdminStatus(bool isAdmin);
-    void initializeAdminButtons(bool isAdmin);
+    void toggleAdminFeatures(bool isAdmin);
 
 private slots:
     /*

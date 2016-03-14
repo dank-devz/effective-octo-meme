@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -192,6 +192,22 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="admin_submitChanges_restaurant_pushButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>440</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Submit Changes</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_planRegularTrip">
