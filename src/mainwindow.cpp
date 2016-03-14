@@ -147,7 +147,7 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     ui->cartItems_label_restaurant_name->setText(ui->planRegularTrip_comboBox_startingLocation->currentText() + " Menu");
     initCartItemsTable(locationID);
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
-    ui->cartItems_tableView_items->resizeColumnsToContents();
+
 }
 
 void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()
@@ -192,9 +192,14 @@ void MainWindow::initCartItemsTable(int id)
     ui->cartItems_tableView_items->setModel(menuModel);
     ui->cartItems_tableView_items->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ITEMID);
-    ui->cartItems_tableView_items->resizeColumnsToContents();
+    ui->cartItems_tableView_items->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->cartItems_tableView_items->verticalHeader()->setVisible(false);
+    ui->cartItems_tableView_items->horizontalHeader()->setStretchLastSection(true);
+
     ui->cartItems_tableView_reciept->setModel(cartModel);
     ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->cartItems_tableView_reciept->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->cartItems_tableView_reciept->verticalHeader()->setVisible(false);
     ui->cartItems_tableView_reciept->horizontalHeader()->setStretchLastSection(true);
 }
 
