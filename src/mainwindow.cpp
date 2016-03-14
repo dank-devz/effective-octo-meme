@@ -139,7 +139,7 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 
 //    // Get the Restaurant name and location ID
     int locationID = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());//ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-    QString Title  = ui->planRegularTrip_comboBox_startinsgLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+    QString Title  = ui->planRegularTrip_comboBox_startingLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
     qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
     // Fill the view with the infos
