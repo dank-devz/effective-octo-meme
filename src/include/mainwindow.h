@@ -88,9 +88,9 @@ private slots:
     /*
      * O T H E R  F U N C T I O N S
      */
-    void initViewAllRestaurantsTable(Database *db);
-    void initViewDetailsTable(Database *db, int id);
-    void initCartItemsTable(Database *db, int id);
+    void initViewAllRestaurantsTable();
+    void initViewDetailsTable(int id);
+    void initCartItemsTable(int id);
     void adminButtonsShow();
     void adminButtonsHide();
 

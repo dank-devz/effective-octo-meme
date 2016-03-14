@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
                       "dankdevz", "cs1d-fast-food-fantasy");
     ui->planRegularTrip_comboBox_numberOfStops->hide();
     ui->planRegularTrip_label_promptLocations->hide();
-    initViewAllRestaurantsTable(db);
+    initViewAllRestaurantsTable();
     QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
                      this, SLOT(toggleAdminFeatures(bool)));
     ui->admin_submitChanges_menu_pushButton->setVisible(false);
@@ -111,7 +111,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 
     // Fill the view with the infos
     ui->label->setText(Title);
-    initViewDetailsTable(db, currentRow+1);
+    initViewDetailsTable(currentRow+1);
     ui->tableView->hideColumn(0);
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
@@ -145,7 +145,7 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     // Fill the view with the infos
     ui->label->setText(Title);
     ui->cartItems_label_restaurant_name->setText(ui->planRegularTrip_comboBox_startingLocation->currentText() + " Menu");
-    initCartItemsTable(db, locationID);
+    initCartItemsTable(locationID);
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
     ui->cartItems_tableView_items->resizeColumnsToContents();
 }
@@ -162,7 +162,7 @@ void MainWindow::on_viewDetails_pushButton_back_clicked()
     ui->stackedWidget->setCurrentIndex(PAGE_VIEW_ALL_RESTAURANTS);
 }
 
-void MainWindow::initViewAllRestaurantsTable(Database *db)
+void MainWindow::initViewAllRestaurantsTable()
 {
     restaurantModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(restaurantModel);
@@ -174,7 +174,7 @@ void MainWindow::initViewAllRestaurantsTable(Database *db)
     ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
-void MainWindow::initViewDetailsTable(Database *db, int id)
+void MainWindow::initViewDetailsTable(int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(menuModel);
@@ -185,7 +185,7 @@ void MainWindow::initViewDetailsTable(Database *db, int id)
     ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
-void MainWindow::initCartItemsTable(Database *db, int id)
+void MainWindow::initCartItemsTable(int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     cartModel = new CartTableModel(this, db);
