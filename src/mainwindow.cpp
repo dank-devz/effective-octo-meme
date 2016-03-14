@@ -190,6 +190,8 @@ void MainWindow::initCartItemsTable(int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     cartModel = new CartTableModel(this, db);
+
+    //table on top
     ui->cartItems_tableView_items->setModel(menuModel);
     ui->cartItems_tableView_items->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ITEMID);
@@ -197,6 +199,7 @@ void MainWindow::initCartItemsTable(int id)
     ui->cartItems_tableView_items->verticalHeader()->setVisible(false);
     ui->cartItems_tableView_items->horizontalHeader()->setStretchLastSection(true);
 
+    //table on bottom
     ui->cartItems_tableView_reciept->setModel(cartModel);
     ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_reciept->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -236,7 +239,21 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 
 void MainWindow::on_cartItems_removeSelected_clicked()
 {
+//    if(ui->cartItems_tableView_reciept->currentIndex().row() > -1)
+//    {
+//        //get the name of the selected item
+//        QString name = ui->cartItems_tableView_reciept->model()->data(ui->cartItems_tableView_reciept->model()->index(ui->cartItems_tableView_reciept->currentIndex().row(), 0)).toString();
+//        qDebug() << name;
+//        qDebug() << "removed: " << db->RemoveFromCart(name);
+//        qDebug() << db->lastError().text();
+//        qDebug() << cartModel->lastError();
 
+//        cartModel->select();
+//    }
+//    else
+//    {
+//        //select a row
+//    }
 }
 
 void MainWindow::on_actionLogin_triggered()

@@ -1,6 +1,6 @@
 #include "../include/carttablemodel.h"
 
-CartTableModel::CartTableModel(QObject *parent, Database *db)
+CartTableModel::CartTableModel(QObject *parent, Database *db) : QSqlTableModel(parent, *db)
 {
     Initialize();
 }
@@ -8,8 +8,9 @@ CartTableModel::CartTableModel(QObject *parent, Database *db)
 void CartTableModel::Initialize()
 {
     this->setTable("cart_view");
-    this->setHeaderData(NAME, Qt::Horizontal, tr("Item Name"),QSqlTableModel::OnManualSubmit);
-    this->setHeaderData(PRICE, Qt::Horizontal, tr("Item Price"),QSqlTableModel::OnManualSubmit);
-    this->setHeaderData(QUANTITY, Qt::Horizontal, tr("Quantity"),QSqlTableModel::OnManualSubmit);
+    this->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    this->setHeaderData(NAME, Qt::Horizontal, tr("Item Name"), 0);
+    this->setHeaderData(PRICE, Qt::Horizontal, tr("Item Price"), 0);
+    this->setHeaderData(QUANTITY, Qt::Horizontal, tr("Quantity"), 0);
     this->select();
 }
