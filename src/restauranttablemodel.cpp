@@ -11,6 +11,7 @@ RestaurantTableModel::RestaurantTableModel(QObject *parent, Database *db) : QSql
  */
 void RestaurantTableModel::Initialize()
 {
+    this->setEditStrategy(QSqlTableModel::OnManualSubmit);
     this->setTable("restaurants_view");
     this->setHeaderData(ID, Qt::Horizontal, tr("Restaurant ID"),QSqlTableModel::OnManualSubmit);
     this->setHeaderData(NAME, Qt::Horizontal, tr("Restaurant Name"),QSqlTableModel::OnManualSubmit);
