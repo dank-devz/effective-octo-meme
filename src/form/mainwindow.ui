@@ -847,6 +847,7 @@
     </property>
     <addaction name="actionLogin"/>
     <addaction name="actionLogout"/>
+    <addaction name="actionAdd_Remove_Restaurants"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAdmin"/>
@@ -864,6 +865,14 @@
   <action name="actionLogout">
    <property name="text">
     <string>Logout</string>
+   </property>
+  </action>
+  <action name="actionAdd_Remove_Restaurants">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Add/Remove Restaurants</string>
    </property>
   </action>
  </widget>

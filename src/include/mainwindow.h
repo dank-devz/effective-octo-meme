@@ -101,6 +101,12 @@ private slots:
     void on_admin_submitChanges_restaurant_pushButton_clicked();
     void on_pushButton_clicked();
 
+    void on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked();
+
+    void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
+
+    void on_actionAdd_Remove_Restaurants_triggered();
+
 private:
 
     void initializeAdminFeatures();
