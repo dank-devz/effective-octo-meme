@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeAdminFeatures();
 
     /*FOR TESTING*/
-    addRestaurant* a = new addRestaurant(0, db);
+    addRestaurant* a = new addRestaurant(0, 5, db);
     a->show();
     /* * */
 

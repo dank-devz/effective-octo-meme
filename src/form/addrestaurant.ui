@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_primary">
     <widget class="QLabel" name="primary_label_title">
@@ -597,9 +597,9 @@
     <widget class="QLabel" name="addItems_label_title">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>25</x>
        <y>10</y>
-       <width>171</width>
+       <width>350</width>
        <height>21</height>
       </rect>
      </property>
@@ -663,7 +663,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Message Label</string>
+      <string>Please add an item name!</string>
      </property>
     </widget>
     <widget class="QDoubleSpinBox" name="addItems_doubleSpinBox_price">
