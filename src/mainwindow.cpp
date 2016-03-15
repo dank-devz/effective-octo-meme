@@ -129,7 +129,6 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->label->setText(Title);
     initViewDetailsTable(currentRow+1);
     ui->tableView->hideColumn(0);
-    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -400,6 +399,13 @@ void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked
             restaurantModel->select();
         }
     }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select a row.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
+    }
 }
 
 
@@ -424,5 +430,12 @@ void MainWindow::on_admin_viewDetails_removeMenuItem_pushButton_clicked()
             qDebug() << db->lastError();
             menuModel->select();
         }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select a row.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
     }
 }
