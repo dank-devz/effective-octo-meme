@@ -104,6 +104,8 @@ private slots:
 
     void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
 
+    void on_admin_viewDetails_removeMenuItem_pushButton_clicked();
+
 private:
 
     void initializeAdminFeatures();

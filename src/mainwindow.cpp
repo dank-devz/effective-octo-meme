@@ -402,3 +402,27 @@ void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked
     }
 }
 
+
+void MainWindow::on_admin_viewDetails_removeMenuItem_pushButton_clicked()
+{
+    if(menuModel->removeRow(ui->tableView->currentIndex().row()))
+    {
+        int currentRow          = ui->tableView->currentIndex().row();
+        QModelIndex restaurantID_index  = ui->tableView->model()->index(currentRow, 0);
+        QModelIndex nameIndex   = ui->tableView->model()->index(currentRow, 1);
+        QString itemName  = ui->tableView->model()->data(nameIndex).toString();
+        int restaurantID        = ui->tableView->model()->data(restaurantID_index).toInt();
+        QMessageBox *p = new QMessageBox(this);
+        p->setText(itemName + " will be removed.");
+        p->setInformativeText("Are you sure?");
+        p->setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
+        p->setDefaultButton(QMessageBox::Cancel);
+        int decision = p->exec();
+        if(decision == QMessageBox::Ok)
+        {
+            db->RemoveMenuItem(restaurantID, itemName);
+            qDebug() << db->lastError();
+            menuModel->select();
+        }
+    }
+}
