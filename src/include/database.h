@@ -47,6 +47,8 @@ public:
     QList<QString> GetRestaurants();
     ///Retrieve a restaurant's unique ID
     int GetRestaurantId(QString restaurantName);
+    ///Retrieve a restaurant's name given their ID
+    QString GetRestaurantName(int id);
     ///Retrieve a menu item's unique ID
     int GetItemId(int restaurantId, QString itemName);
     ///Retrieve the total cost of the items in the cart.
