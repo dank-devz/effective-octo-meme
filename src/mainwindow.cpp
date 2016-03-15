@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeAdminFeatures();
 
     this->the_trip_ = new Trip(db);
-
 }
 
 MainWindow::~MainWindow()
