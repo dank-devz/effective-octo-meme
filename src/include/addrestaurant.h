@@ -60,6 +60,7 @@ private:
     QVector<double> distances_;
 
     QVector<int> otherLocations_;
+    QVector<int> otherLocationsCopy_;
 
     /*
      * F O R  A D D  M E N U  I T E M

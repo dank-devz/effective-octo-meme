@@ -24,6 +24,11 @@ MainWindow::MainWindow(QWidget *parent) :
     initViewAllRestaurantsTable();
     initializeAdminFeatures();
 
+    /*FOR TESTING*/
+    addRestaurant* a = new addRestaurant(0, db);
+    a->show();
+    /* * */
+
     this->the_trip_ = new Trip(db);
 }
 
