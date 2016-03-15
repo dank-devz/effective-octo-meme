@@ -17,7 +17,8 @@ SOURCES += mainwindow.cpp \
     menutablemodel.cpp \
     trip.cpp \
     carttablemodel.cpp \
-    adminlogin.cpp
+    adminlogin.cpp \
+    addrestaurant.cpp
 
 HEADERS  += include/mainwindow.h \
             include/database.h \
@@ -26,9 +27,11 @@ HEADERS  += include/mainwindow.h \
             include/trip.h \
             include/location.h \
             include/carttablemodel.h \
-            include/adminlogin.h
+            include/adminlogin.h \
+    include/addrestaurant.h
 
 FORMS    += form/mainwindow.ui \
-            form/adminlogin.ui
+            form/adminlogin.ui \
+    form/addrestaurant.ui
 
 QTPLUGIN += qsqlmysql

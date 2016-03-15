@@ -1,6 +1,7 @@
 #include "include/mainwindow.h"
 #include "include/adminlogin.h"
 #include "ui_mainwindow.h"
+#include "addrestaurant.h"
 #include <iostream>
 #include "QMessageBox"
 
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
                       "dankdevz", "cs1d-fast-food-fantasy");
     ui->planRegularTrip_comboBox_numberOfStops->hide();
     ui->planRegularTrip_label_promptLocations->hide();
+
     initViewAllRestaurantsTable();
     initializeAdminFeatures();
 }
@@ -290,12 +292,12 @@ void MainWindow::on_actionLogout_triggered()
 
 void MainWindow::adminButtonsShow()
 {
-
+    ui->home_pushButton_planRegularFoodRun->setText("Edit Restaurant Menu Items");
 }
 
 void MainWindow::adminButtonsHide()
 {
-
+    ui->home_pushButton_planRegularFoodRun->setText("View Nearby Restaurants");
 }
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
