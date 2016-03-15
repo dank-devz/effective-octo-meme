@@ -8,6 +8,7 @@
 #include "menutablemodel.h"
 #include "carttablemodel.h"
 #include "trip.h"
+#include "adminlogin.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +34,9 @@ public:
     ~MainWindow();
     Trip* getTrip(QVector<int> ids);
     bool dbOpen() const { return db->isOpen(); }
+
+public slots:
+    void setAdminStatus(bool isAdmin);
 
 private slots:
     /*
@@ -89,6 +93,8 @@ private slots:
 
     void on_cartItems_pushButton_next_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data
@@ -101,6 +107,7 @@ private:
     RestaurantTableModel *restaurantModel;
     CartTableModel *cartModel;
     Database *db;
+    bool isAdmin;
 };
 
 #endif // MAINWINDOW_H
