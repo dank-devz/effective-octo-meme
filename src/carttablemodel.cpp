@@ -7,7 +7,7 @@ CartTableModel::CartTableModel(QObject *parent, Database *db) : QSqlTableModel(p
 
 void CartTableModel::Initialize()
 {
-    this->setTable("cart_view");
+    this->setTable("cart");
     this->setEditStrategy(QSqlTableModel::OnManualSubmit);
     this->setHeaderData(NAME, Qt::Horizontal, tr("Item Name"), 0);
     this->setHeaderData(PRICE, Qt::Horizontal, tr("Item Price"), 0);

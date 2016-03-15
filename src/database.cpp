@@ -242,16 +242,27 @@ bool Database::AuthenticateAdmin(QString username, QString password)
  * @param quantity The quantity of items to purchase.
  * @return true if successfully added.
  */
-bool Database::PurchaseItem(int itemId, int quantity)
+bool Database::PurchaseItem(int itemId, int quantity, QString name, double price)
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO cart (id, quantity) "
-                  "VALUES (:id, :quantity)");
+    query.prepare("INSERT INTO cart (id, quantity, name, price) "
+                  "VALUES (:id, :quantity, :name, :price)");
 
     query.bindValue(":id", itemId);
     query.bindValue(":quantity", quantity);
+    query.bindValue(":name", name);
+    query.bindValue(":price", price);
 
+    return query.exec();
+}
+
+bool Database::UpdateQuantity(int quantity, int itemId)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE cart set cart.quantity = (cart.quantity + :quantity) where cart.id = :itemId");
+    query.bindValue(":quantity", quantity);
+    query.bindValue(":itemId", itemId);
     return query.exec();
 }
 

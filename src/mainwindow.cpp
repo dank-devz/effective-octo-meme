@@ -204,6 +204,7 @@ void MainWindow::initCartItemsTable(int id)
     ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_reciept->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->cartItems_tableView_reciept->verticalHeader()->setVisible(false);
+    ui->cartItems_tableView_reciept->hideColumn(CartTableModel::ID);
     ui->cartItems_tableView_reciept->horizontalHeader()->setStretchLastSection(true);
 }
 
@@ -214,12 +215,18 @@ void MainWindow::on_cartItems_addSelected_clicked()
     int currentRow          = ui->cartItems_tableView_items->currentIndex().row();
     QModelIndex nameIndex   = ui->cartItems_tableView_items->model()->index(currentRow, 1);
     QModelIndex itemIdIndex = ui->cartItems_tableView_items->model()->index(currentRow, 3);
+    QModelIndex priceIndex  = ui->cartItems_tableView_items->model()->index(currentRow, 2);
 
     // Get the Restaurant name and location ID
-    int itemID = ui->cartItems_tableView_items->model()->data(itemIdIndex).toInt();
+    int itemId = ui->cartItems_tableView_items->model()->data(itemIdIndex).toInt();
     QString itemName  = ui->cartItems_tableView_items->model()->data(nameIndex).toString();
+    double itemPrice = ui->cartItems_tableView_items->model()->data(priceIndex).toDouble();
     int quantity = ui->cartItems_spinBox_quantity->value();
-    db->PurchaseItem(itemID, quantity);
+
+    if(!db->PurchaseItem(itemId, quantity, itemName, itemPrice)){
+        //add quantity to item instead of re-adding same item
+        db->UpdateQuantity(quantity, itemId);
+    }
     cartModel->select();
     ui->cartItems_label_totalValue->setText("$" + QString::number(db->GetCartTotal()));
     ui->cartItems_spinBox_quantity->setValue(1);
@@ -239,21 +246,16 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 
 void MainWindow::on_cartItems_removeSelected_clicked()
 {
-//    if(ui->cartItems_tableView_reciept->currentIndex().row() > -1)
-//    {
-//        //get the name of the selected item
-//        QString name = ui->cartItems_tableView_reciept->model()->data(ui->cartItems_tableView_reciept->model()->index(ui->cartItems_tableView_reciept->currentIndex().row(), 0)).toString();
-//        qDebug() << name;
-//        qDebug() << "removed: " << db->RemoveFromCart(name);
-//        qDebug() << db->lastError().text();
-//        qDebug() << cartModel->lastError();
-
-//        cartModel->select();
-//    }
-//    else
-//    {
-//        //select a row
-//    }
+    if(cartModel->removeRow(ui->cartItems_tableView_reciept->currentIndex().row()))
+    {
+        cartModel->submitAll();
+        ui->cartItems_label_totalValue->setText(QString::number(db->GetCartTotal()));
+        cartModel->select();
+    }
+    else
+    {
+        //select a row
+    }
 }
 
 void MainWindow::on_actionLogin_triggered()

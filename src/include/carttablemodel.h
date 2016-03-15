@@ -13,9 +13,10 @@ public:
     /// Fields in menu_view
     enum Fields
     {
+        QUANTITY,
+        ID,
         NAME,
-        PRICE,
-        QUANTITY
+        PRICE
     };
 
     /// Constructor

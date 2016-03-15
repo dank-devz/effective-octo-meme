@@ -30,7 +30,9 @@ public:
     bool RemoveRestaurant(int restaurantId);
     bool RemoveRestaurant(QString restaurantName);
     ///Add an item to purchases
-    bool PurchaseItem(int itemId, int quantity);
+    bool PurchaseItem(int itemId, int quantity, QString name, double price);
+    ///Update quantity in cart
+    bool UpdateQuantity(int quantity, int itemId);
     ///Clear cart
     bool ClearCart();
     ///Add new restaurant and all info
