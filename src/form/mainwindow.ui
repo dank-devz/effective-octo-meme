@@ -810,6 +810,19 @@
        </item>
       </layout>
      </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>150</y>
+        <width>271</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>MOVE THE FUCK BACK</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

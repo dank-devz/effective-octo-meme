@@ -18,7 +18,8 @@ SOURCES += mainwindow.cpp \
     trip.cpp \
     carttablemodel.cpp \
     adminlogin.cpp \
-    addrestaurant.cpp
+    addrestaurant.cpp \
+    location.cpp
 
 HEADERS  += include/mainwindow.h \
             include/database.h \
