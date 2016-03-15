@@ -182,6 +182,20 @@ int Database::GetRestaurantId(QString restaurantName)
     }
 }
 
+QString Database::GetRestaurantName(int id)
+{
+    QSqlQuery query;
+    query.prepare("select name from restaurants where id = :id");
+    query.bindValue(":id", id);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            return query.value("name").toString();
+        }
+    }
+}
+
 /**
  * @brief Database::GetItemId Retrieve a menu item's id given the restaurantID and item name
  * @param restaurantId
@@ -315,7 +329,7 @@ bool Database::AddDistance(int from, int to, double distance)
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO distances (from, to, distance)"
+    query.prepare("INSERT INTO distances (`from`, `to`, `distance`)"
                   "VALUES (:from, :to, :distance)");
     query.bindValue(":from", from);
     query.bindValue(":to", to);
