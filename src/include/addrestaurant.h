@@ -43,6 +43,10 @@ private slots:
 
     void on_addItems_pushButton_add_clicked();
 
+    void on_addDistances_pushButton_cancel_clicked();
+    
+    void on_addDistances_pushButton_next_clicked();
+    
 private:
     Ui::addRestaurant *ui;
 
@@ -54,6 +58,8 @@ private:
     QVector<QString> menuItemNames_;
     QVector<double> menuItemPrices_;
     QVector<double> distances_;
+
+    QVector<int> otherLocations_;
 
     /*
      * F O R  A D D  M E N U  I T E M

@@ -22,6 +22,7 @@ addRestaurant::addRestaurant(QWidget *parent, Database *db) :
     QWidget::setWindowTitle("Add Restaurant");
     ui->stackedWidget->setCurrentIndex(PAGE_PRIMARY);
     ui->primary_pushButton_next->setEnabled(false);
+    otherLocations_ = db->GetAllRestaurantIds();
 
     // hides all of the error message labels
     ui->primary_label_errorMessage->hide();
@@ -102,6 +103,9 @@ void addRestaurant::on_addItems_pushButton_cancel_clicked()
 void addRestaurant::on_addItems_pushButton_next_clicked()
 {
     ui->stackedWidget->setCurrentIndex(PAGE_ADD_DISTANCES);
+    /* Needs to be replaced with the name */
+    ui->addDistances_label_location->setText(QString::number(otherLocations_.at(0)));//db_->GetRestaurantName(otherLocations_.at(0)));
+    /* * */
 }
 
 //
@@ -121,8 +125,32 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
     }
 }
 
-//closes the window
+// closes the window
 void addRestaurant::on_addDistances_pushButton_cancel_clicked()
 {
     QWidget::close();
+}
+
+// adds the
+void addRestaurant::on_addDistances_pushButton_next_clicked()
+{
+    if(otherLocations_.size() == 1)
+    {
+        distances_.push_back(ui->addDistances_doubleSpinBox_distance->value());
+        otherLocations_.pop_front();
+        // take the data and store it into the db
+        QWidget::close();
+    }
+    else
+    {
+        distances_.push_back(ui->addDistances_doubleSpinBox_distance->value());
+        otherLocations_.pop_front();
+        /* Needs to be replaced with the name */
+        ui->addDistances_label_location->setText(QString::number(otherLocations_.at(0)));//db_->GetRestaurantName(otherLocations_.at(0)));
+        /* * */
+
+        // changes the next text to signify that the admin only has on entry left
+        if(otherLocations_.size() == 1)
+            ui->addDistances_pushButton_next->setText("Finish");
+    }
 }
