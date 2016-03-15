@@ -2,6 +2,7 @@
 #include "include/adminlogin.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -223,9 +224,18 @@ void MainWindow::on_cartItems_addSelected_clicked()
     double itemPrice = ui->cartItems_tableView_items->model()->data(priceIndex).toDouble();
     int quantity = ui->cartItems_spinBox_quantity->value();
 
-    if(!db->PurchaseItem(itemId, quantity, itemName, itemPrice)){
-        //add quantity to item instead of re-adding same item
-        db->UpdateQuantity(quantity, itemId);
+    if(currentRow > -1)
+    {
+        if(!db->PurchaseItem(itemId, quantity, itemName, itemPrice)){
+            //add quantity to item instead of re-adding same item
+            db->UpdateQuantity(quantity, itemId);
+        }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select an item to add to the cart.");
+        p->exec();
     }
     cartModel->select();
     ui->cartItems_label_totalValue->setText("$" + QString::number(db->GetCartTotal()));
@@ -254,7 +264,9 @@ void MainWindow::on_cartItems_removeSelected_clicked()
     }
     else
     {
-        //select a row
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select an item to remove from the cart.");
+        p->exec();
     }
 }
 
