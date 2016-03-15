@@ -127,8 +127,8 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 
     // Fill the view with the infos
     ui->label->setText(Title);
-    initViewDetailsTable(currentRow+1);
-    ui->tableView->hideColumn(0);
+    initViewDetailsTable(locationID);
+
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -198,6 +198,7 @@ void MainWindow::initViewDetailsTable(int id)
     ui->tableView->hideColumn(MenuTableModel::ITEMID);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->resizeColumnsToContents();
+    ui->tableView->hideColumn(0);
     ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
@@ -377,6 +378,8 @@ void MainWindow::on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked()
 {
     addRestaurant *p = new addRestaurant(this, db);
     p->exec();
+    restaurantModel->select();
+    menuModel->select();
 }
 
 void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked()
