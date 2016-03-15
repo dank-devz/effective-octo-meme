@@ -49,6 +49,10 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
     ui->admin_viewAllRestaurants_addRestaurant_pushButton->setVisible(isAdmin);
     ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setEnabled(isAdmin);
     ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setVisible(isAdmin);
+    ui->admin_viewDetails_addMenuItem_pushButton->setEnabled(isAdmin);
+    ui->admin_viewDetails_addMenuItem_pushButton->setVisible(isAdmin);
+    ui->admin_viewDetails_removeMenuItem_pushButton->setEnabled(isAdmin);
+    ui->admin_viewDetails_removeMenuItem_pushButton->setVisible(isAdmin);
     ui->admin_submitChanges_menu_pushButton->setEnabled(isAdmin);
     ui->admin_submitChanges_menu_pushButton->setVisible(isAdmin);
     ui->admin_submitChanges_restaurant_pushButton->setEnabled(isAdmin);
@@ -317,6 +321,8 @@ void MainWindow::initializeAdminFeatures()
                      this, SLOT(toggleAdminFeatures(bool)));
     ui->admin_submitChanges_menu_pushButton->setVisible(false);
     ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
+    ui->admin_viewDetails_addMenuItem_pushButton->setVisible(false);
+    ui->admin_viewDetails_removeMenuItem_pushButton->setVisible(false);
     ui->admin_viewAllRestaurants_addRestaurant_pushButton->setVisible(false);
     ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setVisible(false);
     ui->viewAllRestaurants_tableView->setEditTriggers(0);
