@@ -8,7 +8,9 @@ addRestaurant::addRestaurant(QWidget *parent) :
     ui->setupUi(this);
 }
 
-// constructor
+/*
+ * THE CONSTRUCTOR TO DISPLAY THE WINDOW THAT WILL ADD A NEW RESAURANT
+ */
 addRestaurant::addRestaurant(QWidget *parent, Database *db) :
     QDialog(parent),
     ui(new Ui::addRestaurant)
@@ -28,10 +30,13 @@ addRestaurant::addRestaurant(QWidget *parent, Database *db) :
 
     // hides all of the error message labels
     ui->primary_label_errorMessage->hide();
-    ui->addItems_label_errorMessage->hide();
+    ui->addItems_label_errorMessage->hide();//
     ui->addItems_label_added->hide();
 }
 
+/*
+ * THE CONSTUCTOR THAT WILL ADD MENU ITEMS TO AND EXISTING RESTAURANT
+ */
 addRestaurant::addRestaurant(QWidget *parent, int restaurantId, Database *db) :
     QDialog(parent),
     ui(new Ui::addRestaurant)
@@ -43,7 +48,7 @@ addRestaurant::addRestaurant(QWidget *parent, int restaurantId, Database *db) :
     restaurantId_ = restaurantId;
 
     // hides all of the error message labels
-    ui->addItems_label_errorMessage->hide();
+    ui->addItems_label_errorMessage->hide();//
     ui->addItems_label_added->hide();
     ui->addItems_pushButton_cancel->hide();
 
@@ -53,7 +58,7 @@ addRestaurant::addRestaurant(QWidget *parent, int restaurantId, Database *db) :
     ui->addItems_pushButton_next->setText("Done");
 }
 
-
+// destructor
 addRestaurant::~addRestaurant()
 {
     delete ui;
@@ -72,7 +77,6 @@ void addRestaurant::on_primary_pushButton_cancel_clicked()
 }
 
 // extracts the name from the form if the form is not empty
-// note: if the form is empty the user cannot proceed
 void addRestaurant::on_primary_pushButton_next_clicked()
 {
     if(ui->primary_lineEdit_name->text().isEmpty())
@@ -89,7 +93,6 @@ void addRestaurant::on_primary_pushButton_next_clicked()
 }
 
 // extracts the name from the form if the form is not empty
-// note: if the form is empty the user cannot proceed
 void addRestaurant::on_primary_lineEdit_name_returnPressed()
 {
     if(ui->primary_lineEdit_name->text().isEmpty())
@@ -111,7 +114,8 @@ void addRestaurant::on_addItems_pushButton_cancel_clicked()
     QWidget::close();
 }
 
-// takes the user to the distances page
+// case: add new restaurant; takes the user to the add distances page
+// case: add new item; closes the window
 void addRestaurant::on_addItems_pushButton_next_clicked()
 {
     // case: adding menu items -> closes the window
@@ -127,8 +131,8 @@ void addRestaurant::on_addItems_pushButton_next_clicked()
     }
 }
 
-// adds the current value to the vector if it is a new restaurant or
-// sends it to the db if it is an existing one
+// case: add new restaurant; adds the item to the local vector
+// case: add new item; adds the item to the db
 void addRestaurant::on_addItems_pushButton_add_clicked()
 {
     // case: no name value
