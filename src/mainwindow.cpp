@@ -253,7 +253,7 @@ void MainWindow::on_cartItems_addSelected_clicked()
         p->exec();
     }
     cartModel->select();
-    ui->cartItems_label_totalValue->setText("$" + QString::number(db->GetCartTotal()));
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(db->GetCartTotal()));
     ui->cartItems_spinBox_quantity->setValue(1);
 
     ui->cartItems_tableView_reciept->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -379,7 +379,6 @@ void MainWindow::on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked()
     addRestaurant *p = new addRestaurant(this, db);
     p->exec();
     restaurantModel->select();
-    menuModel->select();
 }
 
 void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked()

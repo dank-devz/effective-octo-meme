@@ -177,6 +177,7 @@ void addRestaurant::on_addDistances_pushButton_next_clicked()
         otherLocationsCopy_.pop_front();
         // take the data and store it into the db
         db_->AddNewRestaurant(restaurantName_, menuItemNames_, menuItemPrices_, otherLocations_, distances_);
+        qDebug() << db_->lastError();
 
         // closes the window
         QWidget::close();
