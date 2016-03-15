@@ -245,6 +245,9 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
 {
     QVector<int> restId;
     int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
+    int startPosition ;
+
+    startPosition = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());
 
     qDebug() << "Number of stops selected" << numToVisit;
     for(int index = 0; index < numToVisit; index++)
@@ -254,7 +257,10 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
         qDebug() << db->GetRestaurantDistances(index+1);
     }
 
-    the_trip_->findRouteBrute(restId);
+//    the_trip_->findRouteBrute(restId);
+    qDebug () << "Selected starting position is : " << ui->planRegularTrip_comboBox_startingLocation->currentText();
+
+    this->the_trip_->findRouteGreedy(restId,startPosition);
 
     restId.clear();
 
