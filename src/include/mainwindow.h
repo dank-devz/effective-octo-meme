@@ -33,7 +33,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Trip* getTrip(QVector<int> ids);
-    bool dbOpen() const { return db->isOpen(); }
 
 signals:
     void adminStatusChanged(bool isAdmin);
@@ -104,8 +103,6 @@ private slots:
     void on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked();
 
     void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
-
-    void on_actionAdd_Remove_Restaurants_triggered();
 
 private:
 

@@ -395,13 +395,10 @@ void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked
         int decision = p->exec();
         if(decision == QMessageBox::Ok)
         {
-            restaurantModel->submitAll();
+            db->RemoveRestaurant(restaurantName);
             qDebug() << restaurantModel->lastError();
+            restaurantModel->select();
         }
     }
 }
 
-void MainWindow::on_actionAdd_Remove_Restaurants_triggered()
-{
-
-}

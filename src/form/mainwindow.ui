@@ -847,7 +847,6 @@
     </property>
     <addaction name="actionLogin"/>
     <addaction name="actionLogout"/>
-    <addaction name="actionAdd_Remove_Restaurants"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAdmin"/>
