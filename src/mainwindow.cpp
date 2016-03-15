@@ -19,13 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->planRegularTrip_comboBox_numberOfStops->hide();
     ui->planRegularTrip_label_promptLocations->hide();
     initViewAllRestaurantsTable();
-    QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
-                     this, SLOT(toggleAdminFeatures(bool)));
-    ui->admin_submitChanges_menu_pushButton->setVisible(false);
-    ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
-//    ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
-    ui->viewAllRestaurants_tableView->setEditTriggers(0);
-    ui->tableView->setEditTriggers(0);
+    initializeAdminFeatures();
 }
 
 MainWindow::~MainWindow()
@@ -51,6 +45,10 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
         ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
         ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::NoEditTriggers);
     }
+    ui->admin_viewAllRestaurants_addRestaurant_pushButton->setEnabled(isAdmin);
+    ui->admin_viewAllRestaurants_addRestaurant_pushButton->setVisible(isAdmin);
+    ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setEnabled(isAdmin);
+    ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setVisible(isAdmin);
     ui->admin_submitChanges_menu_pushButton->setEnabled(isAdmin);
     ui->admin_submitChanges_menu_pushButton->setVisible(isAdmin);
     ui->admin_submitChanges_restaurant_pushButton->setEnabled(isAdmin);
@@ -133,12 +131,12 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
-//    // Get the information for the currently selected item
-//    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-//    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-//    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    //    // Get the information for the currently selected item
+    //    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
+    //    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
+    //    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
 
-//    // Get the Restaurant name and location ID
+    //    // Get the Restaurant name and location ID
     int locationID = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());//ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
     QString Title  = ui->planRegularTrip_comboBox_startingLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
     qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
@@ -283,7 +281,7 @@ void MainWindow::on_actionLogin_triggered()
 
 void MainWindow::on_actionLogout_triggered()
 {
-     emit adminStatusChanged(false);
+    emit adminStatusChanged(false);
 }
 
 void MainWindow::adminButtonsShow()
@@ -311,4 +309,16 @@ void MainWindow::on_admin_submitChanges_restaurant_pushButton_clicked()
 {
     restaurantModel->submitAll();
     qDebug() << "Changes submitted to restaurant table.";
+}
+
+void MainWindow::initializeAdminFeatures()
+{
+    QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
+                     this, SLOT(toggleAdminFeatures(bool)));
+    ui->admin_submitChanges_menu_pushButton->setVisible(false);
+    ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
+    ui->admin_viewAllRestaurants_addRestaurant_pushButton->setVisible(false);
+    ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setVisible(false);
+    ui->viewAllRestaurants_tableView->setEditTriggers(0);
+    ui->tableView->setEditTriggers(0);
 }

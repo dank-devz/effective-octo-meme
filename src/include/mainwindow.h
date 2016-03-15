@@ -101,6 +101,9 @@ private slots:
     void on_admin_submitChanges_restaurant_pushButton_clicked();
 
 private:
+
+    void initializeAdminFeatures();
+
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data
 
