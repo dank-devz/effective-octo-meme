@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "database.h"
+#include <QMessageBox>
+#include <QFile>
 
 namespace Ui {
 class AdminLogin;
