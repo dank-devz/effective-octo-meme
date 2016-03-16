@@ -34,3 +34,8 @@ void AdminLogin::on_pushButton_cancel_clicked()
 {
     QWidget::close();
 }
+
+void AdminLogin::on_lineEdit_passwordForm_returnPressed()
+{
+    ui->pushButton_ok->click();
+}
