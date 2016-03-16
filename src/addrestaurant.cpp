@@ -190,9 +190,7 @@ void addRestaurant::on_addDistances_pushButton_next_clicked()
     {
         distances_.push_back(ui->addDistances_doubleSpinBox_distance->value());
         otherLocationsCopy_.pop_front();
-        /* Needs to be replaced with the name */
         ui->addDistances_label_location->setText(db_->GetRestaurantName(otherLocationsCopy_.at(0)));
-        /* * */
 
         // changes the next text to signify that the admin only has on entry left
         if(otherLocationsCopy_.size() == 1)

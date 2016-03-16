@@ -358,32 +358,20 @@ void MainWindow::adminButtonsHide()
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
 {
-    cartTotal = 0;
-    QVector<int> restId;
-    int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
-    int startPosition ;
-
-    startPosition = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());
-
-    qDebug() << "Number of stops selected" << numToVisit;
-    for(int index = 0; index < numToVisit; index++)
+    if(tripStops.size() == 1)
     {
-        restId.push_back(index + 1);
-        qDebug() << "Getting the distances from restaurant id : " << index + 1;
-        qDebug() << db->GetRestaurantDistances(index+1);
+        // code to get and set trip results
+        ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
     }
+    else
+    {
+        tripStops.pop_front();
+        ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
 
-    //    the_trip_->findRouteBrute(restId);
-    qDebug () << "Selected starting position is : " << ui->planRegularTrip_comboBox_startingLocation->currentText();
-
-    this->the_trip_->findRouteGreedy(restId,startPosition);
-
-    restId.clear();
-
-    QString distance = QString::number(the_trip_->getDistance());
-    ui->tripSummary_label_totalDistanceTraveledValue->setText(distance);
-    numToVisit = 0;
-    ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
+        // changes the next text to signify that the admin only has on entry left
+        if(tripStops.size() == 1)
+            ui->cartItems_pushButton_next->setText("Finish");
+    }
 }
 
 void MainWindow::on_admin_submitChanges_menu_pushButton_clicked()
@@ -527,3 +515,30 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 }
+
+//cartTotal = 0;
+//QVector<int> restId;
+//int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
+//int startPosition ;
+
+//startPosition = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());
+
+//qDebug() << "Number of stops selected" << numToVisit;
+//for(int index = 0; index < numToVisit; index++)
+//{
+//    restId.push_back(index + 1);
+//    qDebug() << "Getting the distances from restaurant id : " << index + 1;
+//    qDebug() << db->GetRestaurantDistances(index+1);
+//}
+
+////    the_trip_->findRouteBrute(restId);
+//qDebug () << "Selected starting position is : " << ui->planRegularTrip_comboBox_startingLocation->currentText();
+
+//this->the_trip_->findRouteGreedy(restId,startPosition);
+
+//restId.clear();
+
+//QString distance = QString::number(the_trip_->getDistance());
+//ui->tripSummary_label_totalDistanceTraveledValue->setText(distance);
+//numToVisit = 0;
+//ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
