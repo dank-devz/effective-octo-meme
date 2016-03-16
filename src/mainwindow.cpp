@@ -43,6 +43,10 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
 {
     if(isAdmin)
     {
+
+        QMessageBox *success = new QMessageBox(this);
+        success->setText("You are the Dankest Admin");
+        success->exec();
         ui->tableView->setEditTriggers(QTableView::DoubleClicked);
         ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::DoubleClicked);
         QFile file(":/qss/darkorange.qss");
@@ -549,6 +553,7 @@ void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
 
 void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
 {
+    if(tripStops.size() != 0){
     tripStops = the_trip_->findRouteGreedy(tripStops);
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
     ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
@@ -571,6 +576,14 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
     for(int i = 0; i < tripStops.size(); i++)
     {
         tripStopsModel->insertRow(i, new QStandardItem(db->GetRestaurantName(tripStops.at(i))));
+    }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select some restaurants to visit.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
     }
 }
 

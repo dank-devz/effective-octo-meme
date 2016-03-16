@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -515,10 +515,6 @@
        </item>
       </layout>
      </widget>
-     <zorder>planRegularTrip_label_title</zorder>
-     <zorder>verticalLayoutWidget_6</zorder>
-     <zorder>planRegularTrip_label_promptLocations</zorder>
-     <zorder>planRegularTrip_label_promptStart</zorder>
     </widget>
     <widget class="QWidget" name="page_planCustomFoodRun">
      <widget class="QWidget" name="verticalLayoutWidget_4">
