@@ -390,6 +390,6 @@ void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
     ui->planCustomFoodRun_comboBox_locations->removeItem(ui->planCustomFoodRun_comboBox_locations->currentIndex());
 
     // disables the add button if there is no more restaurants to add
-    //if(ui->planCustomFoodRun_comboBox_locations->size().isEmpty())
+    if(ui->planCustomFoodRun_comboBox_locations->currentText() == "") // not working atm :(
         ui->planCustomFoodRun_pushButton_add->setEnabled(false);
 }
