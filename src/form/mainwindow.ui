@@ -260,7 +260,7 @@
        <item>
         <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
          <property name="text">
-          <string>View Details</string>
+          <string>View Menu</string>
          </property>
         </widget>
        </item>
@@ -690,7 +690,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Total: $</string>
+       <string>Total:</string>
       </property>
      </widget>
      <widget class="QLabel" name="cartItems_label_restaurant_name">
@@ -864,6 +864,14 @@
   <action name="actionLogout">
    <property name="text">
     <string>Logout</string>
+   </property>
+  </action>
+  <action name="actionAdd_Remove_Restaurants">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Add/Remove Restaurants</string>
    </property>
   </action>
  </widget>

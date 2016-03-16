@@ -32,6 +32,7 @@ addRestaurant::addRestaurant(QWidget *parent, Database *db) :
     ui->primary_label_errorMessage->hide();
     ui->addItems_label_errorMessage->hide();//
     ui->addItems_label_added->hide();
+    ui->addItems_pushButton_next->setEnabled(false);
 }
 
 /*
@@ -145,6 +146,7 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
     // section will be skipped
     else if(restaurantId_ > 0)
     {
+        ui->addItems_pushButton_next->setEnabled(true);
         db_->AddMenuItem(restaurantId_, ui->addItems_lineEdit_name->text(), ui->addItems_doubleSpinBox_price->value());
         ui->addItems_label_added->setText("Added " + ui->addItems_lineEdit_name->text());
         ui->addItems_label_added->show();
@@ -153,11 +155,13 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
     // case: adding a new restaurant's menu
     else
     {
+        ui->addItems_pushButton_next->setEnabled(true);
         menuItemNames_.push_back(ui->addItems_lineEdit_name->text());
         menuItemPrices_.push_back(ui->addItems_doubleSpinBox_price->value());
         ui->addItems_label_added->setText("Added " + ui->addItems_lineEdit_name->text());
         ui->addItems_label_added->show();
         ui->addItems_label_errorMessage->hide();
+        ui->addItems_lineEdit_name->clear();
     }
 }
 
@@ -177,6 +181,7 @@ void addRestaurant::on_addDistances_pushButton_next_clicked()
         otherLocationsCopy_.pop_front();
         // take the data and store it into the db
         db_->AddNewRestaurant(restaurantName_, menuItemNames_, menuItemPrices_, otherLocations_, distances_);
+        qDebug() << db_->lastError();
 
         // closes the window
         QWidget::close();
