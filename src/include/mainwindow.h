@@ -12,6 +12,7 @@
 #include "carttablemodel.h"
 #include "trip.h"
 #include "adminlogin.h"
+#include "additemspopup.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,13 +37,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Trip* getTrip(QVector<int> ids);
-    bool dbOpen() const { return db->isOpen(); }
 
 signals:
     void adminStatusChanged(bool isAdmin);
 
 public slots:
     void toggleAdminFeatures(bool isAdmin);
+    void AddMenuItem(int restID, QString name, double price);
 
 private slots:
     /*
@@ -103,8 +104,14 @@ private slots:
 
     void on_admin_submitChanges_restaurant_pushButton_clicked();
     void on_pushButton_clicked();
-
     void on_planCustomFoodRun_pushButton_add_clicked();
+    void on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked();
+
+    void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
+
+    void on_admin_viewDetails_removeMenuItem_pushButton_clicked();
+
+    void on_admin_viewDetails_addMenuItem_pushButton_clicked();
 
 private:
 

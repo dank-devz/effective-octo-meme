@@ -318,6 +318,7 @@ bool Database::AddNewRestaurant(QString restaurantName, QVector<QString> menuIte
         double_it = distances.begin();
         while(int_it != otherRestaurantIds.end() && double_it != distances.end()){
             success = AddDistance(id, *int_it, *double_it);
+            success = AddDistance(*int_it, id, *double_it);
             int_it++;
             double_it++;
         }
@@ -329,7 +330,7 @@ bool Database::AddDistance(int from, int to, double distance)
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO distances (from, to, distance)"
+    query.prepare("INSERT INTO distances (`from`, `to`, `distance`)"
                   "VALUES (:from, :to, :distance)");
     query.bindValue(":from", from);
     query.bindValue(":to", to);
