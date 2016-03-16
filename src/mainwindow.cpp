@@ -119,21 +119,31 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 {
     // Get the information for the currently selected item
     int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-    qDebug() << "currentRow: " << currentRow;
-    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    if(currentRow > -1)
+    {
+        qDebug() << "currentRow: " << currentRow;
+        QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
+        QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
 
-    // Get the Restaurant name and location ID
-    int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-    QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
-    qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
+        // Get the Restaurant name and location ID
+        int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
+        QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+        qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
-    // Fill the view with the infos
-    ui->label->setText(Title);
-    initViewDetailsTable(locationID);
+        // Fill the view with the infos
+        ui->label->setText(Title);
+        initViewDetailsTable(locationID);
 
-    // takes the user to the view details page
-    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
+        // takes the user to the view details page
+        ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select a row.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
+    }
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
