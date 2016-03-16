@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -179,6 +179,13 @@
        </item>
        <item>
         <widget class="QTableView" name="viewAllRestaurants_tableView">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="frameShadow">
           <enum>QFrame::Sunken</enum>
          </property>
@@ -581,7 +588,13 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="planCustomFoodRun_listView_selected"/>
+          <widget class="QListView" name="planCustomFoodRun_listView_selected">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -623,21 +636,21 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_viewDetails">
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="verticalLayoutWidget_7">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
-        <width>507</width>
-        <height>311</height>
+        <y>20</y>
+        <width>407</width>
+        <height>481</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
-           <pointsize>20</pointsize>
+           <pointsize>16</pointsize>
           </font>
          </property>
          <property name="text">
@@ -650,6 +663,11 @@
        </item>
        <item>
         <widget class="QTableView" name="tableView">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
          <property name="sizeAdjustPolicy">
           <enum>QAbstractScrollArea::AdjustToContents</enum>
          </property>
@@ -673,68 +691,62 @@
          </attribute>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="horizontalLayoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>5</x>
-        <y>400</y>
-        <width>421</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="viewDetails_pushButton_back">
-         <property name="font">
-          <font>
-           <pointsize>18</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-           <underline>true</underline>
-          </font>
-         </property>
-         <property name="text">
-          <string>Back</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QPushButton" name="admin_viewDetails_addMenuItem_pushButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
+          <widget class="QPushButton" name="viewDetails_pushButton_back">
            <property name="font">
             <font>
              <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+             <underline>true</underline>
             </font>
            </property>
            <property name="text">
-            <string>Add</string>
+            <string>Back</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="admin_viewDetails_removeMenuItem_pushButton">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QPushButton" name="admin_viewDetails_addMenuItem_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="admin_viewDetails_removeMenuItem_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="admin_submitChanges_menu_pushButton">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -744,75 +756,41 @@
             </font>
            </property>
            <property name="text">
-            <string>Remove</string>
+            <string>Submit Changes</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_cartItems">
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>411</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="admin_submitChanges_menu_pushButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+        <widget class="QLabel" name="cartItems_label_restaurant_name">
          <property name="font">
           <font>
            <pointsize>18</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Submit Changes</string>
+          <string>&lt;insert restaurant's name&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="page_cartItems">
-     <widget class="QLabel" name="cartItems_label_restaurant_name">
-      <property name="geometry">
-       <rect>
-        <x>58</x>
-        <y>10</y>
-        <width>321</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>&lt;insert restaurant's name&gt;</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QWidget" name="verticalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>507</width>
-        <height>461</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <widget class="QTableView" name="cartItems_tableView_items">
          <property name="sizeAdjustPolicy">
@@ -844,7 +822,7 @@
           <widget class="QSpinBox" name="cartItems_spinBox_quantity">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="minimum">
@@ -856,7 +834,7 @@
           <widget class="QPushButton" name="cartItems_addSelected">
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="text">
@@ -868,7 +846,7 @@
           <widget class="QPushButton" name="cartItems_removeSelected">
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="text">
@@ -891,7 +869,7 @@
           <widget class="QPushButton" name="cartItems_pushButton_Back">
            <property name="font">
             <font>
-             <pointsize>15</pointsize>
+             <pointsize>12</pointsize>
              <underline>true</underline>
             </font>
            </property>
@@ -907,7 +885,7 @@
           <widget class="QPushButton" name="cartItems_pushButton_next">
            <property name="font">
             <font>
-             <pointsize>15</pointsize>
+             <pointsize>12</pointsize>
              <underline>true</underline>
             </font>
            </property>
@@ -920,7 +898,9 @@
           <widget class="QLabel" name="cartItems_label_total">
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
@@ -932,7 +912,9 @@
           <widget class="QLabel" name="cartItems_label_totalValue">
            <property name="font">
             <font>
-             <pointsize>18</pointsize>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
             </font>
            </property>
            <property name="text">
