@@ -736,7 +736,7 @@
          <item>
           <widget class="QLabel" name="cartItems_label_total">
            <property name="text">
-            <string>Total:</string>
+            <string>Total for this Location: </string>
            </property>
           </widget>
          </item>
@@ -753,99 +753,111 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_tripSummary">
-     <widget class="QTableView" name="tripSummary_tableView_reciept">
+     <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>280</y>
-        <width>409</width>
-        <height>181</height>
+        <y>10</y>
+        <width>411</width>
+        <height>481</height>
        </rect>
       </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="tripSummary_label_totalSpentPrompt">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>470</y>
-        <width>71</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Total: $</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="tripSummary_label_totalSpentValue">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>470</y>
-        <width>59</width>
-        <height>14</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>0.00</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>401</width>
-        <height>26</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="tripSummary_horizontalLayout_totalDistanceTraveled">
-       <property name="spacing">
-        <number>0</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
-        <widget class="QLabel" name="tripSummary_label_totalDistanceTraveled">
+        <layout class="QHBoxLayout" name="tripSummary_horizontalLayout_totalDistanceTraveled">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="tripSummary_label_totalDistanceTraveled">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Total Distance Traveled:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="tripSummary_label_totalDistanceTraveledValue">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
          <property name="font">
           <font>
            <pointsize>15</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Total Distance Traveled:</string>
+          <string>PLAN ANOTHER TRIP</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="tripSummary_label_totalDistanceTraveledValue">
-         <property name="font">
-          <font>
-           <pointsize>15</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>0</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+        <widget class="QTableView" name="tripSummary_tableView_reciept">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
          </property>
         </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="tripSummary_label_totalSpentPrompt">
+           <property name="font">
+            <font>
+             <pointsize>27</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Grand Total: $</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="tripSummary_label_totalSpentValue">
+           <property name="font">
+            <font>
+             <pointsize>27</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>0.00</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>150</y>
-        <width>271</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>MOVE THE FUCK BACK</string>
-      </property>
      </widget>
     </widget>
    </widget>
