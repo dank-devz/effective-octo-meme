@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    QWidget::setFixedSize(430, 528);
 
     // sets the default page to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(PAGE_HOME);
@@ -43,6 +43,10 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
 {
     if(isAdmin)
     {
+
+        QMessageBox *success = new QMessageBox(this);
+        success->setText("You are the Dankest Admin");
+        success->exec();
         ui->tableView->setEditTriggers(QTableView::DoubleClicked);
         ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::DoubleClicked);
         QFile file(":/qss/darkorange.qss");
@@ -150,7 +154,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 
         // Get the Restaurant name and location ID
         int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-        QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+        QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + " Menu";
         qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
         // Fill the view with the infos
@@ -178,6 +182,7 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 
 void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 {
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
@@ -311,8 +316,12 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 {
     // re-initializes the spin box quantity
     ui->cartItems_spinBox_quantity->setValue(1);
-    // returns back to the planning page
-    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
+    //clear the cart
+    db->ClearCart();
+    //reset trip calculator
+    the_trip_->resetTripCalc();
+    // returns back to the main menu
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 }
 
 void MainWindow::on_cartItems_removeSelected_clicked()
@@ -386,7 +395,7 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
     else
     {
         cartTotal = 0;
-        ui->cartItems_label_totalValue->setText(QString::number(cartTotal));
+        ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
         tripStops.pop_front();
         //refresh menu
         initCartItemsTable(tripStops.front());
@@ -549,20 +558,23 @@ void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
 
 void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
 {
+    if(tripStops.size() != 0){
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     tripStops = the_trip_->findRouteGreedy(tripStops);
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
-    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
 
     // Fill the view with the infos
-    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + " Menu");
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
     //
-    if(tripStops.size() == 1){
+    if(tripStops.size() == 1)
+    {
         ui->cartItems_pushButton_next->setText("Finish");
     }
-    else{
+    else
+    {
         ui->cartItems_pushButton_next->setText("Next");
     }
 
@@ -571,6 +583,14 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
     for(int i = 0; i < tripStops.size(); i++)
     {
         tripStopsModel->insertRow(i, new QStandardItem(db->GetRestaurantName(tripStops.at(i))));
+    }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select some restaurants to visit.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
     }
 }
 
