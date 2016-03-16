@@ -74,6 +74,9 @@
            <pointsize>20</pointsize>
           </font>
          </property>
+         <property name="toolTip">
+          <string>Select to view all the restaurants near Saddleback College.</string>
+         </property>
          <property name="text">
           <string>View Nearby Restaurants</string>
          </property>
@@ -88,6 +91,9 @@
           <font>
            <pointsize>20</pointsize>
           </font>
+         </property>
+         <property name="toolTip">
+          <string>Choose this to plan a food run based on the number of restaurants you would like to visit.</string>
          </property>
          <property name="text">
           <string>Plan a food run</string>
@@ -105,6 +111,9 @@
            <weight>50</weight>
            <bold>false</bold>
           </font>
+         </property>
+         <property name="toolTip">
+          <string>Want something different and custom? Select this to choose every stop you would like to go to.</string>
          </property>
          <property name="text">
           <string>Plan a custom food run</string>
@@ -127,11 +136,6 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QLabel" name="viewAllRestaurants_label_title">
-         <property name="font">
-          <font>
-           <pointsize>20</pointsize>
-          </font>
-         </property>
          <property name="text">
           <string>View all Restaurants</string>
          </property>
@@ -178,8 +182,8 @@
        <rect>
         <x>10</x>
         <y>420</y>
-        <width>424</width>
-        <height>80</height>
+        <width>411</width>
+        <height>78</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -187,7 +191,6 @@
         <widget class="QPushButton" name="viewAllRestaurants_pushButton_back">
          <property name="font">
           <font>
-           <pointsize>18</pointsize>
            <weight>75</weight>
            <bold>true</bold>
            <underline>true</underline>
@@ -221,11 +224,6 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="font">
-            <font>
-             <pointsize>18</pointsize>
-            </font>
-           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -235,11 +233,6 @@
           <widget class="QPushButton" name="admin_viewAllRestaurants_removeRestaurant_pushButton">
            <property name="enabled">
             <bool>false</bool>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>18</pointsize>
-            </font>
            </property>
            <property name="text">
             <string>Remove</string>
@@ -268,11 +261,6 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="font">
-            <font>
-             <pointsize>18</pointsize>
-            </font>
-           </property>
            <property name="text">
             <string>Submit Changes</string>
            </property>
@@ -280,11 +268,6 @@
          </item>
          <item>
           <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
-           <property name="font">
-            <font>
-             <pointsize>18</pointsize>
-            </font>
-           </property>
            <property name="text">
             <string>View Menu</string>
            </property>
@@ -425,6 +408,9 @@
                <pointsize>16</pointsize>
               </font>
              </property>
+             <property name="toolTip">
+              <string>Select the number of locations you would like to visit.</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -449,6 +435,9 @@
               <font>
                <pointsize>16</pointsize>
               </font>
+             </property>
+             <property name="toolTip">
+              <string>Choose the restaurant you would like to start at.</string>
              </property>
             </widget>
            </item>
@@ -529,6 +518,9 @@
        <font>
         <pointsize>16</pointsize>
        </font>
+      </property>
+      <property name="toolTip">
+       <string>Select a restaurant you would like to visit.</string>
       </property>
      </widget>
      <widget class="QPushButton" name="planCustomFoodRun_pushButton_go">
