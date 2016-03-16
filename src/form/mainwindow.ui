@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -315,6 +315,9 @@
       </property>
      </widget>
      <widget class="QComboBox" name="planRegularTrip_comboBox_numberOfStops">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>180</x>

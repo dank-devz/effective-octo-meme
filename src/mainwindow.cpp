@@ -18,8 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                       "dankdevz", "cs1d-fast-food-fantasy");
-    ui->planRegularTrip_comboBox_numberOfStops->hide();
-    ui->planRegularTrip_label_promptLocations->hide();
 
     initViewAllRestaurantsTable();
     initializeAdminFeatures();
@@ -99,11 +97,20 @@ void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 
     // fills the combo boxes with the most recent values from the db
     QList<QString> restaurants = db->GetRestaurants();
+    ui->planRegularTrip_comboBox_numberOfStops->clear();
+    ui->planRegularTrip_comboBox_startingLocation->clear();
     for(int i = 0; i < restaurants.size(); i ++)
     {
         ui->planRegularTrip_comboBox_numberOfStops->addItem(QString::number(i+1));
         ui->planRegularTrip_comboBox_startingLocation->addItem(restaurants.at(i));
     }
+
+    // resets the tripStops vector and model
+    tripStops.clear();
+    tripStopsModel->clear();
+
+    // resets the trip class' calculator
+    the_trip_->resetTripCalc();
 }
 
 void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
@@ -111,7 +118,7 @@ void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
     // takes the user to the planCustomFoodRun page (index - 3)
     ui->stackedWidget->setCurrentIndex(PAGE_PLAN_CUSTOM_TRIP);
 
-    // fills the combo boxe with the most recent restaurants from the db
+    // fills the combo box with the most recent restaurants from the db
     QList<QString> restaurants = db->GetRestaurants();
     ui->planCustomFoodRun_comboBox_locations->clear();
     for(int i = 0; i < restaurants.size(); i ++)
@@ -171,32 +178,23 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(PAGE_HOME);
-
-    // cleares the combo boxes
-    ui->planRegularTrip_comboBox_numberOfStops->clear();
-    ui->planRegularTrip_comboBox_startingLocation->clear();
 }
 
-// WILL BE REPLACED
+
 void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 {
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
-    //    // Get the information for the currently selected item
-    //    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-    //    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-    //    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    // generates the list of locations to be visited
+    QVector<int> allLocations = db->GetAllRestaurantIds();
+    tripStops = the_trip_->findRouteGreedy(allLocations, // vector of all of the locations
+                                           db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText()), // the starting location
+                                           ui->planRegularTrip_comboBox_numberOfStops->currentData().toInt());// the total number of stops
 
-    //    // Get the Restaurant name and location ID
-    int locationID = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());//ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-    QString Title  = ui->planRegularTrip_comboBox_startingLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
-    qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
-
-    // Fill the view with the infos
-    ui->label->setText(Title);
-    ui->cartItems_label_restaurant_name->setText(ui->planRegularTrip_comboBox_startingLocation->currentText() + " Menu");
-    initCartItemsTable(locationID);
+    // Fill the view with the info
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
+    initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
 }
@@ -360,7 +358,7 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
 {
     if(tripStops.size() == 1)
     {
-        // code to get and set trip results
+        // TODO - GET AND SET TRIP RESULTS HERE
         ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
     }
     else
@@ -511,7 +509,7 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
     ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
 
     // Fill the view with the infos
-    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "'s Menu");
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 }
