@@ -33,7 +33,7 @@ public:
   // Get the trip stored in the class, returns a nullptr if no route has been calculated
   QVector<int> getRoute() const { return *trip_; }
   // Gets the location id of the stop in the route given by n. returns -1 if route is empty
-  int getStop(const in& n) const;
+  int getStop(const int& n) const;
   // Gets the number of stops in the calculated route. returns -1 if route is empty
   int routeLength() const;
 

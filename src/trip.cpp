@@ -49,7 +49,7 @@ void Trip::resetTripCalc()
  * @param n [IN] the stop number
  * @return The ID of the nth stop in the route. returns -1 if the route is empty.
  */
-int Trip::getStop(const in &n) const
+int Trip::getStop(const int &n) const
 {
     if(trip_ != NULL)
     {
