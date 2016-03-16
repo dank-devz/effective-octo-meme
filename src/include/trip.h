@@ -30,14 +30,14 @@ public:
   void resetTripCalc();
 
   /*** GET 'EM METHODS ***/
-  // Get the trip stored in the class, returns a nullptr if no route has been calculated
+  /// Get the trip stored in the class, returns a nullptr if no route has been calculated
   QVector<int> getRoute() const { return *trip_; }
   // Gets the location id of the stop in the route given by n. returns -1 if route is empty
   int getStop(const int &n) const;
   // Gets the number of stops in the calculated route. returns -1 if route is empty
   int routeLength() const;
 
-  // Get the distance stored in the class
+  /// Get the distance stored in the class, returns -1 if trip is empty
   double getDistance() const { return distance_; }
 
   // Print the trip stored in the class
