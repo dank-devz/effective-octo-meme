@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>356</width>
-    <height>191</height>
+    <height>166</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,6 +37,9 @@
       <property name="text">
        <string>Please enter in the administrator password.</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item>
@@ -46,6 +49,11 @@
         <width>16777215</width>
         <height>24</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Password:</string>

@@ -23,11 +23,10 @@ void AdminLogin::on_pushButton_ok_clicked()
         emit adminStatusChanged(true);
 
         this->close();
-
-        QMessageBox *success = new QMessageBox();
-        success->setText("You are the Dankest Admin");
-        success->setVisible(true);
-
+    }
+    else if(ui->lineEdit_passwordForm->text().isEmpty())
+    {
+        ui->label_errorMessage->setText("Please enter a password.");
     }
     else
     {
