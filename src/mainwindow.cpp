@@ -119,6 +119,9 @@ void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 
     // enables the add button
     ui->planCustomFoodRun_pushButton_add->setEnabled(true);
+
+    // resets the tripStopsModel
+    tripStopsModel->clear();
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
