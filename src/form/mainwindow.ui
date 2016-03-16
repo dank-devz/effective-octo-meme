@@ -1013,6 +1013,29 @@
         </layout>
        </item>
        <item>
+        <widget class="QLabel" name="tripSummaery_label_stops">
+         <property name="text">
+          <string>Locations Visited</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListView" name="tripSummary_listView_stops"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="tripSummaery_label_reciept">
+         <property name="text">
+          <string>Final Reciept</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QTableView" name="tripSummary_tableView_reciept">
          <property name="alternatingRowColors">
           <bool>true</bool>
