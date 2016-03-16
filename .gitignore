@@ -21,3 +21,4 @@ test/test
 *.dll
 *.exe
 *.autosave
+!Build-Results-*
