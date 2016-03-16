@@ -39,3 +39,6 @@ FORMS    += form/mainwindow.ui \
     form/additemspopup.ui
 
 QTPLUGIN += qsqlmysql
+
+DISTFILES += \
+    ../app/qtdark.qss

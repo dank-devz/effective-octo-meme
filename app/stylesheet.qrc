@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file>qtdark.qss</file>
+    </qresource>
+</RCC>
