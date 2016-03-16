@@ -6,9 +6,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    bool isAdmin;
+//    bool isAdmin = false;
 
-    QFile file(":/qss/darkgreen.qss");
+    QFile file(":/qss/darkmonokai.qss");
     if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         a.setStyleSheet(file.readAll());
@@ -17,9 +17,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
 
-
     w.show();
-    w.adminStatusChanged(isAdmin);
 
     return a.exec();
 }

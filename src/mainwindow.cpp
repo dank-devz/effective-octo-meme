@@ -56,6 +56,12 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
     {
         ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
         ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::NoEditTriggers);
+        QFile file(":/qss/darkgreen.qss");
+           if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+           {
+               setStyleSheet(file.readAll());
+               file.close();
+           }
     }
     ui->actionAdd_Remove_Restaurants->setEnabled(isAdmin);
     ui->actionAdd_Remove_Restaurants->setVisible(isAdmin);
