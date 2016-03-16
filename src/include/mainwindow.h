@@ -117,6 +117,8 @@ private slots:
 
     void on_tripSummary_button_planAnotherTrip_clicked();
 
+    void on_tripSummary_button_goMainMenu_clicked();
+
 private:
 
     void initializeAdminFeatures();

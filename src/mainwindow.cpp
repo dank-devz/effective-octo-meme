@@ -578,3 +578,9 @@ void MainWindow::on_tripSummary_button_planAnotherTrip_clicked()
     db->ClearCart();
     ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
 }
+
+void MainWindow::on_tripSummary_button_goMainMenu_clicked()
+{
+    db->ClearCart();
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
+}
