@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -59,7 +59,7 @@
        <rect>
         <x>80</x>
         <y>200</y>
-        <width>251</width>
+        <width>268</width>
         <height>161</height>
        </rect>
       </property>
@@ -69,6 +69,11 @@
        </property>
        <item>
         <widget class="QPushButton" name="home_pushButton_viewAllRestaurants">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>View Nearby Restaurants</string>
          </property>
@@ -78,6 +83,11 @@
         <widget class="QPushButton" name="home_pushButton_planRegularFoodRun">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>Plan a food run</string>
@@ -91,6 +101,7 @@
          </property>
          <property name="font">
           <font>
+           <pointsize>20</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -116,6 +127,11 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QLabel" name="viewAllRestaurants_label_title">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>View all Restaurants</string>
          </property>
@@ -162,8 +178,8 @@
        <rect>
         <x>10</x>
         <y>420</y>
-        <width>411</width>
-        <height>78</height>
+        <width>424</width>
+        <height>80</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -171,6 +187,7 @@
         <widget class="QPushButton" name="viewAllRestaurants_pushButton_back">
          <property name="font">
           <font>
+           <pointsize>18</pointsize>
            <weight>75</weight>
            <bold>true</bold>
            <underline>true</underline>
@@ -204,6 +221,11 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -213,6 +235,11 @@
           <widget class="QPushButton" name="admin_viewAllRestaurants_removeRestaurant_pushButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>Remove</string>
@@ -241,6 +268,11 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Submit Changes</string>
            </property>
@@ -248,6 +280,11 @@
          </item>
          <item>
           <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>View Menu</string>
            </property>
@@ -301,6 +338,7 @@
       </property>
       <property name="font">
        <font>
+        <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
         <underline>true</underline>
@@ -343,6 +381,22 @@
             </widget>
            </item>
            <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>80</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QLabel" name="planRegularTrip_label_promptStart">
              <property name="font">
               <font>
@@ -366,6 +420,11 @@
              <property name="enabled">
               <bool>true</bool>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
             </widget>
            </item>
            <item>
@@ -379,13 +438,19 @@
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>10</height>
+               <height>80</height>
               </size>
              </property>
             </spacer>
            </item>
            <item>
-            <widget class="QComboBox" name="planRegularTrip_comboBox_startingLocation"/>
+            <widget class="QComboBox" name="planRegularTrip_comboBox_startingLocation">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -412,11 +477,16 @@
      <widget class="QLabel" name="planCustomFoodRun_label_title">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>130</x>
         <y>20</y>
-        <width>120</width>
-        <height>20</height>
+        <width>161</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Plan your trip!</string>
@@ -433,6 +503,7 @@
       </property>
       <property name="font">
        <font>
+        <pointsize>18</pointsize>
         <weight>75</weight>
         <bold>true</bold>
         <underline>true</underline>
@@ -454,6 +525,11 @@
         <height>24</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QPushButton" name="planCustomFoodRun_pushButton_go">
       <property name="geometry">
@@ -464,6 +540,11 @@
         <height>24</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>GO!</string>
       </property>
@@ -473,9 +554,14 @@
        <rect>
         <x>30</x>
         <y>110</y>
-        <width>87</width>
-        <height>24</height>
+        <width>91</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Add</string>
@@ -493,6 +579,11 @@
       <layout class="QVBoxLayout" name="planCustomFoodRun_verticalLayout_selected">
        <item>
         <widget class="QLabel" name="planCustomFoodRun_label_selected">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Selected Locations</string>
          </property>
@@ -520,6 +611,11 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>&lt;insert restauraunt name&gt;'s Details</string>
          </property>
@@ -569,6 +665,7 @@
         <widget class="QPushButton" name="viewDetails_pushButton_back">
          <property name="font">
           <font>
+           <pointsize>18</pointsize>
            <weight>75</weight>
            <bold>true</bold>
            <underline>true</underline>
@@ -602,6 +699,11 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -611,6 +713,11 @@
           <widget class="QPushButton" name="admin_viewDetails_removeMenuItem_pushButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>Remove</string>
@@ -637,6 +744,11 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Submit Changes</string>
          </property>
@@ -655,6 +767,11 @@
         <height>20</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>&lt;insert restaurant's name&gt;</string>
       </property>
@@ -667,7 +784,7 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>411</width>
+        <width>422</width>
         <height>461</height>
        </rect>
       </property>
@@ -701,6 +818,11 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QSpinBox" name="cartItems_spinBox_quantity">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -708,6 +830,11 @@
          </item>
          <item>
           <widget class="QPushButton" name="cartItems_addSelected">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Add Selected</string>
            </property>
@@ -715,6 +842,11 @@
          </item>
          <item>
           <widget class="QPushButton" name="cartItems_removeSelected">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Remove Selected</string>
            </property>
@@ -735,6 +867,7 @@
           <widget class="QPushButton" name="cartItems_pushButton_Back">
            <property name="font">
             <font>
+             <pointsize>15</pointsize>
              <underline>true</underline>
             </font>
            </property>
@@ -750,6 +883,7 @@
           <widget class="QPushButton" name="cartItems_pushButton_next">
            <property name="font">
             <font>
+             <pointsize>15</pointsize>
              <underline>true</underline>
             </font>
            </property>
@@ -760,6 +894,11 @@
          </item>
          <item>
           <widget class="QLabel" name="cartItems_label_total">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Total for this Location: </string>
            </property>
@@ -767,6 +906,11 @@
          </item>
          <item>
           <widget class="QLabel" name="cartItems_label_totalValue">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>0.00</string>
            </property>
@@ -797,7 +941,7 @@
           <widget class="QLabel" name="tripSummary_label_totalDistanceTraveled">
            <property name="font">
             <font>
-             <pointsize>15</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -809,7 +953,7 @@
           <widget class="QLabel" name="tripSummary_label_totalDistanceTraveledValue">
            <property name="font">
             <font>
-             <pointsize>15</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -828,7 +972,7 @@
           <widget class="QPushButton" name="tripSummary_button_planAnotherTrip">
            <property name="font">
             <font>
-             <pointsize>15</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -838,6 +982,11 @@
          </item>
          <item>
           <widget class="QPushButton" name="pushButton">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>MAIN MENU</string>
            </property>
