@@ -95,7 +95,10 @@ void addRestaurant::on_primary_pushButton_next_clicked()
     }
 }
 
-// extracts the name from the form if the form is not empty
+/**
+ * @brief addRestaurant::on_primary_lineEdit_name_returnPressed
+ * extracts the name from the form if the form is not empty
+ */
 void addRestaurant::on_primary_lineEdit_name_returnPressed()
 {
     if(ui->primary_lineEdit_name->text().isEmpty())
@@ -111,7 +114,10 @@ void addRestaurant::on_primary_lineEdit_name_returnPressed()
     }
 }
 
-// closes the window
+/**
+ * @brief addRestaurant::on_addItems_pushButton_cancel_clicked
+ * closes the window
+ */
 void addRestaurant::on_addItems_pushButton_cancel_clicked()
 {
     ui->addItems_doubleSpinBox_price->setValue(0);
@@ -121,8 +127,11 @@ void addRestaurant::on_addItems_pushButton_cancel_clicked()
     QWidget::close();
 }
 
-// case: add new restaurant; takes the user to the add distances page
-// case: add new item; closes the window
+/**
+ * @brief addRestaurant::on_addItems_pushButton_next_clicked
+ * case: add new restaurant; takes the user to the add distances page
+ * case: add new item; closes the window
+ */
 void addRestaurant::on_addItems_pushButton_next_clicked()
 {
     // case: adding menu items -> closes the window
@@ -138,8 +147,11 @@ void addRestaurant::on_addItems_pushButton_next_clicked()
     }
 }
 
-// case: add new restaurant; adds the item to the local vector
-// case: add new item; adds the item to the db
+/**
+ * @brief addRestaurant::on_addItems_pushButton_add_clicked
+ * case: add new restaurant; adds the item to the local vector
+ * case: add new item; adds the item to the db
+ */
 void addRestaurant::on_addItems_pushButton_add_clicked()
 {
     // case: no name value
@@ -172,7 +184,10 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
     }
 }
 
-// closes the window
+/**
+ * @brief addRestaurant::on_addDistances_pushButton_cancel_clicked
+ * closes the window
+ */
 void addRestaurant::on_addDistances_pushButton_cancel_clicked()
 {
     ui->addItems_doubleSpinBox_price->setValue(0);
@@ -182,8 +197,11 @@ void addRestaurant::on_addDistances_pushButton_cancel_clicked()
     QWidget::close();
 }
 
-// adds the locations to the location vector and sends the data into the db after
-// the final form is filled
+/**
+ * @brief addRestaurant::on_addDistances_pushButton_next_clicked
+ * adds the locations to the location vector and sends the data into the db after
+ * the final form is filled
+ */
 void addRestaurant::on_addDistances_pushButton_next_clicked()
 {
     if(otherLocationsCopy_.size() == 1)

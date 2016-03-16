@@ -372,7 +372,12 @@ QVector<double> Database::GetRestaurantDistances(QString name)
     return distanceList;
 }
 
-
+/**
+ * @brief Database::GetRestaurantDistances
+ * Get a list of all the distances given a restaurant ID
+ * @param restaurantId
+ * @return QVector of distances
+ */
 QVector<double> Database::GetRestaurantDistances(int restaurantId)
 {
     QVector<double> 	distanceList(11);
@@ -405,6 +410,11 @@ QVector<double> Database::GetRestaurantDistances(int restaurantId)
     return distanceList;
 }
 
+/**
+ * @brief Database::GetAllRestaurantIds
+ * Retrieve a list of all restaurant IDs in the Database.
+ * @return QVector of restaurantIDs
+ */
 QVector<int> Database::GetAllRestaurantIds() const
 {
     QVector<int> 	restaurantIds;
@@ -428,6 +438,11 @@ QVector<int> Database::GetAllRestaurantIds() const
     return restaurantIds;
 }
 
+/**
+ * @brief Database::GetAllRestaurantNames
+ * Retrieve a list of all Restaurant names.
+ * @return A QVector of all restaurant names.
+ */
 QVector<QString> Database::GetAllRestaurantNames() const
 {
     QVector<QString> restaurantNames;
@@ -447,6 +462,12 @@ QVector<QString> Database::GetAllRestaurantNames() const
     return restaurantNames;
 }
 
+/**
+ * @brief Database::GetRestaurantMenuItemNames
+ * Get a list of all the menu item names given a restaurant ID.
+ * @param restaurantId
+ * @return A QList of all menu item names for a particular restaurant.
+ */
 QList<QString> Database::GetRestaurantMenuItemNames(int restaurantId)
 {
     QList <QString> restaurantItemNames;
@@ -471,6 +492,12 @@ QList<QString> Database::GetRestaurantMenuItemNames(int restaurantId)
     return restaurantItemNames;
 }
 
+/**
+ * @brief Database::GetItemPrice
+ * Get the price for a particular item given its ID.
+ * @param itemId
+ * @return A double representing the price of the item.
+ */
 double Database::GetItemPrice(int itemId)
 {
     QSqlQuery 		query;
@@ -493,7 +520,13 @@ double Database::GetItemPrice(int itemId)
     return itemPrice;
 }
 
-
+/**
+ * @brief Database::GetItemPrice
+ * Get the item price given its name. (This might not work if more than
+ * one item have the same name).
+ * @param itemName
+ * @return A double representing the price of the item.
+ */
 double Database::GetItemPrice(QString itemName)
 {
     QSqlQuery 		query;
