@@ -45,6 +45,12 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
     {
         ui->tableView->setEditTriggers(QTableView::DoubleClicked);
         ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::DoubleClicked);
+        QFile file(":/qss/darkorange.qss");
+           if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+           {
+               setStyleSheet(file.readAll());
+               file.close();
+           }
     }
     else
     {

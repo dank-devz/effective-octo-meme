@@ -27,6 +27,7 @@ void AdminLogin::on_pushButton_ok_clicked()
         QMessageBox *success = new QMessageBox();
         success->setText("You are the Dankest Admin");
         success->setVisible(true);
+
     }
     else
     {
