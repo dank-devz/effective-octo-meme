@@ -72,7 +72,7 @@ QVector<int> Trip::findRouteGreedy(QVector<int> idList, int start, int numVisit)
   // Otherwise just add the distance from saddleback to the closest
   if(start != 0 && visited < numVisit) {
     // Distance from Saddleback to first stop, and add it to the route
-    tempDist += locations_[0].DistanceTo(start);
+    tempDist += locations_.at(0).DistanceTo(start);
     route.push_back(start);
     visited++;
   }
@@ -168,7 +168,7 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
  * @brief Gets the shortest trip to ALL locations in the current list
  * @return A vector of integers representing the route locations
  */
-QVector<int> Trip::RoundTheWorld(int start = 0, int numVisit = -1)
+QVector<int> Trip::RoundTheWorld(int start, int numVisit)
 {
   QVector<int> locIds;  //< Vector for holding location IDs
 
