@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    QWidget::setFixedSize(430, 528);
 
     // sets the default page to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(PAGE_HOME);
