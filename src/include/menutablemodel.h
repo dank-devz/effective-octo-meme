@@ -5,6 +5,10 @@
 #include <QString>
 #include "database.h"
 
+/**
+ * @brief The MenuTableModel class is a wrapper for QSqlTableModel
+ * and displays the menu of a particular restaurant.
+ */
 class MenuTableModel : public QSqlTableModel
 {
     Q_OBJECT
