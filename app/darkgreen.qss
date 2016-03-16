@@ -32,7 +32,7 @@ QMenuBar::item
 QMenuBar::item:selected
 {
     background: transparent;
-    border: 1px solid #93FEFF;
+    border: 1px solid #2FD973;
 }
 
 QMenuBar::item:pressed
@@ -45,7 +45,7 @@ QMenuBar::item:pressed
         stop:1 #212121,
         stop:0.4 #343434/*,
         stop:0.2 #343434,
-        stop:0.1 #93FEFF*/
+        stop:0.1 #2FD973*/
     );
     margin-bottom:-1px;
     padding-bottom:1px;
@@ -112,7 +112,7 @@ QPushButton:pressed
 
 QComboBox
 {
-    selection-background-color: #93FEFF;
+    selection-background-color: #2FD973;
     background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);
     border-style: solid;
     border: 1px solid #1e1e1e;
@@ -130,7 +130,7 @@ QComboBox:on
     padding-top: 3px;
     padding-left: 4px;
     background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #2d2d2d, stop: 0.1 #2b2b2b, stop: 0.5 #292929, stop: 0.9 #282828, stop: 1 #252525);
-    selection-background-color: #93FEFF;
+    selection-background-color: #2FD973;
 }
 
 QComboBox QAbstractItemView
@@ -405,11 +405,11 @@ QTabBar::tab:selected
 
 QTabBar::tab:!selected:hover
 {
-    /*border-top: 2px solid #93FEFF;
+    /*border-top: 2px solid #2FD973;
     padding-bottom: 3px;*/
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    background-color: QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:1 #212121, stop:0.4 #343434, stop:0.2 #343434, stop:0.1 #93FEFF);
+    background-color: QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:1 #212121, stop:0.4 #343434, stop:0.2 #343434, stop:0.1 #2FD973);
 }
 
 QRadioButton::indicator:checked, QRadioButton::indicator:unchecked{
@@ -425,7 +425,7 @@ QRadioButton::indicator:checked
         cx: 0.5, cy: 0.5,
         fx: 0.5, fy: 0.5,
         radius: 1.0,
-        stop: 0.25 #93FEFF,
+        stop: 0.25 #2FD973,
         stop: 0.3 #323232
     );
 }
@@ -445,7 +445,7 @@ QRadioButton::indicator
 
 QRadioButton::indicator:hover, QCheckBox::indicator:hover
 {
-    border: 1px solid #93FEFF;
+    border: 1px solid #2FD973;
 }
 
 QCheckBox::indicator:checked
