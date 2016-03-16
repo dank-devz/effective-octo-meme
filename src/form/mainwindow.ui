@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -943,7 +943,7 @@
           <widget class="QLabel" name="tripSummary_label_totalDistanceTraveled">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>14</pointsize>
             </font>
            </property>
            <property name="text">
@@ -955,7 +955,7 @@
           <widget class="QLabel" name="tripSummary_label_totalDistanceTraveledValue">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>16</pointsize>
             </font>
            </property>
            <property name="text">
@@ -1010,8 +1010,15 @@
        </item>
        <item>
         <widget class="QLabel" name="tripSummaery_label_stops">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
-          <string>Locations Visited</string>
+          <string>Locations Visited (in order):</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1023,8 +1030,15 @@
        </item>
        <item>
         <widget class="QLabel" name="tripSummaery_label_reciept">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
-          <string>Final Reciept</string>
+          <string>Final Receipt:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

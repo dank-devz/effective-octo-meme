@@ -315,8 +315,12 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 {
     // re-initializes the spin box quantity
     ui->cartItems_spinBox_quantity->setValue(1);
-    // returns back to the planning page
-    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
+    //clear the cart
+    db->ClearCart();
+    //reset trip calculator
+    the_trip_->resetTripCalc();
+    // returns back to the main menu
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
 }
 
 void MainWindow::on_cartItems_removeSelected_clicked()
