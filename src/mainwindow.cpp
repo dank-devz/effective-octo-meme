@@ -367,6 +367,10 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
     else
     {
         tripStops.pop_front();
+        //refresh menu
+        initCartItemsTable(tripStops.front());
+        cartModel->select();
+
         ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
 
         // changes the next text to signify that the admin only has on entry left
