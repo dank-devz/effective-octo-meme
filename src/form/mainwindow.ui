@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>429</width>
-    <height>516</height>
+    <width>435</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>-1</y>
-      <width>431</width>
+      <width>421</width>
       <height>501</height>
      </rect>
     </property>
@@ -27,15 +27,15 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>130</y>
-        <width>161</width>
+        <x>120</x>
+        <y>90</y>
+        <width>191</width>
         <height>22</height>
        </rect>
       </property>
@@ -51,7 +51,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Dank Title</string>
+       <string>The Dankest Path</string>
       </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
@@ -162,8 +162,8 @@
        <rect>
         <x>10</x>
         <y>420</y>
-        <width>420</width>
-        <height>71</height>
+        <width>411</width>
+        <height>78</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -235,14 +235,25 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="admin_submitChanges_restaurant_pushButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Submit Changes</string>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QPushButton" name="admin_submitChanges_restaurant_pushButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Submit Changes</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
+           <property name="text">
+            <string>View Menu</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <spacer name="horizontalSpacer_5">
@@ -256,13 +267,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
-         <property name="text">
-          <string>View Menu</string>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -863,8 +867,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>429</width>
-     <height>19</height>
+     <width>435</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
