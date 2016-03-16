@@ -20,9 +20,17 @@ void Trip::refreshLocations(Database *db)
   // Get the ids of all the locations in the
   QVector<int> all_ids(db->GetAllRestaurantIds());
 
+  // Reserve size for the biggest ID, which should be in the back
+  locations_.resize(all_ids.back());
+
   // load the location vector
   for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
-    locations_.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
+      // Resize vector if needed for saftey, in case IDs were received out of order (+1 since we start at 0)
+      if(locations_.size() < *itr+1){
+          locations_.resize(*itr+1);
+      }
+      //insert location into the vector at the proper index
+      locations_.replace(*itr, Location(*itr, db->GetRestaurantDistances(*itr)) );
   }
 }
 

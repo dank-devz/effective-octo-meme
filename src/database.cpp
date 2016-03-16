@@ -316,7 +316,6 @@ bool Database::AddDistance(int from, int to, double distance)
  * @param restaurantName
  * @return int list
  */
-
 QVector<double> Database::GetRestaurantDistances(QString name)
 {
     QVector<double> 	distanceList;
@@ -348,19 +347,26 @@ QVector<double> Database::GetRestaurantDistances(QString name)
 
 QVector<double> Database::GetRestaurantDistances(int restaurantId)
 {
-    QVector<double> 	distanceList;
-    QSqlQuery 		query;
+    QVector<double> 	distanceList(11);
+    QSqlQuery 		    query;
+    int                 id;
     double  	        distance;
 
-    query.prepare("SELECT `distance` FROM distances WHERE distances.from = :id order by distances.to asc");
-
+    query.prepare("SELECT distances.`distance`, distances.`to` FROM distances WHERE distances.`from` = :id order by distances.`to` asc");
     query.bindValue(":id", restaurantId);
 
     if(query.exec()){
         while(query.next())
         {
             distance = query.value("distance").toDouble();
-            distanceList.append(distance);
+            id = query.value("to").toInt();
+
+            // expan vector if need be (id+1 since size starts at 0)
+            if(distanceList.size() < id+1){
+                distanceList.resize(id+1);
+            }
+            // insert distance at proper index
+            distanceList.replace(id, distance);
         }
     }
     else
