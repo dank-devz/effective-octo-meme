@@ -113,6 +113,7 @@ private slots:
 private:
 
     void initializeAdminFeatures();
+    double cartTotal;
 
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data

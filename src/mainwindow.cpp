@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeAdminFeatures();
 
     this->the_trip_ = new Trip(db);
+    cartTotal = 0;
 }
 
 MainWindow::~MainWindow()
@@ -267,7 +268,8 @@ void MainWindow::on_cartItems_addSelected_clicked()
         p->exec();
     }
     cartModel->select();
-    ui->cartItems_label_totalValue->setText("$ " + QString::number(db->GetCartTotal()));
+    cartTotal += (itemPrice * quantity);
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     ui->cartItems_spinBox_quantity->setValue(1);
 
     ui->cartItems_tableView_reciept->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -285,10 +287,19 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 
 void MainWindow::on_cartItems_removeSelected_clicked()
 {
+
     if(cartModel->removeRow(ui->cartItems_tableView_reciept->currentIndex().row()))
     {
+        int currentRow          = ui->cartItems_tableView_reciept->currentIndex().row();
+        QModelIndex priceIndex  = ui->cartItems_tableView_reciept->model()->index(currentRow, 3);
+        QModelIndex quantityIndex  = ui->cartItems_tableView_reciept->model()->index(currentRow, 0);
+        double itemPrice = ui->cartItems_tableView_reciept->model()->data(priceIndex).toDouble();
+        int quantity = ui->cartItems_tableView_reciept->model()->data(quantityIndex).toInt();
+        cartTotal -= (itemPrice * quantity);
+        qDebug() << "cart Total: " << cartTotal;
+
         cartModel->submitAll();
-        ui->cartItems_label_totalValue->setText(QString::number(db->GetCartTotal()));
+        ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
         cartModel->select();
     }
     else
@@ -327,6 +338,7 @@ void MainWindow::adminButtonsHide()
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
 {
+    cartTotal = 0;
     QVector<int> restId;
     int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
     int startPosition ;
