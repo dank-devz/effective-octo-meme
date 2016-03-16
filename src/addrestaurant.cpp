@@ -158,6 +158,7 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
         ui->addItems_label_added->setText("Added " + ui->addItems_lineEdit_name->text());
         ui->addItems_label_added->show();
         ui->addItems_label_errorMessage->hide();
+        ui->addItems_lineEdit_name->clear();
     }
 }
 
