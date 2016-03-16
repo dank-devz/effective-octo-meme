@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -260,7 +260,7 @@
        <item>
         <widget class="QPushButton" name="viewAllRestaurants_pushButton_viewDetails">
          <property name="text">
-          <string>View Details</string>
+          <string>View Menu</string>
          </property>
         </widget>
        </item>

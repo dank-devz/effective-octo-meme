@@ -9,6 +9,7 @@
 #include "carttablemodel.h"
 #include "trip.h"
 #include "adminlogin.h"
+#include "additemspopup.h"
 
 namespace Ui {
 class MainWindow;
@@ -39,6 +40,7 @@ signals:
 
 public slots:
     void toggleAdminFeatures(bool isAdmin);
+    void AddMenuItem(int restID, QString name, double price);
 
 private slots:
     /*
@@ -105,6 +107,8 @@ private slots:
     void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
 
     void on_admin_viewDetails_removeMenuItem_pushButton_clicked();
+
+    void on_admin_viewDetails_addMenuItem_pushButton_clicked();
 
 private:
 

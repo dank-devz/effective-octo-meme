@@ -72,6 +72,11 @@ void MainWindow::toggleAdminFeatures(bool isAdmin)
     ui->admin_submitChanges_restaurant_pushButton->setVisible(isAdmin);
 }
 
+void MainWindow::AddMenuItem(int restID, QString name, double price)
+{
+    db->AddMenuItem(restID, name, price);
+}
+
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
@@ -112,11 +117,9 @@ void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
 
 void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 {
-    // takes the user to the view details page
-    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
-
     // Get the information for the currently selected item
     int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
+    qDebug() << "currentRow: " << currentRow;
     QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
     QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
 
@@ -129,6 +132,8 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
     ui->label->setText(Title);
     initViewDetailsTable(locationID);
 
+    // takes the user to the view details page
+    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -197,7 +202,6 @@ void MainWindow::initViewDetailsTable(int id)
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableView->hideColumn(MenuTableModel::ITEMID);
     ui->tableView->verticalHeader()->setVisible(false);
-    ui->tableView->resizeColumnsToContents();
     ui->tableView->hideColumn(0);
     ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
@@ -440,4 +444,15 @@ void MainWindow::on_admin_viewDetails_removeMenuItem_pushButton_clicked()
         p->setStandardButtons(QMessageBox::Ok);
         p->exec();
     }
+}
+
+void MainWindow::on_admin_viewDetails_addMenuItem_pushButton_clicked()
+{
+    QModelIndex restaurantID_index  = ui->tableView->model()->index(0, 0);
+    int restaurantID        = ui->tableView->model()->data(restaurantID_index).toInt();
+    AddItemsPopup *p = new AddItemsPopup(this, restaurantID);
+    QObject::connect(p, SIGNAL(MenuItemAdd(int,QString,double)),
+                     this, SLOT(AddMenuItem(int,QString,double)));
+    p->exec();
+    menuModel->select();
 }
