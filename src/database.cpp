@@ -322,6 +322,7 @@ bool Database::AddNewRestaurant(QString restaurantName, QVector<QString> menuIte
             int_it++;
             double_it++;
         }
+        AddDistance(id, id, 0);
     }
     return success;
 }

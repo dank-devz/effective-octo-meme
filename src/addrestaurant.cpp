@@ -74,6 +74,7 @@ void addRestaurant::on_primary_lineEdit_name_textChanged(const QString &arg1)
 // closes the window
 void addRestaurant::on_primary_pushButton_cancel_clicked()
 {
+    ui->primary_lineEdit_name->clear();
     QWidget::close();
 }
 
@@ -90,6 +91,7 @@ void addRestaurant::on_primary_pushButton_next_clicked()
         // increments the indexf of the stacked widget
         ui->stackedWidget->setCurrentIndex(PAGE_ADD_ITEMS);
         restaurantName_ = ui->primary_lineEdit_name->text();
+
     }
 }
 
@@ -112,6 +114,10 @@ void addRestaurant::on_primary_lineEdit_name_returnPressed()
 // closes the window
 void addRestaurant::on_addItems_pushButton_cancel_clicked()
 {
+    ui->addItems_doubleSpinBox_price->setValue(0);
+    ui->addDistances_doubleSpinBox_distance->setValue(0);
+    ui->addItems_label_errorMessage->clear();
+    ui->addItems_lineEdit_name->clear();
     QWidget::close();
 }
 
@@ -161,6 +167,7 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
         ui->addItems_label_added->setText("Added " + ui->addItems_lineEdit_name->text());
         ui->addItems_label_added->show();
         ui->addItems_label_errorMessage->hide();
+        ui->addItems_doubleSpinBox_price->setValue(0);
         ui->addItems_lineEdit_name->clear();
     }
 }
@@ -168,6 +175,10 @@ void addRestaurant::on_addItems_pushButton_add_clicked()
 // closes the window
 void addRestaurant::on_addDistances_pushButton_cancel_clicked()
 {
+    ui->addItems_doubleSpinBox_price->setValue(0);
+    ui->addDistances_doubleSpinBox_distance->setValue(0);
+    ui->addItems_label_errorMessage->clear();
+    ui->addItems_lineEdit_name->clear();
     QWidget::close();
 }
 
@@ -192,6 +203,7 @@ void addRestaurant::on_addDistances_pushButton_next_clicked()
         otherLocationsCopy_.pop_front();
         ui->addDistances_label_location->setText(db_->GetRestaurantName(otherLocationsCopy_.at(0)));
 
+        ui->addDistances_doubleSpinBox_distance->setValue(0);
         // changes the next text to signify that the admin only has on entry left
         if(otherLocationsCopy_.size() == 1)
             ui->addDistances_pushButton_next->setText("Finish");
