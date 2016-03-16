@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->the_trip_ = new Trip(db);
     this->tripStopsModel = new QStandardItemModel(this);
+
+    cartTotal = 0;
 }
 
 MainWindow::~MainWindow()
@@ -120,8 +122,12 @@ void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
     // enables the add button
     ui->planCustomFoodRun_pushButton_add->setEnabled(true);
 
-    // resets the tripStopsModel
+    // resets the tripStops vector and model
+    tripStops.clear();
     tripStopsModel->clear();
+
+    // resets the trip class' calculator
+    the_trip_->resetTripCalc();
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
@@ -282,7 +288,8 @@ void MainWindow::on_cartItems_addSelected_clicked()
         p->exec();
     }
     cartModel->select();
-    ui->cartItems_label_totalValue->setText("$ " + QString::number(db->GetCartTotal()));
+    cartTotal += (itemPrice * quantity);
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     ui->cartItems_spinBox_quantity->setValue(1);
 
     ui->cartItems_tableView_reciept->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -300,10 +307,19 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 
 void MainWindow::on_cartItems_removeSelected_clicked()
 {
+
     if(cartModel->removeRow(ui->cartItems_tableView_reciept->currentIndex().row()))
     {
+        int currentRow          = ui->cartItems_tableView_reciept->currentIndex().row();
+        QModelIndex priceIndex  = ui->cartItems_tableView_reciept->model()->index(currentRow, 3);
+        QModelIndex quantityIndex  = ui->cartItems_tableView_reciept->model()->index(currentRow, 0);
+        double itemPrice = ui->cartItems_tableView_reciept->model()->data(priceIndex).toDouble();
+        int quantity = ui->cartItems_tableView_reciept->model()->data(quantityIndex).toInt();
+        cartTotal -= (itemPrice * quantity);
+        qDebug() << "cart Total: " << cartTotal;
+
         cartModel->submitAll();
-        ui->cartItems_label_totalValue->setText(QString::number(db->GetCartTotal()));
+        ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
         cartModel->select();
     }
     else
@@ -342,6 +358,7 @@ void MainWindow::adminButtonsHide()
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
 {
+    cartTotal = 0;
     QVector<int> restId;
     int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
     int startPosition ;
@@ -485,7 +502,7 @@ void MainWindow::on_admin_viewDetails_addMenuItem_pushButton_clicked()
 void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
 {
     // adds the item to the tripStops list
-    tripStops.push_back(ui->planCustomFoodRun_comboBox_locations->currentText());
+    tripStops.push_back(db->GetRestaurantId(ui->planCustomFoodRun_comboBox_locations->currentText()));
 
     // adds the item to the tripStops list view
     tripStopsModel->insertRow(tripStopsModel->rowCount(), new QStandardItem(ui->planCustomFoodRun_comboBox_locations->currentText()));
@@ -495,6 +512,18 @@ void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
     ui->planCustomFoodRun_comboBox_locations->removeItem(ui->planCustomFoodRun_comboBox_locations->currentIndex());
 
     // disables the add button if there is no more restaurants to add
-    if(ui->planCustomFoodRun_comboBox_locations->currentText() == "") // not working atm :(
+    if(ui->planCustomFoodRun_comboBox_locations->currentText() == "")
         ui->planCustomFoodRun_pushButton_add->setEnabled(false);
+}
+
+void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
+{
+    tripStops = the_trip_->findRouteGreedy(tripStops);
+    ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
+
+    // Fill the view with the infos
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "'s Menu");
+    initCartItemsTable(tripStops.at(0));
+    ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 }

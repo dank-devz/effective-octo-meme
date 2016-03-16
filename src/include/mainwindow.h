@@ -113,9 +113,12 @@ private slots:
 
     void on_admin_viewDetails_addMenuItem_pushButton_clicked();
 
+    void on_planCustomFoodRun_pushButton_go_clicked();
+
 private:
 
     void initializeAdminFeatures();
+    double cartTotal;
 
     Ui::MainWindow *ui;
     Trip *the_trip_;                       //< Pointer to a trip variable to hold trip data
@@ -128,7 +131,7 @@ private:
     RestaurantTableModel *restaurantModel; //<
     CartTableModel       *cartModel;       //<
     Database             *db;              //<
-    QVector<QString>     tripStops;        //< Vector that will store the locations of the trip
+    QVector<int>         tripStops;        //< Vector that will store the locations of the trip
     QStandardItemModel   *tripStopsModel;  //< The model that will hold the list of trip stops
 };
 
