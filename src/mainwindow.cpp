@@ -200,6 +200,12 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
+    if(tripStops.size() == 1){
+        ui->cartItems_pushButton_next->setText("Finish");
+    }
+    else{
+        ui->cartItems_pushButton_next->setText("Next");
+    }
 }
 
 void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()
@@ -531,6 +537,13 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
     ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
+
+    if(tripStops.size() == 1){
+        ui->cartItems_pushButton_next->setText("Finish");
+    }
+    else{
+        ui->cartItems_pushButton_next->setText("Next");
+    }
 }
 
 //cartTotal = 0;
