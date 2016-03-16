@@ -361,11 +361,20 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
 {
     if(tripStops.size() == 1)
     {
-        // TODO - GET AND SET TRIP RESULTS HERE
+        ui->tripSummary_tableView_reciept->setModel(cartModel);
+        ui->tripSummary_tableView_reciept->setEditTriggers(QTableView::NoEditTriggers);
+        ui->tripSummary_tableView_reciept->hideColumn(CartTableModel::ID);
+        ui->tripSummary_tableView_reciept->verticalHeader()->setVisible(false);
+        ui->tripSummary_tableView_reciept->horizontalHeader()->setStretchLastSection(true);
+        cartModel->select();
+        ui->tripSummary_label_totalSpentValue->setText(QString::number(db->GetCartTotal()));
+        ui->tripSummary_label_totalDistanceTraveledValue->setText(QString::number(the_trip_->getDistance()) + " miles!");
         ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
     }
     else
     {
+        cartTotal = 0;
+        ui->cartItems_label_totalValue->setText(QString::number(cartTotal));
         tripStops.pop_front();
         //refresh menu
         initCartItemsTable(tripStops.front());
