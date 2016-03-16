@@ -47,7 +47,7 @@ public:
   QVector<int> findRouteBrute(QVector<int> idList, int start = 0);
 
   // Find the shortest route to ALL the locations in the current list
-  QVector<int> RoundTheWorld();
+  QVector<int> RoundTheWorld(int start = 0, int numVisit = -1);
 
 private:
   double distance_;             //< Distance of the shortest trip

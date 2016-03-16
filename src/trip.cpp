@@ -168,7 +168,7 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
  * @brief Gets the shortest trip to ALL locations in the current list
  * @return A vector of integers representing the route locations
  */
-QVector<int> Trip::RoundTheWorld()
+QVector<int> Trip::RoundTheWorld(int start = 0, int numVisit = -1)
 {
   QVector<int> locIds;  //< Vector for holding location IDs
 
@@ -183,7 +183,7 @@ QVector<int> Trip::RoundTheWorld()
   }
   qDebug() << locIds;
   // Find the route and return it!!
-  return findRouteBrute(locIds);
+  return findRouteGreedy(locIds, start, numVisit);
 }
 
 /**
