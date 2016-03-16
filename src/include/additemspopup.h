@@ -1,6 +1,6 @@
 #ifndef ADDITEMSPOPUP_H
 #define ADDITEMSPOPUP_H
-
+#include <QMessageBox>
 #include <QDialog>
 
 namespace Ui {
