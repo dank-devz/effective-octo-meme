@@ -103,7 +103,7 @@ private slots:
     void on_admin_submitChanges_menu_pushButton_clicked();
 
     void on_admin_submitChanges_restaurant_pushButton_clicked();
-    void on_pushButton_clicked();
+
     void on_planCustomFoodRun_pushButton_add_clicked();
     void on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked();
 
@@ -115,13 +115,18 @@ private slots:
 
     void on_planCustomFoodRun_pushButton_go_clicked();
 
-    void on_tripSummary_button_planAnotherTrip_clicked();
-
     void on_tripSummary_button_goMainMenu_clicked();
+
+    void on_tripSummary_button_planEfficientTrip_clicked();
+
+    void on_pageSummary_button_mainMenu_clicked();
+
+    void on_tripSummary_button_planCustomTrip_clicked();
 
 private:
 
     void initializeAdminFeatures();
+    void initializeCustomTripPage();
     double cartTotal;
 
     Ui::MainWindow *ui;

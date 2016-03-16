@@ -127,26 +127,9 @@ void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 
 void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 {
+    initializeCustomTripPage();
     // takes the user to the planCustomFoodRun page (index - 3)
     ui->stackedWidget->setCurrentIndex(PAGE_PLAN_CUSTOM_TRIP);
-
-    // fills the combo box with the most recent restaurants from the db
-    QList<QString> restaurants = db->GetRestaurants();
-    ui->planCustomFoodRun_comboBox_locations->clear();
-    for(int i = 0; i < restaurants.size(); i ++)
-    {
-        ui->planCustomFoodRun_comboBox_locations->addItem(restaurants.at(i));
-    }
-
-    // enables the add button
-    ui->planCustomFoodRun_pushButton_add->setEnabled(true);
-
-    // resets the tripStops vector and model
-    tripStops.clear();
-    tripStopsModel->clear();
-
-    // resets the trip class' calculator
-    the_trip_->resetTripCalc();
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
@@ -443,12 +426,26 @@ void MainWindow::initializeAdminFeatures()
     ui->viewAllRestaurants_tableView->setEditTriggers(0);
     ui->tableView->setEditTriggers(0);
 }
-void MainWindow::on_pushButton_clicked()
-{
 
+void MainWindow::initializeCustomTripPage()
+{
+    // fills the combo box with the most recent restaurants from the db
+    QList<QString> restaurants = db->GetRestaurants();
+    ui->planCustomFoodRun_comboBox_locations->clear();
+    for(int i = 0; i < restaurants.size(); i ++)
+    {
+        ui->planCustomFoodRun_comboBox_locations->addItem(restaurants.at(i));
+    }
+
+    // enables the add button
+    ui->planCustomFoodRun_pushButton_add->setEnabled(true);
+
+    // resets the tripStops vector and model
+    tripStops.clear();
+    tripStopsModel->clear();
+
+    // resets the trip class' calculator
     the_trip_->resetTripCalc();
-    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
-    ui->tripSummary_label_totalDistanceTraveledValue->clear();
 }
 
 void MainWindow::on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked()
@@ -604,14 +601,34 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
 //numToVisit = 0;
 //ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
 
-void MainWindow::on_tripSummary_button_planAnotherTrip_clicked()
+void MainWindow::on_tripSummary_button_planEfficientTrip_clicked()
 {
+    the_trip_->resetTripCalc();
     db->ClearCart();
     ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
 }
 
 void MainWindow::on_tripSummary_button_goMainMenu_clicked()
 {
+    the_trip_->resetTripCalc();
     db->ClearCart();
     ui->stackedWidget->setCurrentIndex(PAGE_HOME);
+}
+
+
+void MainWindow::on_pageSummary_button_mainMenu_clicked()
+{
+    the_trip_->resetTripCalc();
+    db->ClearCart();
+    ui->stackedWidget->setCurrentIndex(PAGE_HOME);
+    ui->tripSummary_label_totalDistanceTraveledValue->clear();
+}
+
+void MainWindow::on_tripSummary_button_planCustomTrip_clicked()
+{
+    the_trip_->resetTripCalc();
+    db->ClearCart();
+    initializeCustomTripPage();
+    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_CUSTOM_TRIP);
+    ui->tripSummary_label_totalDistanceTraveledValue->clear();
 }
