@@ -1,0 +1,13 @@
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (0, 'Saddleback');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (1, 'McDonald''s');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (2, 'Chipotle');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (3, 'Domino''s Pizza');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (4, 'KFC');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (5, 'Subway');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (6, 'In-n-Out Burger');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (7, 'Wendy''s');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (8, 'Jack in the Box');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (9, 'El Pollo Loco');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (10, 'Papa John''s Pizza');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (11, 'Pizza Hut');
+INSERT INTO fast_food_restaurants.restaurants (id, name) VALUES (12, 'Sonic');

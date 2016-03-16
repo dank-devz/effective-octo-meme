@@ -1,0 +1,2 @@
+INSERT INTO fast_food_restaurants.users (id, username, password, admin) VALUES (1, 'dankdevz', 'dankdevz', 1);
+INSERT INTO fast_food_restaurants.users (id, username, password, admin) VALUES (2, 'joeuser', 'password', 0);
