@@ -154,7 +154,7 @@ void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 
         // Get the Restaurant name and location ID
         int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-        QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+        QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + " Menu";
         qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
         // Fill the view with the infos
@@ -182,6 +182,7 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 
 void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 {
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
@@ -394,7 +395,7 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
     else
     {
         cartTotal = 0;
-        ui->cartItems_label_totalValue->setText(QString::number(cartTotal));
+        ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
         tripStops.pop_front();
         //refresh menu
         initCartItemsTable(tripStops.front());
@@ -558,20 +559,22 @@ void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
 void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
 {
     if(tripStops.size() != 0){
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     tripStops = the_trip_->findRouteGreedy(tripStops);
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
-    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
 
     // Fill the view with the infos
-    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + " Menu");
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
     //
-    if(tripStops.size() == 1){
+    if(tripStops.size() == 1)
+    {
         ui->cartItems_pushButton_next->setText("Finish");
     }
-    else{
+    else
+    {
         ui->cartItems_pushButton_next->setText("Next");
     }
 
