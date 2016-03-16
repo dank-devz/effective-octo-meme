@@ -387,6 +387,7 @@ void MainWindow::on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked()
     addRestaurant *p = new addRestaurant(this, db);
     p->exec();
     restaurantModel->select();
+    the_trip_->refreshLocations(db);
 }
 
 void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked()
@@ -416,6 +417,8 @@ void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked
         p->setStandardButtons(QMessageBox::Ok);
         p->exec();
     }
+    // Refresh the trip data
+    the_trip_->refreshLocations(db);
 }
 
 

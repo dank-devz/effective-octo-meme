@@ -20,9 +20,17 @@ void Trip::refreshLocations(Database *db)
   // Get the ids of all the locations in the
   QVector<int> all_ids(db->GetAllRestaurantIds());
 
+  // Reserve size for the biggest ID, which should be in the back
+  locations_.resize(all_ids.back());
+
   // load the location vector
   for(QVector<int>::iterator itr = all_ids.begin(); itr != all_ids.end(); itr++) {
-    locations_.append(Location(*itr, db->GetRestaurantDistances(*itr)) );
+      // Resize vector if needed for saftey, in case IDs were received out of order (+1 since we start at 0)
+      if(locations_.size() < *itr+1){
+          locations_.resize(*itr+1);
+      }
+      //insert location into the vector at the proper index
+      locations_.replace(*itr, Location(*itr, db->GetRestaurantDistances(*itr)) );
   }
 }
 
@@ -33,7 +41,40 @@ void Trip::resetTripCalc()
 {
   this->distance_ = -1.0;
   delete this->trip_;
-  this->trip_ = NULL;
+    this->trip_ = NULL;
+}
+
+/**
+ * @brief Gets the location ID of the nth stop in the route
+ * @param n [IN] the stop number
+ * @return The ID of the nth stop in the route. returns -1 if the route is empty.
+ */
+int Trip::getStop(const in &n) const
+{
+    if(trip_ != NULL)
+    {
+        return trip_->at(n-1);
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+/**
+ * @brief Gets the number of stops in the route
+ * @return The number of stops in the route. (-1 if the route is empty)
+ */
+int Trip::routeLength() const
+{
+    if(trip_ != NULL)
+    {
+        return trip_->size();
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 /**
@@ -64,7 +105,7 @@ QVector<int> Trip::findRouteGreedy(QVector<int> idList, int start, int numVisit)
   // Otherwise just add the distance from saddleback to the closest
   if(start != 0 && visited < numVisit) {
     // Distance from Saddleback to first stop, and add it to the route
-    tempDist += locations_[0].DistanceTo(start);
+    tempDist += locations_.at(0).DistanceTo(start);
     route.push_back(start);
     visited++;
   }
@@ -160,7 +201,7 @@ QVector<int> Trip::findRouteBrute(QVector<int> idList, int start)
  * @brief Gets the shortest trip to ALL locations in the current list
  * @return A vector of integers representing the route locations
  */
-QVector<int> Trip::RoundTheWorld()
+QVector<int> Trip::RoundTheWorld(int start, int numVisit)
 {
   QVector<int> locIds;  //< Vector for holding location IDs
 
@@ -175,7 +216,7 @@ QVector<int> Trip::RoundTheWorld()
   }
   qDebug() << locIds;
   // Find the route and return it!!
-  return findRouteBrute(locIds);
+  return findRouteGreedy(locIds, start, numVisit);
 }
 
 /**

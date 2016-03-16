@@ -30,8 +30,12 @@ public:
   void resetTripCalc();
 
   /*** GET 'EM METHODS ***/
-  // Get the trip stored in the class
+  // Get the trip stored in the class, returns a nullptr if no route has been calculated
   QVector<int> getRoute() const { return *trip_; }
+  // Gets the location id of the stop in the route given by n. returns -1 if route is empty
+  int getStop(const in& n) const;
+  // Gets the number of stops in the calculated route. returns -1 if route is empty
+  int routeLength() const;
 
   // Get the distance stored in the class
   double getDistance() const { return distance_; }
@@ -47,7 +51,7 @@ public:
   QVector<int> findRouteBrute(QVector<int> idList, int start = 0);
 
   // Find the shortest route to ALL the locations in the current list
-  QVector<int> RoundTheWorld();
+  QVector<int> RoundTheWorld(int start = 0, int numVisit = -1);
 
 private:
   double distance_;             //< Distance of the shortest trip
