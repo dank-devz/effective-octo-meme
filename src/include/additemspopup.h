@@ -21,6 +21,8 @@ signals:
 private slots:
     void on_AddItemsPopup_buttonBox_accepted();
 
+    void on_AddItemsPopup_buttonBox_rejected();
+
 private:
     Ui::AddItemsPopup *ui;
     int _restID;

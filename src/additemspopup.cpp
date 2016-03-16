@@ -25,3 +25,8 @@ void AddItemsPopup::on_AddItemsPopup_buttonBox_accepted()
     }
 
 }
+
+void AddItemsPopup::on_AddItemsPopup_buttonBox_rejected()
+{
+    close();
+}
