@@ -11,3 +11,6 @@ CONFIG -= app_bundle
 SOURCES += main.cpp
 
 LIBS += -L../src -lfast-food-app
+
+RESOURCES += \
+    stylesheet.qrc

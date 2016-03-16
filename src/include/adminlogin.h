@@ -22,6 +22,8 @@ private slots:
     // closes the window
     void on_pushButton_cancel_clicked();
 
+    void on_lineEdit_passwordForm_returnPressed();
+
 signals:
     void adminStatusChanged(bool status);
 
