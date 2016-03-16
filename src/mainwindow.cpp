@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeAdminFeatures();
 
     this->the_trip_ = new Trip(db);
+    this->tripStopsModel = new QStandardItemModel(this);
 }
 
 MainWindow::~MainWindow()
@@ -97,10 +98,14 @@ void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 
     // fills the combo boxe with the most recent restaurants from the db
     QList<QString> restaurants = db->GetRestaurants();
+    ui->planCustomFoodRun_comboBox_locations->clear();
     for(int i = 0; i < restaurants.size(); i ++)
     {
         ui->planCustomFoodRun_comboBox_locations->addItem(restaurants.at(i));
     }
+
+    // enables the add button
+    ui->planCustomFoodRun_pushButton_add->setEnabled(true);
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
@@ -370,4 +375,21 @@ void MainWindow::on_pushButton_clicked()
    the_trip_->resetTripCalc();
    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
    ui->tripSummary_label_totalDistanceTraveledValue->clear();
+}
+
+void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
+{
+    // adds the item to the tripStops list
+    tripStops.push_back(ui->planCustomFoodRun_comboBox_locations->currentText());
+
+    // adds the item to the tripStops list view
+    tripStopsModel->insertRow(tripStopsModel->rowCount(), new QStandardItem(ui->planCustomFoodRun_comboBox_locations->currentText()));
+    ui->planCustomFoodRun_listView_selected->setModel(tripStopsModel);
+
+    // removes the current item from the combo box so it cannot be selected again
+    ui->planCustomFoodRun_comboBox_locations->removeItem(ui->planCustomFoodRun_comboBox_locations->currentIndex());
+
+    // disables the add button if there is no more restaurants to add
+    //if(ui->planCustomFoodRun_comboBox_locations->size().isEmpty())
+        ui->planCustomFoodRun_pushButton_add->setEnabled(false);
 }
