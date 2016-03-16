@@ -9,6 +9,7 @@
 #include "carttablemodel.h"
 #include "trip.h"
 #include "adminlogin.h"
+#include "additemspopup.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,10 +34,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Trip* getTrip(QVector<int> ids);
-    bool dbOpen() const { return db->isOpen(); }
+
+signals:
+    void adminStatusChanged(bool isAdmin);
 
 public slots:
-    void setAdminStatus(bool isAdmin);
+    void toggleAdminFeatures(bool isAdmin);
+    void AddMenuItem(int restID, QString name, double price);
 
 private slots:
     /*
@@ -85,17 +89,31 @@ private slots:
     /*
      * O T H E R  F U N C T I O N S
      */
-    void initViewAllRestaurantsTable(Database *db);
-    void initViewDetailsTable(Database *db, int id);
-    void initCartItemsTable(Database *db, int id);
+    void initViewAllRestaurantsTable();
+    void initViewDetailsTable(int id);
+    void initCartItemsTable(int id);
     void adminButtonsShow();
     void adminButtonsHide();
 
     void on_cartItems_pushButton_next_clicked();
 
+    void on_admin_submitChanges_menu_pushButton_clicked();
+
+    void on_admin_submitChanges_restaurant_pushButton_clicked();
     void on_pushButton_clicked();
 
+    void on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked();
+
+    void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
+
+    void on_admin_viewDetails_removeMenuItem_pushButton_clicked();
+
+    void on_admin_viewDetails_addMenuItem_pushButton_clicked();
+
 private:
+
+    void initializeAdminFeatures();
+
     Ui::MainWindow *ui;
     Trip *the_trip_;  //< Pointer to a trip variable to hold trip data
 
@@ -107,7 +125,6 @@ private:
     RestaurantTableModel *restaurantModel;
     CartTableModel *cartModel;
     Database *db;
-    bool isAdmin;
 };
 
 #endif // MAINWINDOW_H

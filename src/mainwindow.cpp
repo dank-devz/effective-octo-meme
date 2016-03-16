@@ -1,7 +1,9 @@
 #include "include/mainwindow.h"
 #include "include/adminlogin.h"
 #include "ui_mainwindow.h"
+#include "addrestaurant.h"
 #include <iostream>
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,13 +18,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                       "dankdevz", "cs1d-fast-food-fantasy");
-//    ui->planRegularTrip_comboBox_numberOfStops->hide();
-//    ui->planRegularTrip_label_promptLocations->hide();
-    initViewAllRestaurantsTable(db);
+    ui->planRegularTrip_comboBox_numberOfStops->hide();
+    ui->planRegularTrip_label_promptLocations->hide();
+
+    initViewAllRestaurantsTable();
+    initializeAdminFeatures();
 
     this->the_trip_ = new Trip(db);
-    isAdmin = false;
-
 }
 
 MainWindow::~MainWindow()
@@ -31,10 +33,48 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setAdminStatus(bool isAdmin)
+/**
+ * @brief MainWindow::toggleAdminFeatures
+ * Make special admin buttons appear, make tables editable.
+ * @param isAdmin
+ */
+void MainWindow::toggleAdminFeatures(bool isAdmin)
 {
-    qDebug() << "SLOT!!";
-    this->isAdmin = isAdmin;
+    if(isAdmin)
+    {
+        ui->tableView->setEditTriggers(QTableView::DoubleClicked);
+        ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::DoubleClicked);
+    }
+    else
+    {
+        ui->tableView->setEditTriggers(QTableView::NoEditTriggers);
+        ui->viewAllRestaurants_tableView->setEditTriggers(QTableView::NoEditTriggers);
+    }
+    ui->actionAdd_Remove_Restaurants->setEnabled(isAdmin);
+    ui->actionAdd_Remove_Restaurants->setVisible(isAdmin);
+
+    ui->admin_viewAllRestaurants_addRestaurant_pushButton->setEnabled(isAdmin);
+    ui->admin_viewAllRestaurants_addRestaurant_pushButton->setVisible(isAdmin);
+
+    ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setEnabled(isAdmin);
+    ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setVisible(isAdmin);
+
+    ui->admin_viewDetails_addMenuItem_pushButton->setEnabled(isAdmin);
+    ui->admin_viewDetails_addMenuItem_pushButton->setVisible(isAdmin);
+
+    ui->admin_viewDetails_removeMenuItem_pushButton->setEnabled(isAdmin);
+    ui->admin_viewDetails_removeMenuItem_pushButton->setVisible(isAdmin);
+
+    ui->admin_submitChanges_menu_pushButton->setEnabled(isAdmin);
+    ui->admin_submitChanges_menu_pushButton->setVisible(isAdmin);
+
+    ui->admin_submitChanges_restaurant_pushButton->setEnabled(isAdmin);
+    ui->admin_submitChanges_restaurant_pushButton->setVisible(isAdmin);
+}
+
+void MainWindow::AddMenuItem(int restID, QString name, double price)
+{
+    db->AddMenuItem(restID, name, price);
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -77,24 +117,33 @@ void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
 
 void MainWindow::on_viewAllRestaurants_pushButton_viewDetails_clicked()
 {
-    // takes the user to the view details page
-    ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
-
     // Get the information for the currently selected item
     int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    if(currentRow > -1)
+    {
+        qDebug() << "currentRow: " << currentRow;
+        QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
+        QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
 
-    // Get the Restaurant name and location ID
-    int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-    QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
-    qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
+        // Get the Restaurant name and location ID
+        int locationID = ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
+        QString Title  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
+        qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
 
-    // Fill the view with the infos
-    ui->label->setText(Title);
-    initViewDetailsTable(db, currentRow+1);
-    ui->tableView->hideColumn(0);
-    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+        // Fill the view with the infos
+        ui->label->setText(Title);
+        initViewDetailsTable(locationID);
+
+        // takes the user to the view details page
+        ui->stackedWidget->setCurrentIndex(PAGE_VIEW_DETAILS);
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select a row.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
+    }
 }
 
 void MainWindow::on_planRegularTrip_pushButton_back_clicked()
@@ -113,12 +162,12 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
-//    // Get the information for the currently selected item
-//    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-//    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-//    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    //    // Get the information for the currently selected item
+    //    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
+    //    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
+    //    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
 
-//    // Get the Restaurant name and location ID
+    //    // Get the Restaurant name and location ID
     int locationID = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());//ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
     QString Title  = ui->planRegularTrip_comboBox_startingLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
     qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
@@ -126,9 +175,9 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     // Fill the view with the infos
     ui->label->setText(Title);
     ui->cartItems_label_restaurant_name->setText(ui->planRegularTrip_comboBox_startingLocation->currentText() + " Menu");
-    initCartItemsTable(db, locationID);
+    initCartItemsTable(locationID);
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
-    ui->cartItems_tableView_items->resizeColumnsToContents();
+
 }
 
 void MainWindow::on_planCustomFoodRun_pushButton_back_clicked()
@@ -143,40 +192,49 @@ void MainWindow::on_viewDetails_pushButton_back_clicked()
     ui->stackedWidget->setCurrentIndex(PAGE_VIEW_ALL_RESTAURANTS);
 }
 
-void MainWindow::initViewAllRestaurantsTable(Database *db)
+void MainWindow::initViewAllRestaurantsTable()
 {
     restaurantModel = new RestaurantTableModel(this, db);
     ui->viewAllRestaurants_tableView->setModel(restaurantModel);
+    ui->viewAllRestaurants_tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->viewAllRestaurants_tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->viewAllRestaurants_tableView->verticalHeader()->setVisible(false);
     ui->viewAllRestaurants_tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+    ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
-void MainWindow::initViewDetailsTable(Database *db, int id)
+void MainWindow::initViewDetailsTable(int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     ui->tableView->setModel(menuModel);
-    qDebug() << "isAdmin: " << isAdmin;
-    if(isAdmin)
-    {
-        ui->tableView->setEditTriggers(QTableView::DoubleClicked);
-    }
-    else
-    {
-        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    }
-    ui->viewAllRestaurants_tableView->resizeColumnsToContents();
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->hideColumn(MenuTableModel::ITEMID);
+    ui->tableView->verticalHeader()->setVisible(false);
+    ui->tableView->hideColumn(0);
+    ui->viewAllRestaurants_tableView->horizontalHeader()->setStretchLastSection(true);
 }
 
-void MainWindow::initCartItemsTable(Database *db, int id)
+void MainWindow::initCartItemsTable(int id)
 {
     menuModel = new MenuTableModel(this, db, id);
     cartModel = new CartTableModel(this, db);
+
+    //table on top
     ui->cartItems_tableView_items->setModel(menuModel);
     ui->cartItems_tableView_items->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ITEMID);
-    ui->cartItems_tableView_items->resizeColumnsToContents();
+    ui->cartItems_tableView_items->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->cartItems_tableView_items->verticalHeader()->setVisible(false);
+    ui->cartItems_tableView_items->horizontalHeader()->setStretchLastSection(true);
+
+    //table on bottom
     ui->cartItems_tableView_reciept->setModel(cartModel);
     ui->cartItems_tableView_reciept->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->cartItems_tableView_reciept->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->cartItems_tableView_reciept->verticalHeader()->setVisible(false);
+    ui->cartItems_tableView_reciept->hideColumn(CartTableModel::ID);
     ui->cartItems_tableView_reciept->horizontalHeader()->setStretchLastSection(true);
 }
 
@@ -187,14 +245,29 @@ void MainWindow::on_cartItems_addSelected_clicked()
     int currentRow          = ui->cartItems_tableView_items->currentIndex().row();
     QModelIndex nameIndex   = ui->cartItems_tableView_items->model()->index(currentRow, 1);
     QModelIndex itemIdIndex = ui->cartItems_tableView_items->model()->index(currentRow, 3);
+    QModelIndex priceIndex  = ui->cartItems_tableView_items->model()->index(currentRow, 2);
 
     // Get the Restaurant name and location ID
-    int itemID = ui->cartItems_tableView_items->model()->data(itemIdIndex).toInt();
+    int itemId = ui->cartItems_tableView_items->model()->data(itemIdIndex).toInt();
     QString itemName  = ui->cartItems_tableView_items->model()->data(nameIndex).toString();
+    double itemPrice = ui->cartItems_tableView_items->model()->data(priceIndex).toDouble();
     int quantity = ui->cartItems_spinBox_quantity->value();
-    db->PurchaseItem(itemID, quantity);
+
+    if(currentRow > -1)
+    {
+        if(!db->PurchaseItem(itemId, quantity, itemName, itemPrice)){
+            //add quantity to item instead of re-adding same item
+            db->UpdateQuantity(quantity, itemId);
+        }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select an item to add to the cart.");
+        p->exec();
+    }
     cartModel->select();
-    ui->cartItems_label_totalValue->setText("$" + QString::number(db->GetCartTotal()));
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(db->GetCartTotal()));
     ui->cartItems_spinBox_quantity->setValue(1);
 
     ui->cartItems_tableView_reciept->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -212,7 +285,18 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 
 void MainWindow::on_cartItems_removeSelected_clicked()
 {
-
+    if(cartModel->removeRow(ui->cartItems_tableView_reciept->currentIndex().row()))
+    {
+        cartModel->submitAll();
+        ui->cartItems_label_totalValue->setText(QString::number(db->GetCartTotal()));
+        cartModel->select();
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select an item to remove from the cart.");
+        p->exec();
+    }
 }
 
 void MainWindow::on_actionLogin_triggered()
@@ -220,7 +304,7 @@ void MainWindow::on_actionLogin_triggered()
     AdminLogin *adminPrompt;
     adminPrompt = new AdminLogin(this, db);
     QObject::connect(adminPrompt, SIGNAL(adminStatusChanged(bool)),
-                     this, SLOT(setAdminStatus(bool)));
+                     this, SLOT(toggleAdminFeatures(bool)));
     adminPrompt->setWindowModality(Qt::ApplicationModal);
     adminPrompt->show();
 
@@ -228,17 +312,17 @@ void MainWindow::on_actionLogin_triggered()
 
 void MainWindow::on_actionLogout_triggered()
 {
-//    isAdmin = false;
+    emit adminStatusChanged(false);
 }
 
 void MainWindow::adminButtonsShow()
 {
-
+    ui->home_pushButton_planRegularFoodRun->setText("Edit Restaurant Menu Items");
 }
 
 void MainWindow::adminButtonsHide()
 {
-
+    ui->home_pushButton_planRegularFoodRun->setText("View Nearby Restaurants");
 }
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
@@ -257,7 +341,7 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
         qDebug() << db->GetRestaurantDistances(index+1);
     }
 
-//    the_trip_->findRouteBrute(restId);
+    //    the_trip_->findRouteBrute(restId);
     qDebug () << "Selected starting position is : " << ui->planRegularTrip_comboBox_startingLocation->currentText();
 
     this->the_trip_->findRouteGreedy(restId,startPosition);
@@ -270,10 +354,115 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
     ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
 }
 
+void MainWindow::on_admin_submitChanges_menu_pushButton_clicked()
+{
+    menuModel->submitAll();
+    qDebug() << "Changes submitted to menu table.";
+}
+
+void MainWindow::on_admin_submitChanges_restaurant_pushButton_clicked()
+{
+    restaurantModel->submitAll();
+    qDebug() << "Changes submitted to restaurant table.";
+}
+
+void MainWindow::initializeAdminFeatures()
+{
+    ui->actionAdd_Remove_Restaurants->setVisible(false);
+    QObject::connect(this, SIGNAL(adminStatusChanged(bool)),
+                     this, SLOT(toggleAdminFeatures(bool)));
+    ui->admin_submitChanges_menu_pushButton->setVisible(false);
+    ui->admin_submitChanges_restaurant_pushButton->setVisible(false);
+    ui->admin_viewDetails_addMenuItem_pushButton->setVisible(false);
+    ui->admin_viewDetails_removeMenuItem_pushButton->setVisible(false);
+    ui->admin_viewAllRestaurants_addRestaurant_pushButton->setVisible(false);
+    ui->admin_viewAllRestaurants_removeRestaurant_pushButton->setVisible(false);
+    ui->viewAllRestaurants_tableView->setEditTriggers(0);
+    ui->tableView->setEditTriggers(0);
+}
 void MainWindow::on_pushButton_clicked()
 {
 
     the_trip_->resetTripCalc();
-   ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
-   ui->tripSummary_label_totalDistanceTraveledValue->clear();
+    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
+    ui->tripSummary_label_totalDistanceTraveledValue->clear();
+}
+
+void MainWindow::on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked()
+{
+    addRestaurant *p = new addRestaurant(this, db);
+    p->exec();
+    restaurantModel->select();
+}
+
+void MainWindow::on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked()
+{
+    if(restaurantModel->removeRow(ui->viewAllRestaurants_tableView->currentIndex().row()))
+    {
+        int currentRow          = ui->viewAllRestaurants_tableView->currentIndex().row();
+        QModelIndex nameIndex   = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
+        QString restaurantName  = ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString();
+        QMessageBox *p = new QMessageBox(this);
+        p->setText(restaurantName + " will be removed.");
+        p->setInformativeText("Are you sure?");
+        p->setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
+        p->setDefaultButton(QMessageBox::Cancel);
+        int decision = p->exec();
+        if(decision == QMessageBox::Ok)
+        {
+            db->RemoveRestaurant(restaurantName);
+            qDebug() << restaurantModel->lastError();
+            restaurantModel->select();
+        }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select a row.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
+    }
+}
+
+
+void MainWindow::on_admin_viewDetails_removeMenuItem_pushButton_clicked()
+{
+    if(menuModel->removeRow(ui->tableView->currentIndex().row()))
+    {
+        int currentRow          = ui->tableView->currentIndex().row();
+        QModelIndex restaurantID_index  = ui->tableView->model()->index(currentRow, 0);
+        QModelIndex nameIndex   = ui->tableView->model()->index(currentRow, 1);
+        QString itemName  = ui->tableView->model()->data(nameIndex).toString();
+        int restaurantID        = ui->tableView->model()->data(restaurantID_index).toInt();
+        QMessageBox *p = new QMessageBox(this);
+        p->setText(itemName + " will be removed.");
+        p->setInformativeText("Are you sure?");
+        p->setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
+        p->setDefaultButton(QMessageBox::Cancel);
+        int decision = p->exec();
+        if(decision == QMessageBox::Ok)
+        {
+            db->RemoveMenuItem(restaurantID, itemName);
+            qDebug() << db->lastError();
+            menuModel->select();
+        }
+    }
+    else
+    {
+        QMessageBox *p = new QMessageBox(this);
+        p->setText("Please select a row.");
+        p->setStandardButtons(QMessageBox::Ok);
+        p->exec();
+    }
+}
+
+void MainWindow::on_admin_viewDetails_addMenuItem_pushButton_clicked()
+{
+    QModelIndex restaurantID_index  = ui->tableView->model()->index(0, 0);
+    int restaurantID        = ui->tableView->model()->data(restaurantID_index).toInt();
+    AddItemsPopup *p = new AddItemsPopup(this, restaurantID);
+    QObject::connect(p, SIGNAL(MenuItemAdd(int,QString,double)),
+                     this, SLOT(AddMenuItem(int,QString,double)));
+    p->exec();
+    menuModel->select();
 }

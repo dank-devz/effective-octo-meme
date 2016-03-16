@@ -182,6 +182,20 @@ int Database::GetRestaurantId(QString restaurantName)
     }
 }
 
+QString Database::GetRestaurantName(int id)
+{
+    QSqlQuery query;
+    query.prepare("select name from restaurants where id = :id");
+    query.bindValue(":id", id);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            return query.value("name").toString();
+        }
+    }
+}
+
 /**
  * @brief Database::GetItemId Retrieve a menu item's id given the restaurantID and item name
  * @param restaurantId
@@ -233,7 +247,8 @@ bool Database::AuthenticateAdmin(QString username, QString password)
     query.prepare("SELECT * from users where username=:username and password=:password and admin=1");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
-    return query.exec();
+    query.exec();
+    return query.next();
 }
 
 /**
@@ -242,16 +257,27 @@ bool Database::AuthenticateAdmin(QString username, QString password)
  * @param quantity The quantity of items to purchase.
  * @return true if successfully added.
  */
-bool Database::PurchaseItem(int itemId, int quantity)
+bool Database::PurchaseItem(int itemId, int quantity, QString name, double price)
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO cart (id, quantity) "
-                  "VALUES (:id, :quantity)");
+    query.prepare("INSERT INTO cart (id, quantity, name, price) "
+                  "VALUES (:id, :quantity, :name, :price)");
 
     query.bindValue(":id", itemId);
     query.bindValue(":quantity", quantity);
+    query.bindValue(":name", name);
+    query.bindValue(":price", price);
 
+    return query.exec();
+}
+
+bool Database::UpdateQuantity(int quantity, int itemId)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE cart set cart.quantity = (cart.quantity + :quantity) where cart.id = :itemId");
+    query.bindValue(":quantity", quantity);
+    query.bindValue(":itemId", itemId);
     return query.exec();
 }
 
@@ -292,6 +318,7 @@ bool Database::AddNewRestaurant(QString restaurantName, QVector<QString> menuIte
         double_it = distances.begin();
         while(int_it != otherRestaurantIds.end() && double_it != distances.end()){
             success = AddDistance(id, *int_it, *double_it);
+            success = AddDistance(*int_it, id, *double_it);
             int_it++;
             double_it++;
         }
@@ -303,7 +330,7 @@ bool Database::AddDistance(int from, int to, double distance)
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO distances (from, to, distance)"
+    query.prepare("INSERT INTO distances (`from`, `to`, `distance`)"
                   "VALUES (:from, :to, :distance)");
     query.bindValue(":from", from);
     query.bindValue(":to", to);

@@ -22,7 +22,7 @@ void AdminLogin::on_pushButton_ok_clicked()
     {
         emit adminStatusChanged(true);
 
-        QWidget::close();
+        this->close();
     }
     else
     {
