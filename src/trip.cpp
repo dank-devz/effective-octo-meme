@@ -41,7 +41,40 @@ void Trip::resetTripCalc()
 {
   this->distance_ = -1.0;
   delete this->trip_;
-  this->trip_ = NULL;
+    this->trip_ = NULL;
+}
+
+/**
+ * @brief Gets the location ID of the nth stop in the route
+ * @param n [IN] the stop number
+ * @return The ID of the nth stop in the route. returns -1 if the route is empty.
+ */
+int Trip::getStop(const in &n) const
+{
+    if(trip_ != NULL)
+    {
+        return trip_->at(n-1);
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+/**
+ * @brief Gets the number of stops in the route
+ * @return The number of stops in the route. (-1 if the route is empty)
+ */
+int Trip::routeLength() const
+{
+    if(trip_ != NULL)
+    {
+        return trip_->size();
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 /**
