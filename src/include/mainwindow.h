@@ -115,6 +115,8 @@ private slots:
 
     void on_planCustomFoodRun_pushButton_go_clicked();
 
+    void on_tripSummary_button_planAnotherTrip_clicked();
+
 private:
 
     void initializeAdminFeatures();

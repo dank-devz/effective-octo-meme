@@ -572,3 +572,9 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
 //ui->tripSummary_label_totalDistanceTraveledValue->setText(distance);
 //numToVisit = 0;
 //ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
+
+void MainWindow::on_tripSummary_button_planAnotherTrip_clicked()
+{
+    db->ClearCart();
+    ui->stackedWidget->setCurrentIndex(PAGE_PLAN_REGULAR_TRIP);
+}
