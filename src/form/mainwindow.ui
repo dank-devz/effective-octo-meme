@@ -27,7 +27,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="page_home">
      <widget class="QLabel" name="home_label_homepageTitle">
@@ -59,7 +59,7 @@
        <rect>
         <x>80</x>
         <y>200</y>
-        <width>268</width>
+        <width>384</width>
         <height>161</height>
        </rect>
       </property>
@@ -596,7 +596,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>411</width>
+        <width>571</width>
         <height>311</height>
        </rect>
       </property>
@@ -776,7 +776,7 @@
        <rect>
         <x>10</x>
         <y>30</y>
-        <width>422</width>
+        <width>601</width>
         <height>461</height>
        </rect>
       </property>
@@ -987,6 +987,29 @@
         </layout>
        </item>
        <item>
+        <widget class="QLabel" name="tripSummaery_label_stops">
+         <property name="text">
+          <string>Locations Visited</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListView" name="tripSummary_listView_stops"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="tripSummaery_label_reciept">
+         <property name="text">
+          <string>Final Reciept</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QTableView" name="tripSummary_tableView_reciept">
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -1045,7 +1068,7 @@
      <x>0</x>
      <y>0</y>
      <width>430</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

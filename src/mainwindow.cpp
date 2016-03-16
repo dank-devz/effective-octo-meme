@@ -212,11 +212,19 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
+    //
     if(tripStops.size() == 1){
         ui->cartItems_pushButton_next->setText("Finish");
     }
     else{
         ui->cartItems_pushButton_next->setText("Next");
+    }
+
+    // gets the model ready for the final diplsay page
+    tripStopsModel->clear();
+    for(int i = 0; i < tripStops.size(); i++)
+    {
+        tripStopsModel->insertRow(i, new QStandardItem(db->GetRestaurantName(tripStops.at(i))));
     }
 }
 
@@ -388,6 +396,9 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
         ui->tripSummary_label_totalSpentValue->setText(QString::number(db->GetCartTotal()));
         ui->tripSummary_label_totalDistanceTraveledValue->setText(QString::number(the_trip_->getDistance()) + " miles!");
         ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
+
+        // sets the stops table in the trip summary
+        ui->tripSummary_listView_stops->setModel(tripStopsModel);
     }
     else
     {
@@ -550,11 +561,19 @@ void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
     initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
+    //
     if(tripStops.size() == 1){
         ui->cartItems_pushButton_next->setText("Finish");
     }
     else{
         ui->cartItems_pushButton_next->setText("Next");
+    }
+
+    // gets the model ready for the final diplsay page
+    tripStopsModel->clear();
+    for(int i = 0; i < tripStops.size(); i++)
+    {
+        tripStopsModel->insertRow(i, new QStandardItem(db->GetRestaurantName(tripStops.at(i))));
     }
 }
 
