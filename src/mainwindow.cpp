@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                       "dankdevz", "cs1d-fast-food-fantasy");
-    ui->planRegularTrip_comboBox_numberOfStops->hide();
-    ui->planRegularTrip_label_promptLocations->hide();
+//    ui->planRegularTrip_comboBox_numberOfStops->hide();
+//    ui->planRegularTrip_label_promptLocations->hide();
 
     initViewAllRestaurantsTable();
     initializeAdminFeatures();
@@ -333,16 +333,10 @@ void MainWindow::on_cartItems_pushButton_next_clicked()
 
     startPosition = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());
 
-    qDebug() << "Number of stops selected" << numToVisit;
     for(int index = 0; index < numToVisit; index++)
     {
         restId.push_back(index + 1);
-        qDebug() << "Getting the distances from restaurant id : " << index + 1;
-        qDebug() << db->GetRestaurantDistances(index+1);
     }
-
-    //    the_trip_->findRouteBrute(restId);
-    qDebug () << "Selected starting position is : " << ui->planRegularTrip_comboBox_startingLocation->currentText();
 
     this->the_trip_->findRouteGreedy(restId,startPosition);
 
