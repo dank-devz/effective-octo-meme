@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QFile file(":/qss/darkorange.qss");
+    QFile file(":/qss/darkgreen.qss");
        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
        {
            a.setStyleSheet(file.readAll());

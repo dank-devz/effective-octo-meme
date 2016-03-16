@@ -2,5 +2,6 @@
     <qresource prefix="/qss">
         <file>qtdark.qss</file>
         <file>darkorange.qss</file>
+        <file>darkgreen.qss</file>
     </qresource>
 </RCC>
