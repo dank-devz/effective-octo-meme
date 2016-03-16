@@ -186,11 +186,14 @@ void MainWindow::on_planRegularTrip_pushButton_go_clicked()
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
+    qDebug() << db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText()) << endl;
+    qDebug() << ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt() << endl;
+
     // generates the list of locations to be visited
     QVector<int> allLocations = db->GetAllRestaurantIds();
     tripStops = the_trip_->findRouteGreedy(allLocations, // vector of all of the locations
                                            db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText()), // the starting location
-                                           ui->planRegularTrip_comboBox_numberOfStops->currentData().toInt());// the total number of stops
+                                           ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt());// the total number of stops
 
     // Fill the view with the info
     ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
