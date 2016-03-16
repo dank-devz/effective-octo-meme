@@ -24,11 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initViewAllRestaurantsTable();
     initializeAdminFeatures();
 
-    /*FOR TESTING*/
-    addRestaurant* a = new addRestaurant(0, 5, db);
-    a->show();
-    /* * */
-
     this->the_trip_ = new Trip(db);
 }
 
@@ -99,6 +94,13 @@ void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 {
     // takes the user to the planCustomFoodRun page (index - 3)
     ui->stackedWidget->setCurrentIndex(PAGE_PLAN_CUSTOM_TRIP);
+
+    // fills the combo boxe with the most recent restaurants from the db
+    QList<QString> restaurants = db->GetRestaurants();
+    for(int i = 0; i < restaurants.size(); i ++)
+    {
+        ui->planCustomFoodRun_comboBox_locations->addItem(restaurants.at(i));
+    }
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
