@@ -3,6 +3,9 @@
 
 #include <QDebug>
 #include <QMainWindow>
+#include <QVector>
+#include <QStandardItem>
+#include <QStandardItemModel>
 #include "database.h"
 #include "restauranttablemodel.h"
 #include "menutablemodel.h"
@@ -101,7 +104,7 @@ private slots:
 
     void on_admin_submitChanges_restaurant_pushButton_clicked();
     void on_pushButton_clicked();
-
+    void on_planCustomFoodRun_pushButton_add_clicked();
     void on_admin_viewAllRestaurants_addRestaurant_pushButton_clicked();
 
     void on_admin_viewAllRestaurants_removeRestaurant_pushButton_clicked();
@@ -110,21 +113,26 @@ private slots:
 
     void on_admin_viewDetails_addMenuItem_pushButton_clicked();
 
+    void on_planCustomFoodRun_pushButton_go_clicked();
+
 private:
 
     void initializeAdminFeatures();
+    double cartTotal;
 
     Ui::MainWindow *ui;
-    Trip *the_trip_;  //< Pointer to a trip variable to hold trip data
+    Trip *the_trip_;                       //< Pointer to a trip variable to hold trip data
 
     /*
      * O T H E R  V A R I A B L E S
      */
 
-    MenuTableModel *menuModel;
-    RestaurantTableModel *restaurantModel;
-    CartTableModel *cartModel;
-    Database *db;
+    MenuTableModel       *menuModel;       //<
+    RestaurantTableModel *restaurantModel; //<
+    CartTableModel       *cartModel;       //<
+    Database             *db;              //<
+    QVector<int>         tripStops;        //< Vector that will store the locations of the trip
+    QStandardItemModel   *tripStopsModel;  //< The model that will hold the list of trip stops
 };
 
 #endif // MAINWINDOW_H

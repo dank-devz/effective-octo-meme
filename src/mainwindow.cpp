@@ -18,13 +18,14 @@ MainWindow::MainWindow(QWidget *parent) :
     // instantiate the database and the model
     db = new Database("fast_food_restaurants", "cs1d-fast-food-fantasy.cjv0rqkpv8ys.us-west-1.rds.amazonaws.com",
                       "dankdevz", "cs1d-fast-food-fantasy");
-//    ui->planRegularTrip_comboBox_numberOfStops->hide();
-//    ui->planRegularTrip_label_promptLocations->hide();
 
     initViewAllRestaurantsTable();
     initializeAdminFeatures();
 
     this->the_trip_ = new Trip(db);
+    this->tripStopsModel = new QStandardItemModel(this);
+
+    cartTotal = 0;
 }
 
 MainWindow::~MainWindow()
@@ -96,17 +97,44 @@ void MainWindow::on_home_pushButton_planRegularFoodRun_clicked()
 
     // fills the combo boxes with the most recent values from the db
     QList<QString> restaurants = db->GetRestaurants();
+    ui->planRegularTrip_comboBox_numberOfStops->clear();
+    ui->planRegularTrip_comboBox_startingLocation->clear();
     for(int i = 0; i < restaurants.size(); i ++)
     {
         ui->planRegularTrip_comboBox_numberOfStops->addItem(QString::number(i+1));
         ui->planRegularTrip_comboBox_startingLocation->addItem(restaurants.at(i));
     }
+
+    // resets the tripStops vector and model
+    tripStops.clear();
+    tripStopsModel->clear();
+
+    // resets the trip class' calculator
+    the_trip_->resetTripCalc();
 }
 
 void MainWindow::on_home_pushButton_planCustomFoodRun_clicked()
 {
     // takes the user to the planCustomFoodRun page (index - 3)
     ui->stackedWidget->setCurrentIndex(PAGE_PLAN_CUSTOM_TRIP);
+
+    // fills the combo box with the most recent restaurants from the db
+    QList<QString> restaurants = db->GetRestaurants();
+    ui->planCustomFoodRun_comboBox_locations->clear();
+    for(int i = 0; i < restaurants.size(); i ++)
+    {
+        ui->planCustomFoodRun_comboBox_locations->addItem(restaurants.at(i));
+    }
+
+    // enables the add button
+    ui->planCustomFoodRun_pushButton_add->setEnabled(true);
+
+    // resets the tripStops vector and model
+    tripStops.clear();
+    tripStopsModel->clear();
+
+    // resets the trip class' calculator
+    the_trip_->resetTripCalc();
 }
 
 void MainWindow::on_viewAllRestaurants_pushButton_back_clicked()
@@ -150,32 +178,26 @@ void MainWindow::on_planRegularTrip_pushButton_back_clicked()
 {
     // takes the user back to the home page (index - 0)
     ui->stackedWidget->setCurrentIndex(PAGE_HOME);
-
-    // cleares the combo boxes
-    ui->planRegularTrip_comboBox_numberOfStops->clear();
-    ui->planRegularTrip_comboBox_startingLocation->clear();
 }
 
-// WILL BE REPLACED
+
 void MainWindow::on_planRegularTrip_pushButton_go_clicked()
 {
     // takes the user to the view details page
     ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
 
-    //    // Get the information for the currently selected item
-    //    int currentRow         = ui->viewAllRestaurants_tableView->currentIndex().row();
-    //    QModelIndex nameIndex  = ui->viewAllRestaurants_tableView->model()->index(currentRow, 1);
-    //    QModelIndex idIndex    = ui->viewAllRestaurants_tableView->model()->index(currentRow, 0);
+    qDebug() << db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText()) << endl;
+    qDebug() << ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt() << endl;
 
-    //    // Get the Restaurant name and location ID
-    int locationID = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());//ui->viewAllRestaurants_tableView->model()->data(idIndex).toInt();
-    QString Title  = ui->planRegularTrip_comboBox_startingLocation->currentData().toString();//ui->viewAllRestaurants_tableView->model()->data(nameIndex).toString() + "'s Menu";
-    qDebug() << "Showing Menu for Location " << locationID << ", " << Title;
+    // generates the list of locations to be visited
+    QVector<int> allLocations = db->GetAllRestaurantIds();
+    tripStops = the_trip_->findRouteGreedy(allLocations, // vector of all of the locations
+                                           db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText()), // the starting location
+                                           ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt());// the total number of stops
 
-    // Fill the view with the infos
-    ui->label->setText(Title);
-    ui->cartItems_label_restaurant_name->setText(ui->planRegularTrip_comboBox_startingLocation->currentText() + " Menu");
-    initCartItemsTable(locationID);
+    // Fill the view with the info
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
+    initCartItemsTable(tripStops.at(0));
     ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
 
 }
@@ -267,7 +289,8 @@ void MainWindow::on_cartItems_addSelected_clicked()
         p->exec();
     }
     cartModel->select();
-    ui->cartItems_label_totalValue->setText("$ " + QString::number(db->GetCartTotal()));
+    cartTotal += (itemPrice * quantity);
+    ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
     ui->cartItems_spinBox_quantity->setValue(1);
 
     ui->cartItems_tableView_reciept->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -285,10 +308,19 @@ void MainWindow::on_cartItems_pushButton_Back_clicked()
 
 void MainWindow::on_cartItems_removeSelected_clicked()
 {
+
     if(cartModel->removeRow(ui->cartItems_tableView_reciept->currentIndex().row()))
     {
+        int currentRow          = ui->cartItems_tableView_reciept->currentIndex().row();
+        QModelIndex priceIndex  = ui->cartItems_tableView_reciept->model()->index(currentRow, 3);
+        QModelIndex quantityIndex  = ui->cartItems_tableView_reciept->model()->index(currentRow, 0);
+        double itemPrice = ui->cartItems_tableView_reciept->model()->data(priceIndex).toDouble();
+        int quantity = ui->cartItems_tableView_reciept->model()->data(quantityIndex).toInt();
+        cartTotal -= (itemPrice * quantity);
+        qDebug() << "cart Total: " << cartTotal;
+
         cartModel->submitAll();
-        ui->cartItems_label_totalValue->setText(QString::number(db->GetCartTotal()));
+        ui->cartItems_label_totalValue->setText("$ " + QString::number(cartTotal));
         cartModel->select();
     }
     else
@@ -327,25 +359,20 @@ void MainWindow::adminButtonsHide()
 
 void MainWindow::on_cartItems_pushButton_next_clicked()
 {
-    QVector<int> restId;
-    int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
-    int startPosition ;
-
-    startPosition = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());
-
-    for(int index = 0; index < numToVisit; index++)
+    if(tripStops.size() == 1)
     {
-        restId.push_back(index + 1);
+        // TODO - GET AND SET TRIP RESULTS HERE
+        ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
     }
+    else
+    {
+        tripStops.pop_front();
+        ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
 
-    this->the_trip_->findRouteGreedy(restId,startPosition);
-
-    restId.clear();
-
-    QString distance = QString::number(the_trip_->getDistance());
-    ui->tripSummary_label_totalDistanceTraveledValue->setText(distance);
-    numToVisit = 0;
-    ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
+        // changes the next text to signify that the admin only has on entry left
+        if(tripStops.size() == 1)
+            ui->cartItems_pushButton_next->setText("Finish");
+    }
 }
 
 void MainWindow::on_admin_submitChanges_menu_pushButton_clicked()
@@ -463,3 +490,59 @@ void MainWindow::on_admin_viewDetails_addMenuItem_pushButton_clicked()
     p->exec();
     menuModel->select();
 }
+
+void MainWindow::on_planCustomFoodRun_pushButton_add_clicked()
+{
+    // adds the item to the tripStops list
+    tripStops.push_back(db->GetRestaurantId(ui->planCustomFoodRun_comboBox_locations->currentText()));
+
+    // adds the item to the tripStops list view
+    tripStopsModel->insertRow(tripStopsModel->rowCount(), new QStandardItem(ui->planCustomFoodRun_comboBox_locations->currentText()));
+    ui->planCustomFoodRun_listView_selected->setModel(tripStopsModel);
+
+    // removes the current item from the combo box so it cannot be selected again
+    ui->planCustomFoodRun_comboBox_locations->removeItem(ui->planCustomFoodRun_comboBox_locations->currentIndex());
+
+    // disables the add button if there is no more restaurants to add
+    if(ui->planCustomFoodRun_comboBox_locations->currentText() == "")
+        ui->planCustomFoodRun_pushButton_add->setEnabled(false);
+}
+
+void MainWindow::on_planCustomFoodRun_pushButton_go_clicked()
+{
+    tripStops = the_trip_->findRouteGreedy(tripStops);
+    ui->stackedWidget->setCurrentIndex(PAGE_CART_ITEMS);
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)));
+
+    // Fill the view with the infos
+    ui->cartItems_label_restaurant_name->setText(db->GetRestaurantName(tripStops.at(0)) + "\'s Menu");
+    initCartItemsTable(tripStops.at(0));
+    ui->cartItems_tableView_items->hideColumn(MenuTableModel::ID);
+}
+
+//cartTotal = 0;
+//QVector<int> restId;
+//int numToVisit = ui->planRegularTrip_comboBox_numberOfStops->currentText().toInt();
+//int startPosition ;
+
+//startPosition = db->GetRestaurantId(ui->planRegularTrip_comboBox_startingLocation->currentText());
+
+//qDebug() << "Number of stops selected" << numToVisit;
+//for(int index = 0; index < numToVisit; index++)
+//{
+//    restId.push_back(index + 1);
+//    qDebug() << "Getting the distances from restaurant id : " << index + 1;
+//    qDebug() << db->GetRestaurantDistances(index+1);
+//}
+
+////    the_trip_->findRouteBrute(restId);
+//qDebug () << "Selected starting position is : " << ui->planRegularTrip_comboBox_startingLocation->currentText();
+
+//this->the_trip_->findRouteGreedy(restId,startPosition);
+
+//restId.clear();
+
+//QString distance = QString::number(the_trip_->getDistance());
+//ui->tripSummary_label_totalDistanceTraveledValue->setText(distance);
+//numToVisit = 0;
+//ui->stackedWidget->setCurrentIndex(PAGE_TRIP_SUMMARY);
