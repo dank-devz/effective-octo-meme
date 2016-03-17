@@ -65,20 +65,30 @@ addRestaurant::~addRestaurant()
     delete ui;
 }
 
-// unlocks the next button
+/**
+ * @brief addRestaurant::on_primary_lineEdit_name_textChanged
+ * unlocks the next button
+ * @param arg1
+ */
 void addRestaurant::on_primary_lineEdit_name_textChanged(const QString &arg1)
 {
     ui->primary_pushButton_next->setEnabled(true);
 }
 
-// closes the window
+/**
+ * @brief addRestaurant::on_primary_pushButton_cancel_clicked
+ * closes the window
+ */
 void addRestaurant::on_primary_pushButton_cancel_clicked()
 {
     ui->primary_lineEdit_name->clear();
     QWidget::close();
 }
 
-// extracts the name from the form if the form is not empty
+/**
+ * @brief addRestaurant::on_primary_pushButton_next_clicked
+ * extracts the name from the form if the form is not empty
+ */
 void addRestaurant::on_primary_pushButton_next_clicked()
 {
     if(ui->primary_lineEdit_name->text().isEmpty())

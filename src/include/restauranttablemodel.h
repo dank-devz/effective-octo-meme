@@ -4,6 +4,10 @@
 #include <QObject>
 #include "database.h"
 
+/**
+ * @brief The RestaurantTableModel class is a wrapper for QSqlTableModel
+ * and displays the restaurants_view table.
+ */
 class RestaurantTableModel : public QSqlTableModel
 {
     Q_OBJECT

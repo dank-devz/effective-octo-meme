@@ -5,6 +5,10 @@
 #include <QString>
 #include "database.h"
 
+/**
+ * @brief The CartTableModel class is a wrapper for QSqlTableModel class
+ * and displays the current cart database.
+ */
 class CartTableModel : public QSqlTableModel
 {
     Q_OBJECT

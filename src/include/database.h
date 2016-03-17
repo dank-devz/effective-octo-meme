@@ -8,7 +8,10 @@
 #include <QString>
 #include <QDebug>
 
-
+/**
+ * @brief The Database class is a wrapper for QSqlDatabase, with
+ * many handy methods.
+ */
 class Database : public QSqlDatabase
 {
 public:
